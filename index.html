@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Ecoboost Game Screen</title>
+    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="css/flipclock.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/buzz/buzz.min.js"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/flipclock/flipclock.js"></script>
+    <script src="js/model.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/tutorial.js"></script>
+    <script src="js/gamescene.js"></script>
+    <script src="js/speedmeter.js"></script>
+    <script src="js/game-uielements.js"></script>
+    <script src="js/video.js"></script>
+</head>
+<body onkeydown="keyEvent(event)" onkeyup="">
+<script type="text/vertexShader" id="vertexShader">
+    varying vec3 iRay;
+    varying vec2 vUv;
+    //varying vec3 vColor;
+    void main() {
+            vUv = uv;
+            //vColor = color;
+            vec4 mvPosition = modelViewMatrix * vec4(position, 1.0 );
+            gl_Position = projectionMatrix * mvPosition;
+
+    }
+</script>
+<script type="text/fragmentShader" id="fragmentShader">
+        uniform float iGlobalTime;
+        varying vec2 vUv;
+        varying vec3 vColor;
+        uniform vec2 iResolution;
+        uniform float startZPos;
+        uniform sampler2D iChannel0;
+        uniform sampler2D iChannel1;
+
+        //Adjust Color
+        uniform float iRedColor;
+        uniform float greenColor;
+        uniform float blueColor;
+        uniform float iColorsDist;
+
+        #define GAMMA (2.2)
+        vec3 ToGamma( in vec3 col )
+        {
+            // convert back into colour values, so the correct light will come out of the monitor
+            return pow( col, vec3(1.0/GAMMA) );
+        }
+
+        vec4 Noise( in ivec2 x )
+        {
+            return texture2D( iChannel0, (vec2(x)+0.5)/256.0, -100.0 );
+        }
+
+        void main(void) {
+            vec3 ray;
+            ray.xy = 2.0*(gl_FragCoord.xy-iResolution.xy*.5)/iResolution.x;
+            /*ray.z = startZPos;*/
+            ray.z = 0.5;
+
+            float offset = iGlobalTime*.5;
+            /*float speed2 = (cos(offset)+1.0)*2.0;*/
+            float speed2 = (0.2)*1.0;
+            float speed = speed2+.1;
+            /*offset += sin(offset)*.96;*/
+            offset += (offset)*.0016;
+            /*offset *= 1.0;*/
+            offset *= 0.15;
+
+            vec3 col = vec3(0.00,0.000,0.111);
+            /*vec3 col = vec3(0);*/
+            //vec3 col = vColor;
+            vec3 stp = ray/max(abs(ray.x),abs(ray.y));
+            vec3 pos = 5.0*stp+.5;
+
+            for ( int i=0; i < 20 ; i++ )
+            {
+                float z = Noise(ivec2(pos.xy)).x;
+                //float z = 1.0;
+                z = fract(z-offset);
+                float d = 50.0*z-pos.z;
+                float w = pow(max(0.0,1.0-8.0*length(fract(pos.xy)-.5)),2.0);
+                vec3 c = max(vec3(0),vec3(1.0-abs(d+speed2*.5)/speed,1.0-abs(d)/speed,1.0-abs(d-speed2*.5)/speed));
+                col += 1.5*(1.0-z)*c*w;
+                pos += stp;
+            }
+            gl_FragColor = vec4(ToGamma(col),1);
+            /*gl_FragColor = vec4(ToGamma(col).x,ToGamma(col).y,ToGamma(col).z,0.5);*/
+
+        }
+</script>
+
+
+<div id="gameScene"></div>
+<div id="gameSceneGradient"></div>
+
+<div id="wrapper">
+    <div id="video-wrapper">
+        <video id="myVideo" preload="metadata" poster="" autoplay="autoplay" width="100%" height="100%" loop muted="muted"></video>
+    </div>
+</div>
+
+<div id="mainOverlay"></div>
+<div id="gameUIElements">
+    <div id="tutorial" class="sections">
+        <div class="instructions" id="instruction1">
+            <h1 class="text1">Start Pedaling Now</h1>
+            <h1 class="text2">You need to reach the highest speed together</h1>
+            <h1 class="text3" id="showRPMText">This is your personal rpm.</h1>
+        </div>
+
+        <div class="instructions" id="instruction2">
+            <h1 class="text1">This is your team live rpm guage.</h1>
+            <h1 class="text2">Simply adding your both personal rpm together.</h1>
+            <h1 class="text3">You will need to increase the team rpm <br>to reach new levels and experience the boost.</h1>
+        </div>
+
+        <div class="instructions" id="instruction3">
+            <h1 class="text1">Your Team Speed</h1>
+            <h1 class="text2">Team speed increases with each</h1>
+            <h1 class="text3">ecoboost you can activiate.</h1>
+        </div>
+
+        <div class="instructions" id="instruction4">
+            <h1 class="text1">Some random events will ask you to</h1>
+            <h1 class="text2">sync both your rpm to enjoy an extra</h1>
+            <h1 class="text3">boost to reach the next level faster.</h1>
+        </div>
+
+        <!--<div class="instructions" id="instruction5">
+            <h1 class="text1">Congrats! blah blah blah</h1>
+            <h1 class="text2">Blah Blah Blah</h1>
+        </div>-->
+    </div>
+    <div id="rpms">
+        <div id="player1rpm">
+            <div class="elements">
+                <canvas id="myCanvas" width="300" height="150">
+                    Your browser does not support the HTML5 canvas tag.</canvas>
+                <div class="background"><img src="images/rpmround.png"></div>
+                <div class="indicator" id="curveRPMIndicator"></div>
+                <div id="greyCenter"></div>
+            </div>
+        </div>
+
+        <!--<div id="player2rpm">
+            <div class="elements" id="verticalMask">
+                <svg id="mySVG" xmlns="http://www.w3.org/2000/svg" width="80" height="300"
+                     xmlns:xlink="http://www.w3.org/1999/xlink" viewport="0 0 80 300" preserveAspectRatio="xMinYMin meet">
+                    <defs>
+                        <linearGradient id="myLinearGradient1"
+                                        x1="0%" y1="0%"
+                                        x2="0%" y2="100%"
+                                        spreadMethod="pad">
+                            <stop offset="0%"   stop-color="#fe4342" stop-opacity="1"/>
+                            <stop offset="50%"   stop-color="#ffff43" stop-opacity="1"/>
+                            <stop offset="100%" stop-color="#43ff41" stop-opacity="1"/>
+                        </linearGradient>
+                        <pattern id="pattern"
+                                 x="0" y="0" width="80" height="10"
+                                 patternUnits="userSpaceOnUse" >
+                            <rect x="0" y="0"  width="80" height="8"
+                                  rx="3" ry="3"
+                                  style="fill: #ffffff"/>
+                        </pattern>
+                        <mask id="myMask" x="0" y="0" width="80" height="300" >
+                            <rect x="0" y="0"  width="80" height="300"
+                                  style="fill: url(#pattern)"/>
+                        </mask>
+                    </defs>
+                    <rect id="meter" x="0" y="0" width="80" height="300" style="fill: url(#myLinearGradient1); mask: url(#myMask)"/>
+                </svg>
+            </div>
+        </div>-->
+    </div>
+    <div id="teamRPM">
+        <div class="elements">
+            <div class="bar">
+                <div class="background">
+                    <div class="levelColor"></div>
+                </div>
+                <div class="indicator">
+                    <div class="indicatorColor"></div>
+                </div>
+                <div class="bgGradient"></div>
+                <div class="levelBarFrames">
+                    <div id="barLevel1" class="frames"></div>
+                    <div id="barLevel2" class="frames"></div>
+                    <div id="barLevel3" class="frames"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="speedMeter">
+        <div class="clock"></div>
+    </div>
+</div>
+
+<div id="congratsOverlay" class="panel">
+    <!--<h1>Congrats</h1>
+    <h2>Blah Blah blah</h2>
+    <h2>Blah Blah blah Blah</h2>-->
+    <!--<div id="photos"></div>-->
+</div>
+
+</body>
+</html>

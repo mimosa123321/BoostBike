@@ -1,0 +1,453 @@
+html, body {
+    padding:0;
+    margin:0;
+    width:100%;
+    height: 100%;
+    background-color: #00005e;
+    overflow: hidden;
+}
+
+h1, h2 {
+    padding:0;
+    margin:0;
+}
+
+h1, h2, div, p {
+    font-family: "FordAntenna", sans-serif;
+}
+
+img {
+    width:100%;
+}
+
+.frame {
+    overflow: hidden;
+}
+
+#wrapper {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+
+#wrapper #video-wrapper {
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    opacity: 1;
+    -webkit-transition: opacity 0.8s ease-out;
+    transition: opacity 0.8s ease-out;
+    z-index: 3;
+}
+
+#gameSceneGradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vw;
+    margin: auto;
+    -webkit-transform: scale(0.4);
+    border-radius: 999px;
+    background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,94,0) 0%, rgba(0,0,94,1) 52%, rgba(0,0,94,1) 99%, rgba(0,0,94,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,94,0)), color-stop(52%,rgba(0,0,94,1)), color-stop(99%,rgba(0,0,94,1)), color-stop(100%,rgba(0,0,94,1))); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,94,0) 0%,rgba(0,0,94,1) 52%,rgba(0,0,94,1) 99%,rgba(0,0,94,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,94,0) 0%,rgba(0,0,94,1) 52%,rgba(0,0,94,1) 99%,rgba(0,0,94,1) 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,94,0) 0%,rgba(0,0,94,1) 52%,rgba(0,0,94,1) 99%,rgba(0,0,94,1) 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  rgba(0,0,94,0) 0%,rgba(0,0,94,1) 52%,rgba(0,0,94,1) 99%,rgba(0,0,94,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0000005e', endColorstr='#00005e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    /*border:1px solid red;*/
+    /*z-index:99;*/
+}
+
+#gameScene {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    display: inline-block;
+}
+
+#gameScene canvas {
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    margin:auto;
+    /*-webkit-transform-origin: 50% 50%;*/
+    -webkit-transform: scale(0.1);
+    border-radius:999px;
+    opacity:1;
+}
+
+
+#gameUIElements {
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    z-index:4;
+    opacity:1;
+}
+
+#gameUIElements #tutorial {
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
+
+#gameUIElements #tutorial .instructions {
+    text-align: center;
+    position: absolute;
+    width:80%;
+    top:40%;
+    left:50%;
+    -webkit-transform: translate3d(-50%,-50%,0);
+    transform: translate3d(-50%,-50%,0);
+}
+
+#gameUIElements #tutorial .instructions h1 {
+    position:relative;
+    color: #cccccc;
+
+    -webkit-transform: translate3d(0px, 50px, 0px);
+    transform: translate3d(0px, 50px, 0px);
+    opacity: 0;
+}
+
+#gameUIElements #tutorial .instructions.hide h1 {
+    -webkit-transform: translate3d(0px, 0px, 0px);
+    transform: translate3d(0px, 0px, 0px);
+    opacity: 1;
+}
+
+#gameUIElements #rpms {
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    bottom: -4px;
+    opacity:0;
+    z-index: 6;
+    -webkit-transition:opacity 1.2s ease-out;
+    transition:opacity 1.2s ease-out;
+}
+
+#gameUIElements #rpms.show {
+    opacity:1;
+}
+
+/*player1rpm*/
+#gameUIElements #rpms #player1rpm {
+    position: absolute;
+    top: 0;
+    left: 2px;
+    width: 300px;
+    height: 150px;
+}
+
+#gameUIElements #rpms #player1rpm .elements {
+    position: relative;
+    float:left;
+    top:0;
+    left:0;
+    width: 300px;
+    height: 150px;
+}
+
+#gameUIElements #rpms #player1rpm .elements .background{
+    position: absolute;
+    width: 300px;
+    height: 150px;
+    z-index:3;
+}
+
+#gameUIElements #rpms #player1rpm .elements #myCanvas {
+    position:absolute;
+    left:0;
+    top:0;
+    background-color: transparent;
+    z-index:2;
+}
+
+#gameUIElements #rpms #player1rpm .elements .indicator {
+    position: absolute;
+    bottom: 6px;
+    left: 149px;
+    width: 3px;
+    height: 106px;
+    background-color: #ca0203;
+    -webkit-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+    -webkit-transform: rotate(-83deg);
+    z-index: 4;
+}
+
+#gameUIElements #rpms #player1rpm .elements #greyCenter {
+    position: absolute;
+    top: 119px;
+    left: 118px;
+    border-radius: 50px;
+    width: 65px;
+    height: 65px;
+    background-color: #7f7f7f;
+    z-index: 98;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    z-index: 5;
+}
+
+#gameUIElements #rpms #player2rpm {
+    float: right;
+    position: relative;
+    right: 0;
+    bottom: 150px;;
+    width:112px;
+    height:150px;
+}
+
+#gameUIElements #rpms #player2rpm svg {
+    position:absolute;
+    left:0px;
+    top:0;
+    width:80px;
+    height:300px;
+    -webkit-transform: translateY(-300px);
+}
+
+#gameUIElements #rpms #player2rpm #verticalMask {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 80px;
+    height: 300px;
+    -webkit-transform: translateY(300px);
+    overflow: hidden;
+}
+
+
+#gameUIElements #teamRPM {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:80px;
+    opacity: 0;
+    -webkit-transition: opacity 1s ease-out 0.5s;
+    transition: opacity 1s ease-out 0.5s;
+    /*border:1px solid grey;*/
+}
+
+#gameUIElements #teamRPM.show {
+    opacity:1;
+}
+
+
+#gameUIElements #teamRPM .elements {
+    position:relative;
+    margin:20px auto 0 auto;
+    width:780px;
+    height:36px;
+    /*border:1px solid green;*/
+
+}
+
+#gameUIElements #teamRPM .elements .bar {
+    position:absolute;
+    width:100%;
+    height:100%;
+}
+
+#gameUIElements #teamRPM .elements .bar .background {
+    position:absolute;
+    width:100%;
+    height:100%;
+    border-radius: 5px;
+    padding: 0.3em;
+    background: #cccccc; /* Old browsers */
+    background: -moz-linear-gradient(top,  #cccccc 0%, #888585 50%, #3f3f3f 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cccccc), color-stop(50%,#888585), color-stop(100%,#3f3f3f)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #cccccc 0%,#888585 50%,#3f3f3f 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #cccccc 0%,#888585 50%,#3f3f3f 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #cccccc 0%,#888585 50%,#3f3f3f 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #cccccc 0%,#888585 50%,#3f3f3f 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cccccc', endColorstr='#3f3f3f',GradientType=0 ); /* IE6-9 */
+}
+
+#gameUIElements #teamRPM .elements .bar .background .levelColor {
+    position:relative;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    margin: 0 auto;
+    -webkit-filter: brightness(40%);
+    border-bottom: 1px solid white;
+    background: url(../images/energybar.jpg) no-repeat;
+    background-size: cover;
+}
+
+#gameUIElements #teamRPM .elements .bar .bgGradient {
+    position:absolute;
+    left: 5px;
+    top: 3px;
+    width:100%;
+    height:100%;
+    opacity:0.9;
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+}
+
+#gameUIElements #teamRPM .elements .bar .levelBarFrames {
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
+
+#gameUIElements #teamRPM .elements .bar .levelBarFrames .frames {
+    position: absolute;
+    left: 0px;
+    top: 3px;
+    width: 4px;
+    height: 39px;
+    border-right: 1px solid #696969;
+    background: rgb(201,201,201); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(201,201,201,1) 0%, rgba(147,147,147,1) 50%, rgba(90,90,90,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(201,201,201,1)), color-stop(50%,rgba(147,147,147,1)), color-stop(100%,rgba(90,90,90,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(201,201,201,1) 0%,rgba(147,147,147,1) 50%,rgba(90,90,90,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(201,201,201,1) 0%,rgba(147,147,147,1) 50%,rgba(90,90,90,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(201,201,201,1) 0%,rgba(147,147,147,1) 50%,rgba(90,90,90,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(201,201,201,1) 0%,rgba(147,147,147,1) 50%,rgba(90,90,90,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c9c9c9', endColorstr='#5a5a5a',GradientType=0 ); /* IE6-9 */
+}
+
+#gameUIElements #teamRPM .elements .bar .levelBarFrames #barLevel1 {
+    left: 96px;
+}
+#gameUIElements #teamRPM .elements .bar .levelBarFrames #barLevel2 {
+    left: 361px;
+}
+#gameUIElements #teamRPM .elements .bar .levelBarFrames #barLevel3 {
+    left: 629px;
+}
+
+#gameUIElements #teamRPM .elements .indicator {
+    position:absolute;
+    width:1px;
+    height:100%;
+    padding: 0.3em;
+    -webkit-transition: all 0.3s linear;
+}
+
+#gameUIElements #teamRPM .elements .indicator .indicatorColor {
+    position:relative;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    margin: 0 auto;
+    /*background: -moz-linear-gradient(left,  #43ff41 0%, #ffff43 13%, #ffff43 44%, #fe4342 87%, #fe4342 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#43ff41), color-stop(13%,#ffff43), color-stop(44%,#ffff43), color-stop(87%,#fe4342), color-stop(100%,#fe4342));
+    background: -webkit-linear-gradient(left,  #43ff41 0%,#ffff43 13%,#ffff43 44%,#fe4342 87%,#fe4342 100%);
+    background: linear-gradient(to right,  #43ff41 0%,#ffff43 13%,#ffff43 44%,#fe4342 87%,#fe4342 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#43ff41', endColorstr='#fe4342',GradientType=1 );*/
+    background: url(../images/energybar.jpg) no-repeat;
+    background-size: cover;
+    -webkit-filter: blur(5px);
+}
+
+#gameUIElements #speedMeter {
+    position: absolute;
+    bottom: 16px;
+    width: 100%;
+    opacity:0;
+    -webkit-transition: opacity 1s ease-out 0.5s;
+    transition: opacity 1s ease-out 0.5s;
+}
+
+#gameUIElements #speedMeter .clock {
+    margin: 0 auto;
+    width: 242px;
+}
+
+#mainOverlay {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height:100%;
+    background-color: black;
+    opacity: 1;
+    -webkit-transition: opacity 0.8s ease-out;
+    transition: opacity 0.8s ease-out;
+    z-index: 2;
+}
+
+#mainOverlay.show {
+    opacity: 1;
+}
+
+#congratsOverlay {
+    position:absolute;
+    top:50%;
+    left:50%;
+    /*width:500px;*/
+    /*height:300px;*/
+    width:720px;
+    height:722px;
+    -webkit-transform:translate3d(-50%,-50%,0) scale(0.4);
+    /*background-color: grey;*/
+    text-align: center;
+    padding:2em;
+    opacity: 1;
+    -webkit-transition: opacity 0.6s ease-out;
+    transition: opacity 0.6s ease-out;
+}
+
+#congratsOverlay.show {
+    opacity:1;
+}
+
+#congratsOverlay h1 {
+    margin-bottom:20px;
+}
+
+#congratsOverlay #photos {
+    /*background: url('../images/engine3.png') no-repeat;*/
+    background-position: 0 0;
+    width:720px;
+    height:722px;
+    /*border: 1px red solid;*/
+
+}
+
+@media only screen and (min-width: 1440px) {
+    .instructions h1 { font-size: 3em; }
+}
+
+@media only screen and (max-width: 1439px) {
+    .instructions h1 { font-size: 2em; }
+
+}
+
+
+
+
