@@ -12,10 +12,9 @@ var SpeedMeter = function() {
 };
 
 SpeedMeter.prototype.show = function() {
-    this.domElement.css('opacity',1);
+    this.domElement.css('opacity', 1);
 };
 
 SpeedMeter.prototype.updateValue = function() {
     this.clock.setValue(123);
 };
-

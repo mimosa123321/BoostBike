@@ -5,7 +5,7 @@ var Video = function() {
 };
 
 // Constants
-Video.VIDEO_SOURCE   = "./videos/ford.mp4";
+Video.VIDEO_SOURCE = "./videos/ford.mp4";
 
 
 Video.prototype.init = function() {

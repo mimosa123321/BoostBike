@@ -8,7 +8,7 @@ function initMain() {
     main = new Main();
 }
 
-var Main = function () {
+var Main = function() {
     this.initVideo();
     this.initGameScene();
 };
@@ -44,7 +44,7 @@ Main.prototype.initUIElements = function() {
 };
 
 Main.prototype.updateLevel = function() {
-    if(model.totalRevolutions >= model.revolutionPerLevel[model.currentLevel-1]) {
+    if (model.totalRevolutions >= model.revolutionPerLevel[model.currentLevel - 1]) {
         model.currentLevel += 1;
     }
 };
@@ -54,13 +54,12 @@ Main.prototype.changeSection = function(currentSection, nextSection) {
     main.hideScene(currentSection);
 };
 
-Main.prototype.showScene = function(scene) {
-};
+Main.prototype.showScene = function(scene) {};
 
 Main.prototype.hideScene = function(scene) {
-    scene.css("opacity",0);
+    scene.css("opacity", 0);
     animate.transitionEnd(scene, function() {
-        scene.css('display','none');
+        scene.css('display', 'none');
     });
 };
 
@@ -71,9 +70,9 @@ Main.prototype.showOverlay = function() {
 
 Main.prototype.hideOverlay = function() {
     var overlay = $('#mainOverlay');
-    overlay.css("opacity",0);
+    overlay.css("opacity", 0);
     animate.transitionEnd(overlay, function() {
-        overlay.css('display','none');
+        overlay.css('display', 'none');
     });
 };
 
@@ -81,7 +80,7 @@ Main.prototype.hideOverlay = function() {
 var keyEvent = function(event) {
     var key = event.keyCode || event.which;
     var keychar = String.fromCharCode(key);
-    if(keychar.toUpperCase() === "V") {
+    if (keychar.toUpperCase() === "V") {
         main.stopVideo();
         main.changeSection($('#video-wrapper'), null);
         main.hideOverlay();
@@ -89,11 +88,11 @@ var keyEvent = function(event) {
         main.initUIElements();
         setTimeout(function() {
             main.initTutorial();
-        },3000);
+        }, 3000);
     }
 
-    if(key === 38) {
-        if(model.isStartTeamRPM) {
+    if (key === 38) {
+        if (model.isStartTeamRPM) {
             model.totalRevolutions += 1;
             model.isAccelerate = true;
         }
@@ -118,28 +117,28 @@ var animate = {
         });
     },
 
-    addAnimationListener:function(ele, event, callbackFunc) {
-        prefixedEventListener(ele,event,callbackFunc);
+    addAnimationListener: function(ele, event, callbackFunc) {
+        prefixedEventListener(ele, event, callbackFunc);
     },
 
-    removeAnimationListener:function(ele, event, callbackFunc) {
-        prefixedRemoveEventListener(ele,event,callbackFunc);
+    removeAnimationListener: function(ele, event, callbackFunc) {
+        prefixedRemoveEventListener(ele, event, callbackFunc);
     }
 };
 
 //fix for different version // detect animation events
 var pfx = ["webkit", "moz", "MS", "o", ""];
-var prefixedEventListener = function (element, type, callback) {
+var prefixedEventListener = function(element, type, callback) {
     for (var p = 0; p < pfx.length; p++) {
         if (!pfx[p]) type = type.toLowerCase();
-        element.addEventListener(pfx[p]+type, callback, false);
+        element.addEventListener(pfx[p] + type, callback, false);
     }
 };
 
-var prefixedRemoveEventListener = function (element, type, callback) {
+var prefixedRemoveEventListener = function(element, type, callback) {
     for (var p = 0; p < pfx.length; p++) {
         if (!pfx[p]) type = type.toLowerCase();
-        element.removeEventListener(pfx[p]+type, callback);
+        element.removeEventListener(pfx[p] + type, callback);
     }
 };
 

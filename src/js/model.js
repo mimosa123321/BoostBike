@@ -1,21 +1,21 @@
 var model = {
-    player1_RPM : 80,
-    player2_RPM : 280,
+    player1_RPM: 80,
+    player2_RPM: 280,
     totalRevolutions: 1,
-    revolutionPerLevel:[78,296,516,640],
-    currentLevel : 1,
-    isShowCongrats : false,
+    revolutionPerLevel: [78, 296, 516, 640],
+    currentLevel: 1,
+    isShowCongrats: false,
     isShowEngine: false,
     isSpinEngine: false,
-    isGameStart : false,
-    isStartTeamRPM : false,
+    isGameStart: false,
+    isStartTeamRPM: false,
     isAccelerate: false,
 
-    onReady:function() {
+    onReady: function() {
         model.onLoadImages('#preload');
     },
 
-    onLoadImages:function(target) {
+    onLoadImages: function(target) {
         var imgLoad = imagesLoaded(document.querySelector(target), function(instance) {
             console.log(target + ': images are loaded');
             initMain();
@@ -28,5 +28,3 @@ var model = {
 
     }
 };
-
-
