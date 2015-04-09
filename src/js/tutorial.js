@@ -81,9 +81,20 @@ Tutorial.prototype.addRevolution = function(value) {
     model.totalRevolutions += value;
 };
 
+
+/*---------*/
+
 var Engine = function() {
     this.photoContainer = $('#photos');
     this.frameHeight = 722;
+
+    //
+    this.engine = $('#engine');
+    this.engine3D = $('#photos');
+    this.engineDomElement = document.getElementById('engine');
+    this.engine3DDomElement = document.getElementById('photos');
+    this.finishShowEngine = this.onFinishShowEngine.bind(this);
+    this.finishHide3DEngine = this.onFinishHide3DEngine.bind(this);
 };
 
 Engine.prototype.loop = function() {
@@ -96,4 +107,44 @@ Engine.prototype.loop = function() {
         newPosY = 0;
     }
     this.photoContainer.css("background-position-y", newPosY + 'px');
+};
+
+Engine.prototype.show = function() {
+    this.engine.addClass("show");
+    animate.addAnimationListener(this.engineDomElement, "AnimationEnd", this.finishShowEngine);
+
+    //3d (png sequence) engine appears
+    setTimeout(this.show3DEngine.bind(this), 1000);
+};
+
+Engine.prototype.onFinishShowEngine = function() {
+    console.log("remove shader! And show engine");
+    gamescene.deleteShader();
+    animate.removeAnimationListener(this.engineDomElement, "AnimationEnd", this.finishShowEngine);
+};
+
+Engine.prototype.show3DEngine = function() {
+    this.engine3D.addClass('show');
+    setTimeout(function () {
+        model.isSpinEngine = true;
+    }, 1200);
+    setTimeout(this.hide3DEngine.bind(this), 8000);
+};
+
+Engine.prototype.hide3DEngine = function() {
+    model.isSpinEngine = false;
+    this.engine3D.attr('class','hide');
+    animate.addAnimationListener(this.engine3DDomElement, "AnimationEnd", this.finishHide3DEngine);
+};
+
+Engine.prototype.onFinishHide3DEngine = function() {
+    console.log("finish hide 3d Engine");
+    this.engine3D.css('display','none');
+    //hide engine section also
+    this.hide();
+    animate.removeAnimationListener(this.engine3DDomElement, "AnimationEnd", this.finishHide3DEngine);
+};
+
+Engine.prototype.hide = function() {
+    this.engine.attr('class','hide');
 };

@@ -31,10 +31,6 @@ var GameScene = function() {
 
     this.initShaderToy();
     this.render();
-
-    //
-    this.engineDomElement = document.getElementById('engine');
-    this.finishShowAnimation = this.onFinishAnimationEngine.bind(this);
 };
 
 GameScene.prototype.initShaderToy = function() {
@@ -189,7 +185,9 @@ GameScene.prototype.render = function() {
         //level 3
         if (model.currentLevel === 3 && !model.isShowEngine) {
             //show engine
-            gamescene.showEngine();
+            main.initEngine();
+            engine.show();
+
             //stop team rpm
             model.isStartTeamRPM = false;
             model.isShowEngine = true;
@@ -206,37 +204,8 @@ GameScene.prototype.render = function() {
     }
 };
 
-GameScene.prototype.showEngine = function() {
-    this.engine = $('#engine');
-    this.engine.addClass("show");
-    animate.addAnimationListener(this.engineDomElement, "AnimationEnd", this.finishShowAnimation);
-
-    //3d (png sequence) engine appears
-    setTimeout(this.show3DEngine.bind(this), 1000);
-};
-
-GameScene.prototype.onFinishAnimationEngine = function() {
-    console.log("remove shader! And show engine");
-    this.deleteShader();
-    animate.removeAnimationListener(this.engineDomElement, "AnimationStart", this.finishShowAnimation);
-};
-
-
 GameScene.prototype.deleteShader = function() {
     this.scene.remove(this.tobject);
 };
 
-GameScene.prototype.show3DEngine = function() {
-    main.initEngine();
-    this.enginePhotos = $('#photos');
-    this.enginePhotos.addClass('show');
 
-    setTimeout(function() {
-        model.isSpinEngine = true;
-    }, 1200);
-
-};
-
-GameScene.prototype.hideEngine = function() {
-
-};

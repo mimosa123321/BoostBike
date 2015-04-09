@@ -68,9 +68,19 @@
     100%   { transform: translate3d(0,-50px,0); opacity: 0}
 }
 
+
+
 #engine.show {
-    -webkit-animation: show-engine-ani 1.2s;
-    animation: show-engine-ani 1.2s;
+    -webkit-animation: show-engine-ani 1.2s ease-out;
+    animation: show-engine-ani 1.2s ease-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+
+#engine.hide {
+    -webkit-animation: hide-engine-ani 0.6s ease-out;
+    animation: hide-engine-ani 1s ease-out;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
@@ -80,10 +90,22 @@
     100%   { transform: scaleY(1); opacity: 1}
 }
 
+@-webkit-keyframes hide-engine-ani {
+    0%   { transform: scaleY(1); opacity: 1 }
+    100%   { transform: scaleY(0); opacity: 0}
+}
+
 
 #photos.show {
-    -webkit-animation: show-photos-ani 1s;
-    animation: show-photos-ani 1s;
+    -webkit-animation: show-photos-ani 1s ease-out;
+    animation: show-photos-ani 1s ease-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+#photos.hide {
+    -webkit-animation: hide-photos-ani 0.8s ease-out;
+    animation: hide-photos-ani 0.8s ease-out;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
@@ -92,5 +114,10 @@
 @-webkit-keyframes show-photos-ani {
     0%   { transform: scale(0); opacity: 0 }
     100%   { transform: scale(0.7); opacity: 1}
+}
+
+@-webkit-keyframes hide-photos-ani {
+    0%   { transform: scale(0.7); opacity: 1 }
+    100%   { transform: scale(0); opacity: 0}
 }
 
