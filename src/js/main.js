@@ -26,7 +26,7 @@ Main.prototype.initGameScene = function() {
 };
 
 Main.prototype.startGameScene = function() {
-    gamescene.isGameStart = true;
+    model.isGameStart = true;
     gamescene.show();
 };
 
@@ -86,17 +86,24 @@ var keyEvent = function(event) {
         main.changeSection($('#video-wrapper'), null);
         main.hideOverlay();
         main.startGameScene();
+        main.initUIElements();
         setTimeout(function() {
             main.initTutorial();
         },3000);
-
-        //main.initUIElements();
-        //main.initEngine();
     }
 
     if(key === 38) {
-        model.totalRevolutions += 1;
+        if(model.isStartTeamRPM) {
+            model.totalRevolutions += 1;
+            model.isAccelerate = true;
+        }
+
     }
+};
+
+var keyUpEvent = function(event) {
+    //model.totalRevolutions -= 1;
+    model.isAccelerate = false;
 };
 
 //animate Event
@@ -136,4 +143,5 @@ var prefixedRemoveEventListener = function (element, type, callback) {
     }
 };
 
-window.addEventListener('DOMContentLoaded', model.onReady);
+//window.addEventListener('DOMContentLoaded', model.onReady);
+window.addEventListener('load', model.onReady);

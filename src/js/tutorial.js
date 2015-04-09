@@ -4,66 +4,38 @@ var Tutorial = function() {
 
 Tutorial.prototype.showInstructions = function(pageId) {
     console.log("show page="+pageId);
-    if(pageId === 1) {
-        this.instructions = $('#tutorial').find('#instruction1');
-        this.instructions.addClass('show');
+    this.instructions = $('#tutorial').find('#instruction' + pageId);
+    this.instructions.addClass('show');
 
+    if(pageId === 1) {
         //add Animation End Listener //text sentence 3
         this.showRMPText = document.getElementById('showRPMText');
         animate.addAnimationListener(this.showRMPText,"AnimationStart",this.startShowRPMS);
-
-        setTimeout(this.hideInstructions.bind(this,1),8000);
-    }
-
-    if(pageId === 2) {
-        this.instructions = $('#tutorial').find('#instruction2');
-        this.instructions.addClass('show');
+    }else if(pageId === 2) {
         this.onStartShowTeamRPM();
-
-        setTimeout(this.hideInstructions.bind(this,2),8000);
-    }
-
-    if(pageId === 3) {
-        this.instructions = $('#tutorial').find('#instruction3');
-        this.instructions.addClass('show');
+        setTimeout(this.addRevolution.bind(this,25),1500);
+    }else if(pageId === 3) {
         this.onStartShowSpeedMeter();
-
-        setTimeout(this.hideInstructions.bind(this,3),8000);
+        setTimeout(this.addRevolution.bind(this,25),800);
+    }else if(pageId === 4) {
     }
 
-    if(pageId === 4) {
-        this.instructions = $('#tutorial').find('#instruction4');
-        this.instructions.addClass('show');
-
-        setTimeout(this.hideInstructions.bind(this,4),6000);
-    }
+    setTimeout(this.hideInstructions.bind(this,pageId),5000);
 };
 
 Tutorial.prototype.hideInstructions = function(pageId) {
-    if(pageId === 1) {
-        this.instructions = $('#tutorial').find('#instruction1');
-        this.instructions.attr('class','instructions hide');
+    this.instructions = $('#tutorial').find('#instruction' + pageId);
+    this.instructions.attr('class','instructions hide');
 
-        setTimeout(this.showInstructions.bind(this,2),1000);
-    }
-
-    if(pageId === 2) {
-        this.instructions = $('#tutorial').find('#instruction2');
-        this.instructions.attr('class','instructions hide');
-
-        setTimeout(this.showInstructions.bind(this,3),1000);
-    }
-
-    if(pageId === 3) {
-        this.instructions = $('#tutorial').find('#instruction3');
-        this.instructions.attr('class','instructions hide');
-
-        setTimeout(this.showInstructions.bind(this,4),1000);
-    }
-
-    if(pageId === 4) {
-        this.instructions = $('#tutorial').find('#instruction4');
-        this.instructions.attr('class','instructions hide');
+    if(pageId < 3) {
+        var nextPageId = parseInt(pageId) + 1;
+        setTimeout(this.showInstructions.bind(this,nextPageId),1500);
+    }else if(pageId === 3) {
+        this.addRevolution(27);
+    }else if(pageId === 4) {
+        setTimeout(function(){
+            uielements.rpmMeter.teamRPMMeter.startUpdate();
+        },1000);
     }
 };
 
@@ -94,12 +66,25 @@ Tutorial.prototype.onsStartShowCongrats = function() {
     console.log("show Congrats");
     this.congrats = $('#congratsOverlay');
     this.congrats.addClass('show');
+
+    setTimeout(this.onHideCongrats.bind(this),2500);
+};
+
+Tutorial.prototype.onHideCongrats = function() {
+    this.congrats = $('#congratsOverlay');
+    this.congrats.removeClass('show');
+
+    animate.transitionEnd(this.congrats, this.showInstructions.bind(this,4));
+};
+
+
+Tutorial.prototype.addRevolution =function(value) {
+    model.totalRevolutions += value;
 };
 
 var Engine = function() {
     this.photoContainer = $('#photos');
     this.frameHeight = 722;
-
 };
 
 Engine.prototype.loop = function() {

@@ -7,7 +7,7 @@ var GameUIElements = function() {
 //RPMMeters
 var RPMMeter = function () {
     this.rpmCurveMeter = new RPMCurveMeter();
-    this.rpmVerticalMeter = new RPMVerticalMeter();
+    //this.rpmVerticalMeter = new RPMVerticalMeter();
     this.teamRPMMeter = new TeamRPMMeter();
 
     this.domElement = document.getElementById('rpms');
@@ -28,7 +28,10 @@ RPMMeter.prototype.initMeterAnimation = function () {
 
 RPMMeter.prototype.updateMeterValue = function (shakeValue, shakeValue2) {
     this.rpmCurveMeter.updateValue(shakeValue);
-    this.rpmVerticalMeter.updateValue(shakeValue2);
+    //this.rpmVerticalMeter.updateValue(shakeValue2);
+};
+
+RPMMeter.prototype.updateTeamMeterValue = function() {
     this.teamRPMMeter.updateValue();
 };
 
@@ -149,6 +152,10 @@ TeamRPMMeter.totalRevolutionNeeded = 640; //two people
 
 TeamRPMMeter.prototype.show = function() {
     this.rpmeter.css('opacity',1);
+};
+
+TeamRPMMeter.prototype.startUpdate = function () {
+    model.isStartTeamRPM = true;
 };
 
 TeamRPMMeter.prototype.updateValue = function() {

@@ -1,5 +1,8 @@
 var GameScene = function() {
-    this.tuniform, this.tobject, this.clock, this.isGameStart = false, this.shakeValue = model.player1_RPM, this.shakeValue2 = model.player2_RPM, this.addShakeValue = 1 , this.addShakeValue2 = 1, this.canvasWidth = 1000, this.canvasHeight = 500;
+    this.tuniform, this.tobject, this.clock, this.shakeValue = model.player1_RPM, this.shakeValue2 = model.player2_RPM, this.addShakeValue = 1 , this.addShakeValue2 = 1, this.canvasWidth = 1000, this.canvasHeight = 500;
+    //this.bgSpeedPerRevolution = 3 / 300;
+    //this.rayLenthPerRevolution = 1 / 100;
+    this.lightRaySpeed = 0;
 
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({ antialias: true ,alpha: false});
@@ -25,6 +28,10 @@ var GameScene = function() {
 
     this.initShaderToy();
     this.render();
+
+    //
+    this.engineDomElement = document.getElementById('engine');
+    this.finishShowAnimation =  this.onFinishAnimationEngine.bind(this);
 };
 
 GameScene.prototype.initShaderToy = function(){
@@ -36,7 +43,9 @@ GameScene.prototype.initShaderToy = function(){
         iRedColor :  {type: "f", value :0.0 },
         iColorsDist: {type: "f", value :0.0},
         iNoOfParticle: {type: "i", value: 20 },
-        startZPos: {type: "f", value :0.1 }
+        startZPos: {type: "f", value :0.1 },
+        iAccValue: {type: "f", value :0.0 },
+        iRayLength: {type: "f", value :0.0 }
     };
 
     this.tuniform.iChannel0.value.wrapS = this.tuniform.iChannel0.value.wrapT = THREE.RepeatWrapping;
@@ -67,12 +76,10 @@ GameScene.prototype.show=function() {
 GameScene.prototype.render = function() {
     var delta=this.clock.getDelta();
 
-    if(this.isGameStart) {
+    if(model.isGameStart) {
         if(this.tuniform) {
-            this.tuniform.iGlobalTime.value += delta;
+            this.tuniform.iGlobalTime.value += delta + this.lightRaySpeed;
         }
-
-
         /*if(this.tuniform.startZPos.value < 1.0) {
             this.tuniform.startZPos.value += 0.005;
         }*/
@@ -111,6 +118,9 @@ GameScene.prototype.render = function() {
             //for better swing
             uielements.rpmMeter.updateMeterValue(this.shakeValue,this.shakeValue2);
 
+            //update team meter
+            uielements.rpmMeter.updateTeamMeterValue();
+
             //
             if(uielements.speedMeter.isStartUpdate) {
                 uielements.speedMeter.updateValue();
@@ -119,19 +129,83 @@ GameScene.prototype.render = function() {
             //check current level
             main.updateLevel();
 
-            //
+            //console.log(model.currentLevel + ',' + model.totalRevolutions);
             if(model.currentLevel === 2  && !model.isShowCongrats) {
-                tutorial.onsStartShowCongrats();
+                setTimeout(function() {
+                    tutorial.onsStartShowCongrats();
+                },1700);
                 model.isShowCongrats = true;
             }
 
-            /*engineTimer+= 1;
+        }
+
+        //
+        if(model.isStartTeamRPM && model.isAccelerate) {
+            //increase the background speed.
+            this.lightRaySpeed += 0.0005;
+            this.tuniform.iRayLength.value += 0.002;
+        }else {
+            //speed
+            if( this.lightRaySpeed > 0) {
+                this.lightRaySpeed -= 0.001;
+            }
+            //eay length
+            if( this.tuniform.iRayLength.value > 0 ) {
+                this.tuniform.iRayLength.value -= 0.02;
+            }
+        }
+
+        //level 3
+        if(model.currentLevel === 3 && !model.isShowEngine) {
+            //show engine
+            gamescene.showEngine();
+            //stop team rpm
+            model.isStartTeamRPM = false;
+            model.isShowEngine = true;
+
+        }
+
+        if(model.isSpinEngine) {
+            engineTimer+= 1;
             if(engineTimer >= 2) {
                 engine.loop();
                 engineTimer = 0;
-            }*/
+            }
         }
     }
+};
 
+GameScene.prototype.showEngine = function() {
+    this.engine = $('#engine');
+    this.engine.addClass("show");
+    animate.addAnimationListener(this.engineDomElement,"AnimationEnd",this.finishShowAnimation);
+
+    //3d (png sequence) engine appears
+    setTimeout(this.show3DEngine.bind(this),1000);
+};
+
+GameScene.prototype.onFinishAnimationEngine = function() {
+    console.log("remove shader! And show engine");
+    this.deleteShader();
+    animate.removeAnimationListener(this.engineDomElement,"AnimationStart",this.finishShowAnimation);
+};
+
+
+GameScene.prototype.deleteShader = function() {
+    this.scene.remove(this.tobject);
+};
+
+GameScene.prototype.show3DEngine = function() {
+    main.initEngine();
+    this.enginePhotos = $('#photos');
+    this.enginePhotos.addClass('show');
+
+    setTimeout(function() {
+        model.isSpinEngine = true;
+    },1200);
+
+};
+
+GameScene.prototype.hideEngine = function() {
 
 };

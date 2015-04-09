@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="js/buzz/buzz.min.js"></script>
     <script src="js/three.min.js"></script>
     <script src="js/flipclock/flipclock.js"></script>
@@ -19,7 +20,7 @@
     <script src="js/game-uielements.js"></script>
     <script src="js/video.js"></script>
 </head>
-<body onkeydown="keyEvent(event)" onkeyup="">
+<body onkeydown="keyEvent(event)" onkeyup="keyUpEvent(event)">
 <script type="text/vertexShader" id="vertexShader">
     varying vec3 iRay;
     varying vec2 vUv;
@@ -47,6 +48,12 @@
         uniform float blueColor;
         uniform float iColorsDist;
 
+        //Accelerate
+        uniform float iAccValue;
+
+        //light ray length
+        uniform float iRayLength;
+
         #define GAMMA (2.2)
         vec3 ToGamma( in vec3 col )
         {
@@ -67,16 +74,16 @@
 
             float offset = iGlobalTime*.5;
             /*float speed2 = (cos(offset)+1.0)*2.0;*/
-            float speed2 = (0.2)*1.0;
+            float speed2 = (0.2 + iRayLength)*1.0;
             float speed = speed2+.1;
             /*offset += sin(offset)*.96;*/
-            offset += (offset)*.0016;
+            offset += (offset)*(.0016);
             /*offset *= 1.0;*/
             offset *= 0.15;
 
-            vec3 col = vec3(0.00,0.000,0.111);
+            vec3 col = vec3(0.1137,0.27,0.50);
+            /*vec3 col = vec3(0.00,0.000,0.050);*/
             /*vec3 col = vec3(0);*/
-            //vec3 col = vColor;
             vec3 stp = ray/max(abs(ray.x),abs(ray.y));
             vec3 pos = 5.0*stp+.5;
 
@@ -92,11 +99,13 @@
                 pos += stp;
             }
             gl_FragColor = vec4(ToGamma(col),1);
-            /*gl_FragColor = vec4(ToGamma(col).x,ToGamma(col).y,ToGamma(col).z,0.5);*/
+            gl_FragColor = vec4(col,1);
+
 
         }
 </script>
 
+<div id="preload"><img src="images/engine3.png"></div>
 
 <div id="gameScene"></div>
 <div id="gameSceneGradient"></div>
@@ -129,15 +138,9 @@
         </div>
 
         <div class="instructions" id="instruction4">
-            <h1 class="text1">Some random events will ask you to</h1>
-            <h1 class="text2">sync both your rpm to enjoy an extra</h1>
-            <h1 class="text3">boost to reach the next level faster.</h1>
+            <h1 class="text1">You've already reached level 2!</h1>
+            <h1 class="text2">You are on your own now. Good luck!</h1>
         </div>
-
-        <!--<div class="instructions" id="instruction5">
-            <h1 class="text1">Congrats! blah blah blah</h1>
-            <h1 class="text2">Blah Blah Blah</h1>
-        </div>-->
     </div>
     <div id="rpms">
         <div id="player1rpm">
@@ -149,36 +152,7 @@
                 <div id="greyCenter"></div>
             </div>
         </div>
-
-        <!--<div id="player2rpm">
-            <div class="elements" id="verticalMask">
-                <svg id="mySVG" xmlns="http://www.w3.org/2000/svg" width="80" height="300"
-                     xmlns:xlink="http://www.w3.org/1999/xlink" viewport="0 0 80 300" preserveAspectRatio="xMinYMin meet">
-                    <defs>
-                        <linearGradient id="myLinearGradient1"
-                                        x1="0%" y1="0%"
-                                        x2="0%" y2="100%"
-                                        spreadMethod="pad">
-                            <stop offset="0%"   stop-color="#fe4342" stop-opacity="1"/>
-                            <stop offset="50%"   stop-color="#ffff43" stop-opacity="1"/>
-                            <stop offset="100%" stop-color="#43ff41" stop-opacity="1"/>
-                        </linearGradient>
-                        <pattern id="pattern"
-                                 x="0" y="0" width="80" height="10"
-                                 patternUnits="userSpaceOnUse" >
-                            <rect x="0" y="0"  width="80" height="8"
-                                  rx="3" ry="3"
-                                  style="fill: #ffffff"/>
-                        </pattern>
-                        <mask id="myMask" x="0" y="0" width="80" height="300" >
-                            <rect x="0" y="0"  width="80" height="300"
-                                  style="fill: url(#pattern)"/>
-                        </mask>
-                    </defs>
-                    <rect id="meter" x="0" y="0" width="80" height="300" style="fill: url(#myLinearGradient1); mask: url(#myMask)"/>
-                </svg>
-            </div>
-        </div>-->
+        <div id="player2rpm"></div>
     </div>
     <div id="teamRPM">
         <div class="elements">
@@ -198,17 +172,18 @@
             </div>
         </div>
     </div>
-
     <div id="speedMeter">
         <div class="clock"></div>
     </div>
 </div>
 
 <div id="congratsOverlay" class="panel">
-    <!--<h1>Congrats</h1>
-    <h2>Blah Blah blah</h2>
-    <h2>Blah Blah blah Blah</h2>-->
-    <!--<div id="photos"></div>-->
+    <h1>Congrats</h1>
+</div>
+
+<div id="engine">
+    <div class="background"></div>
+    <div id="photos"></div>
 </div>
 
 </body>
