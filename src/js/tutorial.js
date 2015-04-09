@@ -87,6 +87,7 @@ Tutorial.prototype.addRevolution = function(value) {
 var Engine = function() {
     this.photoContainer = $('#photos');
     this.frameHeight = 722;
+    this.engineTimer = 0;
 
     //
     this.engine = $('#engine');
@@ -125,7 +126,7 @@ Engine.prototype.onFinishShowEngine = function() {
 
 Engine.prototype.show3DEngine = function() {
     this.engine3D.addClass('show');
-    setTimeout(function () {
+    setTimeout(function() {
         model.isSpinEngine = true;
     }, 1200);
     setTimeout(this.hide3DEngine.bind(this), 8000);
@@ -133,18 +134,18 @@ Engine.prototype.show3DEngine = function() {
 
 Engine.prototype.hide3DEngine = function() {
     model.isSpinEngine = false;
-    this.engine3D.attr('class','hide');
+    this.engine3D.attr('class', 'hide');
     animate.addAnimationListener(this.engine3DDomElement, "AnimationEnd", this.finishHide3DEngine);
 };
 
 Engine.prototype.onFinishHide3DEngine = function() {
     console.log("finish hide 3d Engine");
-    this.engine3D.css('display','none');
+    this.engine3D.css('display', 'none');
     //hide engine section also
     this.hide();
     animate.removeAnimationListener(this.engine3DDomElement, "AnimationEnd", this.finishHide3DEngine);
 };
 
 Engine.prototype.hide = function() {
-    this.engine.attr('class','hide');
+    this.engine.attr('class', 'hide');
 };

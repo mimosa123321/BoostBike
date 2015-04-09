@@ -1,4 +1,4 @@
-var main, screen_width, screen_height, video, gamescene, uielements, tutorial, canvas, ctx, engine, engineTimer = 0;
+var main, screen_width, screen_height, video, gamescene, uielements, tutorial, canvas, ctx, engine;
 
 function initMain() {
     screen_width = window.innerWidth;

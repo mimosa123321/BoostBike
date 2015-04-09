@@ -472,41 +472,6 @@ img {
     -webkit-transform:scale(0);
 }
 
-/*
-#congratsOverlay {
-    position:absolute;
-    top:50%;
-    left:50%;
-    /*width:500px;*/
-    /*height:300px;*/
-    /*width:720px;*/
-    /*height:722px;*/
-    /*-webkit-transform:translate3d(-50%,-50%,0) scale(0.4);*/
-    /*background-color: grey;*/
-    /*text-align: center;*/
-    /*padding:2em;*/
-    /*opacity: 1;*/
-    /*-webkit-transition: opacity 0.6s ease-out;*/
-    /*transition: opacity 0.6s ease-out;*/
-/*}*/
-
-/*#congratsOverlay.show {*/
-    /*opacity:1;*/
-/*}*/
-/**/
-/*#congratsOverlay h1 {*/
-    /*margin-bottom:20px;*/
-/*}*/
-/**/
-/*#congratsOverlay #photos {*/
-    /*background: url('../images/engine3.png') no-repeat;*/
-    /*background-position: 0 0;*/
-    /*width:720px;*/
-    /*height:722px;*/
-    /*border: 1px red solid;*/
-/**/
-/*}*/
-
 
 @media only screen and (min-width: 1440px) {
     .instructions h1 { font-size: 3em; }

@@ -15,12 +15,13 @@ var GameScene = function() {
     $("#gameScene").append(this.renderer.domElement);
 
     this.light = new THREE.DirectionalLight(0xff0000, 1.5);
-    this.light.position.set(-100, -100, -100).normalize();
-    this.scene.add(this.light);
-
+    this.light.position.set(1, 1, 0).normalize();
     this.light2 = new THREE.DirectionalLight(0x0000ff, 1.5);
-    this.light2.position.set(-100, 100, -50).normalize();
-    this.scene.add(this.light2);
+    this.light2.position.set(-1, 1, 0).normalize();
+    this.light3 = new THREE.PointLight(0x44FFAA, 15, 25);
+    this.light3.position.set(0, -3, 0);
+    this.light4 = new THREE.PointLight(0xff4400, 20, 30);
+    this.light4.position.set(3, 3, 0);
 
     this.camera = new THREE.PerspectiveCamera(70, screen_width / screen_width, 1, 1000);
     this.camera.position.set(0, 0, -100);
@@ -104,85 +105,70 @@ GameScene.prototype.render = function() {
     var delta = this.clock.getDelta();
 
     if (model.isGameStart) {
-        if (this.tuniform) {
-            this.tuniform.iGlobalTime.value += delta + this.lightRaySpeed;
+        //for tunnel 1
+        if (model.currentTunnel == 1) {
+            if (this.tuniform) {
+                this.tuniform.iGlobalTime.value += delta + this.lightRaySpeed;
+
+                if (model.isStartTeamRPM && model.isAccelerate) {
+                    //increase the light ray speed and length
+                    this.lightRaySpeed += 0.0005;
+                    this.tuniform.iRayLength.value += 0.002;
+                } else {
+                    //speed
+                    if (this.lightRaySpeed > 0) {
+                        this.lightRaySpeed -= 0.001;
+                    }
+                    //eay length
+                    if (this.tuniform.iRayLength.value > 0) {
+                        this.tuniform.iRayLength.value -= 0.02;
+                    }
+                }
+            }
         }
-        /*if(this.tuniform.startZPos.value < 1.0) {
-            this.tuniform.startZPos.value += 0.005;
-        }*/
-    }
 
-    requestAnimationFrame(this.render.bind(this));
-    this.renderer.render(this.scene, this.camera);
+        //for meters
+        if (uielements) {
+            if (uielements.rpmMeter.isStartUpdate) {
+                uielements.rpmMeter.initMeterAnimation();
 
-    //RPM meters enterframe
-    if (uielements) {
-        if (uielements.rpmMeter.isStartUpdate) {
-            uielements.rpmMeter.initMeterAnimation();
+                var randomShakeValue = Math.floor(Math.random() * 10);
 
-            this.shakeValue += this.addShakeValue;
+                if (this.shakeValue >= model.player1_RPM + randomShakeValue || this.shakeValue <= model.player1_RPM - randomShakeValue) {
+                    this.addShakeValue *= -1;
+                }
 
-            if (this.shakeValue >= model.player1_RPM + (Math.floor(Math.random() * 10))) {
-                this.addShakeValue *= -1;
-            }
+                if (this.shakeValue2 >= model.player2_RPM + randomShakeValue || this.shakeValue2 <= model.player2_RPM - randomShakeValue) {
+                    this.addShakeValue2 *= -1;
+                }
 
-            if (this.shakeValue <= model.player1_RPM - (Math.floor(Math.random() * 10))) {
-                this.addShakeValue *= -1;
-            }
+                this.shakeValue += this.addShakeValue;
+                this.shakeValue2 += this.addShakeValue2;
 
-            this.shakeValue2 += this.addShakeValue2;
+                //for better swing
+                uielements.rpmMeter.updateMeterValue(this.shakeValue, this.shakeValue2);
 
-            if (this.shakeValue2 >= model.player2_RPM + (Math.floor(Math.random() * 10))) {
-                this.addShakeValue2 *= -1;
-            }
+                //for Update Team Meter
+                uielements.rpmMeter.updateTeamMeterValue();
 
-            if (this.shakeValue2 <= model.player2_RPM - (Math.floor(Math.random() * 10))) {
-                this.addShakeValue2 *= -1;
-            }
-
-            //console.log(this.shakeValue2);
-
-            //for better swing
-            uielements.rpmMeter.updateMeterValue(this.shakeValue, this.shakeValue2);
-
-            //update team meter
-            uielements.rpmMeter.updateTeamMeterValue();
-
-            //
-            if (uielements.speedMeter.isStartUpdate) {
+                //for Update Speed Meter
                 uielements.speedMeter.updateValue();
             }
-
-            //check current level
-            main.updateLevel();
-
-            //console.log(model.currentLevel + ',' + model.totalRevolutions);
-            if (model.currentLevel === 2 && !model.isShowCongrats) {
-                setTimeout(function() {
-                    tutorial.onsStartShowCongrats();
-                }, 1700);
-                model.isShowCongrats = true;
-            }
-
         }
 
-        //
-        if (model.isStartTeamRPM && model.isAccelerate) {
-            //increase the background speed.
-            this.lightRaySpeed += 0.0005;
-            this.tuniform.iRayLength.value += 0.002;
-        } else {
-            //speed
-            if (this.lightRaySpeed > 0) {
-                this.lightRaySpeed -= 0.001;
-            }
-            //eay length
-            if (this.tuniform.iRayLength.value > 0) {
-                this.tuniform.iRayLength.value -= 0.02;
-            }
+        //check current level
+        main.updateLevel();
+
+        //For Transition between Levels
+        //level 2 - show Congrats Layer
+        if (model.currentLevel === 2 && !model.isShowCongrats) {
+            setTimeout(function() {
+                tutorial.onsStartShowCongrats();
+            }, 1700);
+            model.isShowCongrats = true;
         }
 
-        //level 3
+        //level 3 - show Engine Layer
         if (model.currentLevel === 3 && !model.isShowEngine) {
             //show engine
             main.initEngine();
@@ -191,21 +177,48 @@ GameScene.prototype.render = function() {
             //stop team rpm
             model.isStartTeamRPM = false;
             model.isShowEngine = true;
-
         }
 
+        //for 3d Engine Spinning
         if (model.isSpinEngine) {
-            engineTimer += 1;
-            if (engineTimer >= 2) {
+            engine.engineTimer += 1;
+            if (engine.engineTimer >= 2) {
                 engine.loop();
-                engineTimer = 0;
+                engine.engineTimer = 0;
             }
         }
     }
+    requestAnimationFrame(this.render.bind(this));
+    this.renderer.render(this.scene, this.camera);
 };
 
 GameScene.prototype.deleteShader = function() {
     this.scene.remove(this.tobject);
+    this.tobject = null;
 };
 
+GameScene.prototype.changeTunnel = function(tunnelId) {
+    if (tunnelId === 2) {
+        this.scene.add(this.light);
+        this.scene.add(this.light2);
+        this.scene.add(this.light3);
+        this.scene.add(this.light4);
 
+        this.scene.fog = new THREE.FogExp2(0x000000, 0.15);
+
+        var geometry = new THREE.CylinderGeometry(1, 1, 30, 32, 1, true);
+        var texture = THREE.ImageUtils.loadTexture("images/ash_uvgrid01.jpg");
+        texture.wrapT = THREE.RepeatWrapping;
+
+        var material = new THREE.MeshLambertMaterial({
+            color: 0xFFFFFF,
+            map: texture
+        });
+        this.tobject = new THREE.Mesh(geometry, material);
+        this.tobject.rotation.x = Math.PI / 2;
+
+        this.scene.add(this.tobject);
+
+        this.tobject.flipSided = true;
+    }
+};
