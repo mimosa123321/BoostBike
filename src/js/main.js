@@ -49,9 +49,14 @@ Main.prototype.updateLevel = function() {
     }
 };
 
-
 Main.prototype.changeSection = function(currentSection, nextSection) {
     main.hideScene(currentSection);
+};
+
+Main.prototype.changeTunnel = function(targetChannelId) {
+    console.log("changeTunnel="+targetChannelId);
+    gamescene.changeTunnel(targetChannelId);
+    model.currentTunnel = targetChannelId;
 };
 
 Main.prototype.showScene = function(scene) {};

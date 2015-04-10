@@ -86,8 +86,8 @@ GameScene.prototype.initShaderToy = function() {
         vertexShader: document.getElementById("vertexShader").textContent,
         fragmentShader: document.getElementById("fragmentShader").textContent,
         side: THREE.DoubleSide
-            //transparent: true,
-            //lights: true
+        //transparent: true,
+        //lights: true
     });
     //mat.transparent = true;
     //mat.lights = true;
@@ -199,7 +199,7 @@ GameScene.prototype.deleteShader = function() {
 
 GameScene.prototype.changeTunnel = function(tunnelId) {
     if (tunnelId === 2) {
-        this.scene.add(this.light);
+        /*this.scene.add(this.light);
         this.scene.add(this.light2);
         this.scene.add(this.light3);
         this.scene.add(this.light4);
@@ -219,6 +219,6 @@ GameScene.prototype.changeTunnel = function(tunnelId) {
 
         this.scene.add(this.tobject);
 
-        this.tobject.flipSided = true;
+        this.tobject.flipSided = true;*/
     }
 };

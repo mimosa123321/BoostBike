@@ -111,6 +111,7 @@ Engine.prototype.loop = function() {
 };
 
 Engine.prototype.show = function() {
+    console.log("show Engine");
     this.engine.addClass("show");
     animate.addAnimationListener(this.engineDomElement, "AnimationEnd", this.finishShowEngine);
 
@@ -144,6 +145,9 @@ Engine.prototype.onFinishHide3DEngine = function() {
     //hide engine section also
     this.hide();
     animate.removeAnimationListener(this.engine3DDomElement, "AnimationEnd", this.finishHide3DEngine);
+
+    //
+    main.changeTunnel(2);
 };
 
 Engine.prototype.hide = function() {
