@@ -149,7 +149,7 @@ var TeamRPMMeter = function() {
 };
 
 
-TeamRPMMeter.barLength = 780;
+TeamRPMMeter.barLength = 1200;
 //TeamRPMMeter.totalRevolutionNeeded = 320;
 TeamRPMMeter.totalRevolutionNeeded = 640; //two people
 

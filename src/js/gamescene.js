@@ -1,5 +1,5 @@
 var GameScene = function() {
-    this.tuniform, this.tobject, this.clock, this.shakeValue = model.player1_RPM, this.addShakeValue = 1;
+    this.tuniform, this.tobject, this.clock, this.shakeValue = model.speed, this.addShakeValue = 1;
     //this.bgSpeedPerRevolution = 3 / 300;
     //this.rayLenthPerRevolution = 1 / 100;
     this.lightRaySpeed = 0;
@@ -30,7 +30,7 @@ var GameScene = function() {
     this.clock = new THREE.Clock();
     this.clock.start();
 
-    //this.initShaderToy();
+    this.initShaderToy();
     this.render();
 };
 
@@ -107,7 +107,7 @@ GameScene.prototype.render = function() {
     if (model.isGameStart) {
         //for tunnel 1
         if (model.currentTunnel == 1) {
-            /*if (this.tuniform) {
+            if (this.tuniform) {
                 this.tuniform.iGlobalTime.value += delta + this.lightRaySpeed;
 
                 if (model.isStartTeamRPM && model.isAccelerate) {
@@ -124,7 +124,7 @@ GameScene.prototype.render = function() {
                         this.tuniform.iRayLength.value -= 0.02;
                     }
                 }
-            }*/
+            }
         }
 
         //for meters
@@ -132,22 +132,23 @@ GameScene.prototype.render = function() {
             if (uielements.rpmMeter.isStartUpdate) {
                 uielements.rpmMeter.initMeterAnimation();
 
+                //for Update RPM Meter
+                uielements.rpmMeter.updateMeterValue(model.player1_RPM, model.player2_RPM);
+
+                //for better swing
                 var randomShakeValue = Math.floor(Math.random() * 10);
 
-                if (this.shakeValue >= model.player1_RPM + randomShakeValue || this.shakeValue <= model.player1_RPM - randomShakeValue) {
+                if (this.shakeValue >= model.speed + randomShakeValue || this.shakeValue <= model.speed - randomShakeValue) {
                     this.addShakeValue *= -1;
                 }
 
                 this.shakeValue += this.addShakeValue;
 
-                //for better swing
-                uielements.rpmMeter.updateMeterValue(model.player1_RPM, model.player2_RPM);
-
                 //for Update Team Meter
                 uielements.rpmMeter.updateTeamMeterValue();
 
                 //for Update Speed Meter
-                uielements.speedMeter.updateValue();
+                uielements.speedMeter.updateValue(this.shakeValue);
             }
         }
 

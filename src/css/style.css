@@ -50,7 +50,7 @@ img {
     left: 0;
     bottom: 0;
     right: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vw;
     margin: auto;
     -webkit-transform: scale(0.4);
@@ -268,7 +268,7 @@ img {
 #gameUIElements #teamRPM .elements {
     position:relative;
     margin:44px auto 0 auto;
-    width:60%;
+    width:1152px;
     height:36px;
     /*border:1px solid green;*/
 
@@ -342,13 +342,13 @@ img {
 
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #barLevel1 {
-    left: 96px;
+    left: 166px;
 }
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #barLevel2 {
-    left: 361px;
+    left: 430px;
 }
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #barLevel3 {
-    left: 629px;
+    left: 1000px;
 }
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames .number {
@@ -360,20 +360,20 @@ img {
 }
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #number1{
-    left: 50px;
+    left: 90px;
 
 }
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #number2{
-    left: 218px;
+    left: 287px;
 }
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #number3{
-    left: 489px
+    left: 703px
 }
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #number4{
-    left: 896px;
+    left: 1086px;
 }
 
 #gameUIElements #teamRPM .elements .indicator {
@@ -462,14 +462,14 @@ img {
 
 #gameUIElements #speedMeter .elements .indicator {
     position: absolute;
-    bottom: 155px;
-    left: 74px;
-    width: 233px;
+    bottom: 50px;
+    left: 168px;
+    width: 23px;
     height: 146px;
     background: url("../images/speedindicator.png") no-repeat;
     -webkit-transform-origin: 50% 100%;
     transform-origin: 50% 100%;
-    -webkit-transform: rotate(-83deg);
+    -webkit-transform: rotate(-98deg);
     z-index: 4;
 }
 
@@ -499,15 +499,17 @@ img {
     right:0;
     bottom:0;
     margin:auto;
-    width:500px;
-    height:300px;
+    width:76%;
+    height:790px;
     -webkit-transition: opacity 0.6s ease-out;
     transition: opacity 0.6s ease-out;
     padding:2em;
     text-align: center;
-    background-color:rgba(0,0,0,0.5);
+    background-color:rgba(18,13,66,0.8);
     color:white;
     opacity: 0;
+    border-radius: 15px;
+    z-index: 99;
 }
 
 #congratsOverlay h1 {
@@ -516,6 +518,18 @@ img {
 
 #congratsOverlay.show {
     opacity:1;
+}
+
+#congratsOverlay #CongratsContainer {
+    position: absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    right:0;
+    margin:auto;
+    width: 899px;
+    height: 319px;
+    font-size: 52px;
 }
 
 /*engine*/
@@ -527,15 +541,39 @@ img {
     bottom:0;
     width:100%;
     height:100%;
-    background: url(../images/backplate.jpg) no-repeat;
-    background-size: cover;
     z-index:3;
-    -webkit-transform:scaleY(0.03);
-    opacity:0;
-    /*-webkit-animation: show-engine-ani 1.2s;*/
-    /*animation: show-engine-ani 1.2s;*/
-    /*-webkit-animation-fill-mode: forwards;*/
-    /*animation-fill-mode: forwards;*/
+    opacity:1;
+    z-index:100;
+}
+
+#engine .background {
+    position:absolute;
+    top:0px;
+    left:0;
+    width:100%;
+    height:100%;
+}
+
+#engine .background #greenTop {
+    position:absolute;
+    top:0px;
+    left:0;
+    width:1920px;
+    height:50%;
+    background: url(../images/backplatetop.jpg) no-repeat;
+    background-size: cover;
+    -webkit-transform:translateY(-600px);
+}
+
+#engine .background #greenBottom {
+    position:absolute;
+    top:50%;
+    left:0;
+    width:1920px;
+    height:50%;
+    background: url(../images/backplatebottom.jpg) no-repeat;
+    -webkit-transform:translateY(600px);
+    background-size: cover;
 }
 
 #engine #photos {
