@@ -54,7 +54,7 @@ Main.prototype.changeSection = function(currentSection, nextSection) {
 };
 
 Main.prototype.changeTunnel = function(targetChannelId) {
-    console.log("changeTunnel="+targetChannelId);
+
     gamescene.changeTunnel(targetChannelId);
     model.currentTunnel = targetChannelId;
 };

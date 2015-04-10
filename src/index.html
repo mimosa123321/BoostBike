@@ -11,8 +11,8 @@
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="js/buzz/buzz.min.js"></script>
-    <!--<script src="js/three.min.js"></script>-->
-    <script src="js/three.js"></script>
+    <script src="js/three.min.js"></script>
+    <!--<script src="js/three.js"></script>-->
     <script src="js/flipclock/flipclock.js"></script>
     <script src="js/model.js"></script>
     <script src="js/main.js"></script>
@@ -155,7 +155,35 @@
                 <div id="greyCenter"></div>
             </div>
         </div>
-        <div id="player2rpm"></div>
+        <div id="player2rpm">
+            <div class="elements" id="verticalMask">
+                <svg id="mySVG" xmlns="http://www.w3.org/2000/svg" width="100" height="360"
+                     xmlns:xlink="http://www.w3.org/1999/xlink" viewport="0 0 80 300" preserveAspectRatio="xMinYMin meet">
+                    <defs>
+                        <linearGradient id="myLinearGradient1"
+                                        x1="0%" y1="0%"
+                                        x2="0%" y2="100%"
+                                        spreadMethod="pad">
+                            <stop offset="0%"   stop-color="#e8662a" stop-opacity="1"/>
+                            <stop offset="50%"   stop-color="#955054" stop-opacity="1"/>
+                            <stop offset="100%" stop-color="#1a6eb4" stop-opacity="1"/>
+                        </linearGradient>
+                        <pattern id="pattern"
+                                 x="0" y="0" width="100" height="18"
+                                 patternUnits="userSpaceOnUse" >
+                            <rect x="0" y="0"  width="100" height="10"
+                                  rx="3" ry="3"
+                                  style="fill: #ffffff"/>
+                        </pattern>
+                        <mask id="myMask" x="0" y="0" width="100" height="360" >
+                            <rect x="0" y="0"  width="100" height="360"
+                                  style="fill: url(#pattern)"/>
+                        </mask>
+                    </defs>
+                    <rect id="meter" x="0" y="0" width="100" height="360" style="fill: url(#myLinearGradient1); mask: url(#myMask)"/>
+                </svg>
+            </div>
+        </div>
     </div>
     <div id="teamRPM">
         <div class="elements">
@@ -164,19 +192,30 @@
                     <div class="levelColor"></div>
                 </div>
                 <div class="indicator">
+                    <div class="indicatorBg"></div>
                     <div class="indicatorColor"></div>
+
                 </div>
-                <div class="bgGradient"></div>
+                <!--<div class="bgGradient"></div>-->
                 <div class="levelBarFrames">
+                    <div id="number1" class="number">1</div>
                     <div id="barLevel1" class="frames"></div>
+                    <div id="number2" class="number">2</div>
                     <div id="barLevel2" class="frames"></div>
+                    <div id="number3" class="number">3</div>
                     <div id="barLevel3" class="frames"></div>
+                    <div id="number4" class="number">4</div>
                 </div>
             </div>
         </div>
     </div>
     <div id="speedMeter">
-        <div class="clock"></div>
+        <div class="elements">
+            <div class="background"></div>
+            <div class="indicator" id="speedRPMIndicator"></div>
+
+        </div>
+        <!--<div class="clock"></div>-->
     </div>
 </div>
 

@@ -10,7 +10,7 @@ var model = {
     isGameStart: false,
     isStartTeamRPM: false,
     isAccelerate: false,
-    currentTunnel: 1,
+    currentTunnel:1,
 
     onReady: function() {
         model.onLoadImages('#preload');

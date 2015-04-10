@@ -1,38 +1,108 @@
+var scene, renderer, texture;
+ var camera, cameraControl;
+ var accel = 0.008; //0.008
+ var cameraOffsetY = 0.5;
+
+
+
 var GameScene = function() {
     this.tuniform, this.tobject, this.clock, this.shakeValue = model.player1_RPM, this.shakeValue2 = model.player2_RPM, this.addShakeValue = 1, this.addShakeValue2 = 1, this.canvasWidth = 1000, this.canvasHeight = 500;
-    //this.bgSpeedPerRevolution = 3 / 300;
-    //this.rayLenthPerRevolution = 1 / 100;
-    this.lightRaySpeed = 0;
+    //
 
-    this.scene = new THREE.Scene();
-    this.renderer = new THREE.WebGLRenderer({
+    loadjscssfile("js/Three.js", "js");
+    //model.isGameStart = true;
+    model.currentTunnel = 2;
+    setTimeout(this.changeTunnel.bind(this),100);
+};
+
+
+GameScene.prototype.changeTunnel = function(tunnelId) {
+
+    console.log("!!");
+
+    renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: false
     });
-    //this.renderer.setClearColor( 0x193e75, 1);
-    this.renderer.setSize(screen_width, screen_width);
-    //this.renderer.setSize(screen_width, screen_width);
-    $("#gameScene").append(this.renderer.domElement);
 
-    this.light = new THREE.DirectionalLight(0xff0000, 1.5);
-    this.light.position.set(1, 1, 0).normalize();
-    this.light2 = new THREE.DirectionalLight(0x0000ff, 1.5);
-    this.light2.position.set(-1, 1, 0).normalize();
-    this.light3 = new THREE.PointLight(0x44FFAA, 15, 25);
-    this.light3.position.set(0, -3, 0);
-    this.light4 = new THREE.PointLight(0xff4400, 20, 30);
-    this.light4.position.set(3, 3, 0);
+    renderer.setClearColor( 0xff0000, 1 );
 
-    this.camera = new THREE.PerspectiveCamera(70, screen_width / screen_width, 1, 1000);
-    this.camera.position.set(0, 0, -100);
-    this.camera.lookAt(this.scene.position);
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.getElementById('container').appendChild(renderer.domElement);
 
-    this.clock = new THREE.Clock();
-    this.clock.start();
 
-    //this.initShaderToy();
+    scene = new THREE.Scene();
+
+    camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 10000 );
+    //        camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 100);
+    camera.position.set(0, 0, 7);
+    camera.lookAt(scene.position);
+    scene.add(camera);
+
+    var light	= new THREE.DirectionalLight( 0xff8000, 1.5 );
+    light.position.set( 1, 1, 0 ).normalize();
+    scene.add( light );
+
+    var light	= new THREE.DirectionalLight( 0xff8000, 1.5 );
+    light.position.set( -1, 1, 0 ).normalize();
+    scene.add( light );
+
+    var light	= new THREE.PointLight( 0x44FFAA, 15, 25 );
+    light.position.set( 0, -3, 0 );
+    scene.add( light );
+
+    var light	= new THREE.PointLight( 0xff4400, 20, 30 );
+    light.position.set( 3, 3, 0 );
+    scene.add( light );
+
+    scene.fog	= new THREE.FogExp2( 0x000000, 0.15 );
+
+    var geometry	= new THREE.CylinderGeometry( 1, 1, 30, 32, 1, true );
+    texture		= THREE.ImageUtils.loadTexture( "images/ash_uvgrid01.jpg" );
+    texture.wrapT	= THREE.RepeatWrapping;
+
+    var material	= new THREE.MeshLambertMaterial({color : 0xFFFFFF, map : texture});
+    var mesh	= new THREE.Mesh( geometry, material );
+    mesh.rotation.x	= Math.PI/2;
+    scene.add( mesh );
+
+    console.log(mesh);
+
+    mesh.flipSided	= true;
+
+    //animate();
     this.render();
 };
+
+
+function animate() {
+
+    // move the texture to give the illusion of moving thru the tunnel
+    texture.offset.y	+= 0.008; //control the speed of tunnel
+    texture.offset.y	%= 1;
+    texture.needsUpdate	= true;
+
+    // move the camera back and forth
+    var seconds		= Date.now() / 1000;
+    var radius		= 0.70;
+    var angle		= Math.sin(0.75 * seconds * Math.PI) / 4;
+    //angle	= (seconds*Math.PI)/4;
+    camera.position.x	= Math.cos(angle - Math.PI/2) * radius;
+    camera.position.y	= Math.sin(angle - Math.PI/2) * radius + cameraOffsetY;
+    camera.rotation.z	= angle;
+
+
+    requestAnimationFrame( animate );
+    renderer.render( scene, camera );
+}
+
+GameScene.prototype.animate = function() {
+
+    //requestAnimationFrame( this.animate.bind(this) );
+    //this.renderer.render(this.scene, this.camera);
+
+};
+
 
 GameScene.prototype.initShaderToy = function() {
     this.tuniform = {
@@ -102,11 +172,29 @@ GameScene.prototype.show = function() {
 };
 
 GameScene.prototype.render = function() {
-    var delta = this.clock.getDelta();
+    if (model.currentTunnel == 2) {
+        texture.offset.y	+= 0.008; //control the speed of tunnel
+        texture.offset.y	%= 1;
+        texture.needsUpdate	= true;
+
+        // move the camera back and forth
+        var seconds		= Date.now() / 1000;
+        var radius		= 0.70;
+        var angle		= Math.sin(0.75 * seconds * Math.PI) / 4;
+        //angle	= (seconds*Math.PI)/4;
+        camera.position.x	= Math.cos(angle - Math.PI/2) * radius;
+        camera.position.y	= Math.sin(angle - Math.PI/2) * radius + cameraOffsetY;
+        camera.rotation.z	= angle;
+
+
+
+    }
+
 
     if (model.isGameStart) {
         //for tunnel 1
         if (model.currentTunnel == 1) {
+            //var delta = this.clock.getDelta();
             /*if (this.tuniform) {
                 this.tuniform.iGlobalTime.value += delta + this.lightRaySpeed;
 
@@ -124,8 +212,11 @@ GameScene.prototype.render = function() {
                         this.tuniform.iRayLength.value -= 0.02;
                     }
                 }
-            }*/
+            }
+            this.renderer.render(this.scene, this.camera);*/
         }
+
+
 
         //for meters
         if (uielements) {
@@ -188,8 +279,12 @@ GameScene.prototype.render = function() {
             }
         }
     }
+
+
+
     requestAnimationFrame(this.render.bind(this));
-    this.renderer.render(this.scene, this.camera);
+    renderer.render( scene, camera );
+
 };
 
 GameScene.prototype.deleteShader = function() {
@@ -197,23 +292,3 @@ GameScene.prototype.deleteShader = function() {
     this.tobject = null;
 };
 
-GameScene.prototype.changeTunnel = function(tunnelId) {
-    if (tunnelId === 2) {
-        /*this.scene.add(this.light);
-         this.scene.add(this.light2);
-         this.scene.add(this.light3);
-         this.scene.add(this.light4);
-         this.scene.fog = new THREE.FogExp2(0x000000, 0.15);
-         var geometry = new THREE.CylinderGeometry(1, 1, 30, 32, 1, true);
-         var texture = THREE.ImageUtils.loadTexture("images/ash_uvgrid01.jpg");
-         texture.wrapT = THREE.RepeatWrapping;
-         var material = new THREE.MeshLambertMaterial({
-         color: 0xFFFFFF,
-         map: texture
-         });
-         this.tobject = new THREE.Mesh(geometry, material);
-         this.tobject.rotation.x = Math.PI / 2;
-         this.scene.add(this.tobject);
-         this.tobject.flipSided = true;*/
-    }
-};
