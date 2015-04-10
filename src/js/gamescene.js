@@ -1,5 +1,5 @@
 var GameScene = function() {
-    this.tuniform, this.tobject, this.clock, this.shakeValue = model.player1_RPM, this.shakeValue2 = model.player2_RPM, this.addShakeValue = 1, this.addShakeValue2 = 1, this.canvasWidth = 1000, this.canvasHeight = 500;
+    this.tuniform, this.tobject, this.clock, this.shakeValue = model.player1_RPM, this.addShakeValue = 1;
     //this.bgSpeedPerRevolution = 3 / 300;
     //this.rayLenthPerRevolution = 1 / 100;
     this.lightRaySpeed = 0;
@@ -138,15 +138,10 @@ GameScene.prototype.render = function() {
                     this.addShakeValue *= -1;
                 }
 
-                if (this.shakeValue2 >= model.player2_RPM + randomShakeValue || this.shakeValue2 <= model.player2_RPM - randomShakeValue) {
-                    this.addShakeValue2 *= -1;
-                }
-
                 this.shakeValue += this.addShakeValue;
-                this.shakeValue2 += this.addShakeValue2;
 
                 //for better swing
-                uielements.rpmMeter.updateMeterValue(this.shakeValue, this.shakeValue2);
+                uielements.rpmMeter.updateMeterValue(model.player1_RPM, model.player2_RPM);
 
                 //for Update Team Meter
                 uielements.rpmMeter.updateTeamMeterValue();

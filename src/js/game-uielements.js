@@ -5,8 +5,10 @@ var GameUIElements = function() {
 
 //RPMMeters
 var RPMMeter = function() {
-    this.rpmCurveMeter = new RPMCurveMeter();
+    //this.rpmCurveMeter = new RPMCurveMeter();
     this.rpmVerticalMeter = new RPMVerticalMeter();
+    this.rpmVerticalMeter2 = new RPMVerticalMeter();
+
     this.teamRPMMeter = new TeamRPMMeter();
 
     this.domElement = document.getElementById('rpms');
@@ -22,12 +24,13 @@ RPMMeter.prototype.startUpdate = function() {
 };
 
 RPMMeter.prototype.initMeterAnimation = function() {
-    this.rpmCurveMeter.animateDraw();
+    //this.rpmCurveMeter.animateDraw();
 };
 
 RPMMeter.prototype.updateMeterValue = function(shakeValue, shakeValue2) {
-    this.rpmCurveMeter.updateValue(shakeValue);
-    this.rpmVerticalMeter.updateValue(shakeValue2);
+    //this.rpmCurveMeter.updateValue(shakeValue);
+    this.rpmVerticalMeter.updateValue(shakeValue,$('#verticalMask'),$('#mySVG'));
+    this.rpmVerticalMeter2.updateValue(shakeValue2,$('#verticalMask2'),$('#mySVG2'));
 };
 
 RPMMeter.prototype.updateTeamMeterValue = function() {
@@ -72,11 +75,11 @@ RPMCurveMeter.prototype.draw = function() {
 };
 
 RPMCurveMeter.prototype.animateDraw = function() {
-    if (RPMCurveMeter.currentEnergyDegree <= RPMCurveMeter.endEnergyDegree) {
+    /*if (RPMCurveMeter.currentEnergyDegree <= RPMCurveMeter.endEnergyDegree) {
         ctx.clearRect(0, 0, 300, 150);
         RPMCurveMeter.currentEnergyDegree += 3;
         this.draw();
-    }
+    }*/
 };
 
 RPMCurveMeter.prototype.updateValue = function(value) {
@@ -109,18 +112,20 @@ RPMVerticalMeter.totalRPM = 360;
 RPMVerticalMeter.totalBlocks = 20;
 RPMVerticalMeter.blockHeight = 10;
 
-RPMVerticalMeter.prototype.updateValue = function(value) {
-    this.targetValue = this.convertRPMToUnit(value);
-    var maskPosY = parseInt(this.matrixToArray(this.verticalMask.css('-webkit-transform'))[5]);
-    var svgPosY = parseInt(this.matrixToArray(this.mySVG.css('-webkit-transform'))[5]);
-    if (maskPosY > this.targetValue) {
+RPMVerticalMeter.prototype.updateValue = function(value, targetMask, targetSVG) {
+    var targetValue = this.convertRPMToUnit(value);
+    var maskPosY = parseInt(this.matrixToArray(targetMask.css('-webkit-transform'))[5]);
+    var svgPosY = parseInt(this.matrixToArray( targetSVG .css('-webkit-transform'))[5]);
+
+    if (maskPosY > targetValue) {
         var currentPosY = maskPosY - 1;
-        this.verticalMask.css('-webkit-transform', 'translateY(' + currentPosY + 'px)');
+        targetMask.css('-webkit-transform', 'translateY(' + currentPosY + 'px)');
+        targetSVG.css('-webkit-transform', 'translateY(' + -currentPosY + 'px)');
     }
 
-    if (svgPosY < -this.targetValue) {
-        var currentSVGPosY = svgPosY + 1;
-        this.mySVG.css('-webkit-transform', 'translateY(' + currentSVGPosY + 'px)');
+    if (svgPosY < targetValue) {
+        //var currentSVGPosY = svgPosY + 1;
+
     }
 };
 

@@ -154,20 +154,20 @@ img {
 /*player1rpm*/
 #gameUIElements #rpms #player1rpm {
     position: absolute;
-    bottom: 0;
-    left: 2px;
-    width: 300px;
-    height: 150px;
+    bottom: 40px;
+    left: 75px;
+    width: 100px;
+    height: 360px;
 }
 
-#gameUIElements #rpms #player1rpm .elements {
+/*#gameUIElements #rpms #player1rpm .elements {
     position: relative;
     float:left;
     top:0;
     left:0;
     width: 300px;
     height: 150px;
-}
+}*/
 
 #gameUIElements #rpms #player1rpm .elements .background{
     position: absolute;
@@ -211,6 +211,9 @@ img {
     z-index: 5;
 }
 
+
+/*player2rpm*/
+
 #gameUIElements #rpms #player2rpm {
     position: absolute;
     right: 75px;
@@ -219,7 +222,7 @@ img {
     height: 360px;
 }
 
-#gameUIElements #rpms #player2rpm svg {
+#gameUIElements #rpms #player2rpm svg , #gameUIElements #rpms #player1rpm svg{
     position:absolute;
     left:0px;
     top:0;
@@ -228,15 +231,18 @@ img {
     -webkit-transform: translateY(-360px);
 }
 
-#gameUIElements #rpms #player2rpm #verticalMask {
+#gameUIElements #rpms #player2rpm #verticalMask2 ,#gameUIElements #rpms #player1rpm #verticalMask {
     position: absolute;
     top: 0px;
     left: 0px;
     width: 100px;
     height: 360px;
     -webkit-transform: translateY(360px);
+    /*border: 1px solid red;*/
     overflow: hidden;
 }
+
+
 
 
 #gameUIElements #teamRPM {
@@ -245,7 +251,7 @@ img {
     left:0;
     width:100%;
     height:80px;
-    opacity: 1;
+    opacity: 0;
     -webkit-transition: opacity 1s ease-out 0.5s;
     transition: opacity 1s ease-out 0.5s;
     /*border:1px solid grey;*/
@@ -429,7 +435,7 @@ img {
     bottom: 25px;
     width: 360px;
     height:220px;
-    opacity:1;
+    opacity:0;
     -webkit-transition: opacity 1s ease-out 0.5s;
     transition: opacity 1s ease-out 0.5s;
     /*border:1px red solid;*/

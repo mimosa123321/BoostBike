@@ -3,8 +3,8 @@ var main, screen_width, screen_height, video, gamescene, uielements, tutorial, c
 function initMain() {
     screen_width = window.innerWidth;
     screen_height = window.innerHeight;
-    canvas = document.getElementById('myCanvas');
-    ctx = canvas.getContext('2d');
+    //canvas = document.getElementById('myCanvas');
+    //ctx = canvas.getContext('2d');
     main = new Main();
 }
 
