@@ -7,7 +7,6 @@ var Video = function() {
 // Constants
 Video.VIDEO_SOURCE = "./videos/ford.mp4";
 
-
 Video.prototype.init = function() {
     var video = this.domElement;
     video.src = Video.VIDEO_SOURCE;
@@ -19,6 +18,16 @@ Video.prototype.init = function() {
     }, false);
 };
 
+Video.prototype.playVideo = function() {
+    this.player.play();
+};
+
 Video.prototype.stopVideo = function() {
     this.player.pause();
+};
+
+Video.prototype.reset = function() {
+    this.stopVideo();
+    this.player.currentTime = 0;
+    this.playVideo();
 };

@@ -8,41 +8,25 @@
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/style.css">
     <!-- DEV START -->
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script type="text/javascript" src="js/websocket/core.js"></script>
-    <script type="text/javascript" src="js/WebcamJS/webcam.min.js"></script>
-    <script src="js/three.min.js"></script>
-    <script src="js/threeM.js"></script>
-    <script src="js/buzz/buzz.min.js"></script>
-    <script src="js/flipclock/flipclock.js"></script>
+    <script src="js/lib/jquery-1.11.1.min.js"></script>
+    <script src="js/lib/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="js/websocket/core.js"></script>
+    <script src="js/lib/WebcamJS/webcam.min.js"></script>
+    <script src="js/lib/three/three.min.js"></script>
+    <script src="js/lib/three/threeM.js"></script>
+    <script src="js/lib/buzz/buzz.min.js"></script>
     <script src="js/model.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/video.js"></script>
     <script src="js/camera-manage.js"></script>
     <script src="js/tutorial.js"></script>
     <script src="js/gamescene.js"></script>
     <script src="js/tunnels.js"></script>
-    <script src="js/speedmeter.js"></script>
-    <script src="js/game-uielements.js"></script>
-    <script src="js/video.js"></script>
+    <script src="js/ui-elements/speedmeter.js"></script>
+    <script src="js/ui-elements/game-uielements.js"></script>
     <!-- DEV END -->
 </head>
 <body onkeydown="keyEvent(event)" onkeyup="keyUpEvent(event)">
-<script>
-    function loadjscssfile(filename, filetype) {
-        if (filetype == "js") {
-            var fileref = document.createElement('script');
-            fileref.setAttribute("type", "text/javascript");
-            fileref.setAttribute("src", filename);
-        }else if (filetype=="css") {
-            var fileref=document.createElement("link");
-            fileref.setAttribute("rel", "stylesheet");
-            fileref.setAttribute("type", "text/css");
-            fileref.setAttribute("href", filename);
-        }
-        if (typeof fileref!="undefined")  document.getElementsByTagName("head")[0].appendChild(fileref);
-    }
-</script>
 <script type="text/vertexShader" id="vertexShader">
     varying vec3 iRay;
     varying vec2 vUv;
@@ -123,11 +107,7 @@
 
         }
 </script>
-
 <div id="preload"><img src="images/engine3.png"></div>
-
-
-
 <div id="wrapper">
     <div id="preparation">
         <div id="cameraFeedContainer">
@@ -186,16 +166,9 @@
             <h1 class="text2">You are on your own now. Good luck!</h1>
         </div>
     </div>
-    <!--<canvas id="myCanvas" width="300" height="150">-->
+
     <div id="rpms">
         <div id="player1rpm">
-            <!--<div class="elements">
-                <canvas id="myCanvas" width="300" height="150">
-                    Your browser does not support the HTML5 canvas tag.</canvas>
-                <div class="background"><img src="images/rpmround.png"></div>
-                <div class="indicator" id="curveRPMIndicator"></div>
-                <div id="greyCenter"></div>
-            </div>-->
             <div class="elements" id="verticalMask">
                 <svg id="mySVG" xmlns="http://www.w3.org/2000/svg" width="100" height="360"
                      xmlns:xlink="http://www.w3.org/1999/xlink" viewport="0 0 80 300" preserveAspectRatio="xMinYMin meet">
@@ -268,7 +241,6 @@
     </div>
 </div>
 
-
 <div id="congratsOverlay" class="panel">
     <div id="CongratsContainer">
         <h1>Congratulations</h1>
@@ -276,9 +248,17 @@
     </div>
 </div>
 
+<div id="transition2">
+    <div class="background">
+        <div class="greenTop" id="transition2Bg"></div>
+        <div class="greenBottom"></div>
+    </div>
+
+</div>
+
 <div id="engine">
     <div class="background">
-        <div id="greenTop"></div>
+        <div id="greenTop" id="engineBg"></div>
         <div id="greenBottom"></div>
     </div>
     <div id="photos"></div>

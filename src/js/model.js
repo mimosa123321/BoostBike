@@ -4,14 +4,16 @@ var model = {
     player1_RPM: 80,
     player2_RPM: 280,
     totalRevolutions: 1,
-    revolutionPerLevel: [78, 218, 426, 640],
+    revolutionPerLevel: [78, 220, 520, 630],
     currentLevel: 1,
     isShowCongrats: false,
-    isShowEngine: false,
     isSpinEngine: false,
-    isGameStart: false,
-    isStartTeamRPM: false,
     isAccelerate: false,
+    isShowTransition1: false,
+    isShowTransition2: false,
+    isShowTransition3: false,
+    isShowEnding: false,
+    isEndGame:false,
     currentTunnel:1,
     speed :60,
 
@@ -34,7 +36,6 @@ var model = {
 
     onReady:function() {
         initMain();
-
         /*console.log("Start Connection");
         try {
             GameScreenCore.getInstance().init('#camera-feed'); //Init the GameScreen (required as it init the connect)

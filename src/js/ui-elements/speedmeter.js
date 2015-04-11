@@ -5,10 +5,6 @@
 var SpeedMeter = function() {
     this.isStartUpdate = false;
     this.domElement = $('#speedMeter');
-    /*this.clock = new FlipClock($('.clock'), 000, {
-        clockFace: 'Counter',
-        minimumDigits: 3
-    });*/
 };
 
 SpeedMeter.initialSpeedValue = 20;
@@ -22,8 +18,11 @@ SpeedMeter.prototype.show = function() {
 
     this.indictorCurrentDegree = SpeedMeter.initialSpeedDegree;
     this.indictorTargetDegree;
-
     //console.log(speedRPMIndicator)
+};
+
+SpeedMeter.prototype.startUpdate = function() {
+    this.isStartUpdate = true;
 };
 
 SpeedMeter.prototype.updateValue = function(value) {

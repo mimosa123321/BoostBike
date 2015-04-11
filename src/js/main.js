@@ -1,4 +1,5 @@
-var main, cameraManager, screen_width, screen_height, video, gamescene, uielements, tutorial, canvas, ctx, engine;
+var main, cameraManager, video, gamescene, uielements, tutorial, engine, transitionManager;
+var screen_width, screen_height;
 
 function initMain() {
     screen_width = window.innerWidth;
@@ -33,44 +34,54 @@ Main.prototype.hideGetReady = function() {
 };
 
 Main.prototype.enterPhotoShoot = function() {
-    //stop Video
     main.stopVideo();
     main.changeSection($('#video-wrapper'), null);
     main.hideOverlay();
 };
 
-/*----------------------------------------------------------*/
-
+/*---------------------Game Scene-------------------------------------*/
 Main.prototype.initGameScene = function() {
     gamescene = new GameScene();
 };
 
 Main.prototype.startGameScene = function() {
-    model.isGameStart = true;
+    gamescene.start();
     gamescene.show();
 };
 
-Main.prototype.initEngine = function() {
-    engine = new Engine();
-};
-
+/*---------------------Tutorial---------------------------------------*/
 Main.prototype.initTutorial = function() {
     tutorial = new Tutorial();
     tutorial.showInstructions(1);
 };
 
+/*-------------------TransitionManager--------------------------------*/
+Main.prototype.initTransitionManager = function() {
+    transitionManager = new TransitionManager();
+};
+
+/*---------------------UI---------------------------------------------*/
 Main.prototype.initUIElements = function() {
     uielements = new GameUIElements();
 };
 
-
 Main.prototype.enterGame = function() {
     main.startGameScene();
     main.initUIElements();
+    main.initTransitionManager();
+    main.initEngine();
     setTimeout(function () {
         main.initTutorial();
     }, 3000);
-}
+};
+
+/*---------------------Engine-------------------------------------*/
+Main.prototype.initEngine = function() {
+    engine = new Engine();
+};
+
+
+/*---------------------------------------------------------------*/
 
 
 Main.prototype.updateLevel = function() {
@@ -119,6 +130,10 @@ Main.prototype.hideWrapper = function() {
     $('#wrapper').attr('class','hide');
 };
 
+Main.prototype.restartGame = function() {
+
+};
+
 // keyboard event
 var keyEvent = function(event) {
     var key = event.keyCode || event.which;
@@ -138,17 +153,20 @@ var keyEvent = function(event) {
         //}, 3000);
     }
 
+    if (keychar.toUpperCase() === "R") {
+        console.log("reset");
+        video.reset();
+    }
+
     if (key === 38) {
-        if (model.isStartTeamRPM) {
+        if (uielements.rpmMeter.teamRPMMeter.isStartUpdate) {
             model.totalRevolutions += 1;
             model.isAccelerate = true;
         }
-
     }
 };
 
 var keyUpEvent = function(event) {
-    //model.totalRevolutions -= 1;
     model.isAccelerate = false;
 };
 

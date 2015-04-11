@@ -92,20 +92,23 @@ Tunnel1.prototype.update = function() {
         this.tuniform.iGlobalTime.value += delta + this.lightRaySpeed;
         //this.tuniform.iGlobalTime.value += delta;
 
-        if (model.isStartTeamRPM && model.isAccelerate) {
-            //increase the light ray speed and length
-            this.lightRaySpeed += 0.0005;
-            this.tuniform.iRayLength.value += 0.002;
-        } else {
-            //speed
-            if (this.lightRaySpeed > 0) {
-                this.lightRaySpeed -= 0.001;
-            }
-            //eay length
-            if (this.tuniform.iRayLength.value > 0) {
-                this.tuniform.iRayLength.value -= 0.02;
+        if(uielements) {
+            if (uielements.rpmMeter.teamRPMMeter.isStartUpdate && model.isAccelerate) {
+                //increase the light ray speed and length
+                this.lightRaySpeed += 0.0005;
+                this.tuniform.iRayLength.value += 0.002;
+            } else {
+                //speed
+                if (this.lightRaySpeed > 0) {
+                    this.lightRaySpeed -= 0.001;
+                }
+                //eay length
+                if (this.tuniform.iRayLength.value > 0) {
+                    this.tuniform.iRayLength.value -= 0.02;
+                }
             }
         }
+
         this.renderer.render(this.scene, this.camera);
     }
 };
@@ -118,6 +121,10 @@ Tunnel1.prototype.deleteShader = function() {
 /*----------------------------------------------------------*/
 
 var Tunnel2 = function() {
+    this.accelSpeed = 0;
+    this.isChangeTexture = false;
+    this.geom, this.mesh;
+
     this.renderer = new THREE_M.WebGLRenderer({
         antialias: true,
         alpha: false
@@ -127,6 +134,8 @@ var Tunnel2 = function() {
 
     this.renderer.setSize( window.innerWidth, window.innerHeight );
     $("#gameScene").append(this.renderer.domElement);
+
+    this.renderer.domElement.style.webkitTransform = "scale(1)";
 
     this.scene = new THREE_M.Scene();
 
@@ -154,21 +163,43 @@ var Tunnel2 = function() {
 
     this.scene.fog	= new THREE_M.FogExp2( 0x000000, 0.15 );
 
-    var geometry	= new THREE_M.CylinderGeometry( 1, 1, 30, 32, 1, true );
+    this.geom	= new THREE_M.CylinderGeometry( 1, 1, 30, 32, 1, true );
     this.texture	= THREE_M.ImageUtils.loadTexture( "images/textures/ash_uvgrid01.jpg" );
     this.texture.wrapT	= THREE_M.RepeatWrapping;
 
     var material	= new THREE_M.MeshLambertMaterial({color : 0xFFFFFF, map :  this.texture});
-    var mesh	= new THREE_M.Mesh( geometry, material );
-    mesh.rotation.x	= Math.PI/2;
-    this.scene.add( mesh );
+    this.mesh	= new THREE_M.Mesh( this.geom, material );
+    this.mesh.rotation.x	= Math.PI/2;
+    this.scene.add( this.mesh );
 
-    mesh.flipSided	= true;
+    this.mesh.flipSided	= true;
 };
 
 Tunnel2.prototype.update = function() {
-    this.texture.offset.y	+= 0.008; //control the speed of tunnel
+
+    if(uielements) {
+        if (uielements.rpmMeter.teamRPMMeter.isStartUpdate && model.isAccelerate) {
+            //increase the light ray speed and length
+            this.accelSpeed  += 0.0001;
+        } else {
+            //speed
+            if (this.accelSpeed > 0) {
+                this.accelSpeed -= 0.0005;
+            }else {
+                this.accelSpeed = 0;
+            }
+        }
+    }
+
+    this.texture.offset.y	+= 0.003 + this.accelSpeed; //control the speed of tunnel
     this.texture.offset.y	%= 1;
+
+    if(model.currentLevel === 4 && !this.isChangeTexture) {
+        this.texture = THREE_M.ImageUtils.loadTexture( "images/textures/wave.png"  );
+        this.mesh.material.map =  this.texture;
+        this.mesh.material.needsUpdate = true;
+        this.isChangeTexture = true;
+    }
     this.texture.needsUpdate	= true;
 
      // move the camera back and forth
@@ -176,9 +207,9 @@ Tunnel2.prototype.update = function() {
      var radius		= 0.70;
      var angle		= Math.sin(0.75 * seconds * Math.PI) / 4;
      //angle	= (seconds*Math.PI)/4;
-    this.camera.position.x	= Math.cos(angle - Math.PI/2) * radius;
-    this.camera.position.y	= Math.sin(angle - Math.PI/2) * radius + 0.5;
-    this.camera.rotation.z	= angle;
+//    this.camera.position.x	= Math.cos(angle - Math.PI/2) * radius;
+//    this.camera.position.y	= Math.sin(angle - Math.PI/2) * radius + 0.5;
+//    this.camera.rotation.z	= angle;
     this.renderer.render(this.scene, this.camera);
 };
 

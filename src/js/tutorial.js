@@ -1,38 +1,39 @@
 var Tutorial = function() {
-    this.startShowRPMS = this.onStartShowRPMS.bind(this);
+    this.startShowRPMSText = this.onStartShowRPMS.bind(this);
+    this.showTutorialTimeout;
 };
 
 Tutorial.prototype.showInstructions = function(pageId) {
     console.log("show page=" + pageId);
-    this.instructions = $('#tutorial').find('#instruction' + pageId);
+    this.instructions = $('#instruction' + pageId);
     this.instructions.addClass('show');
 
     if (pageId === 1) {
         //add Animation End Listener //text sentence 3
         this.showRMPText = document.getElementById('showRPMText');
-        animate.addAnimationListener(this.showRMPText, "AnimationStart", this.startShowRPMS);
+        animate.addAnimationListener(this.showRMPText, "AnimationStart", this.startShowRPMSText);
     } else if (pageId === 2) {
         this.onStartShowTeamRPM();
-        setTimeout(this.addRevolution.bind(this, 25), 1500);
+        this.showTutorialTimeout = setTimeout(this.addRevolution.bind(this, 25), 1500);
     } else if (pageId === 3) {
         this.onStartShowSpeedMeter();
-        setTimeout(this.addRevolution.bind(this, 25), 800);
+        this.showTutorialTimeout = setTimeout(this.addRevolution.bind(this, 25), 800);
     } else if (pageId === 4) {}
 
-    setTimeout(this.hideInstructions.bind(this, pageId), 5000);
+    this.showTutorialTimeout = setTimeout(this.hideInstructions.bind(this, pageId), 5000);
 };
 
 Tutorial.prototype.hideInstructions = function(pageId) {
-    this.instructions = $('#tutorial').find('#instruction' + pageId);
+    this.instructions = $('#instruction' + pageId);
     this.instructions.attr('class', 'instructions hide');
 
     if (pageId < 3) {
         var nextPageId = parseInt(pageId) + 1;
-        setTimeout(this.showInstructions.bind(this, nextPageId), 1500);
+        this.showTutorialTimeout = setTimeout(this.showInstructions.bind(this, nextPageId), 1500);
     } else if (pageId === 3) {
         this.addRevolution(27);
     } else if (pageId === 4) {
-        setTimeout(function() {
+        this.showTutorialTimeout = setTimeout(function() {
             uielements.rpmMeter.teamRPMMeter.startUpdate();
         }, 1000);
     }
@@ -41,10 +42,10 @@ Tutorial.prototype.hideInstructions = function(pageId) {
 Tutorial.prototype.onStartShowRPMS = function() {
     console.log("Start Show RPMS");
     uielements.rpmMeter.show();
-    setTimeout(function() {
-        uielements.rpmMeter.startUpdate();
+    this.showTutorialTimeout = setTimeout(function() {
+        uielements.startUpdate();
     }, 400);
-    animate.removeAnimationListener(this.showRMPText, "AnimationStart", this.startShowRPMS);
+    animate.removeAnimationListener(this.showRMPText, "AnimationStart", this.startShowRPMSText);
 };
 
 Tutorial.prototype.onStartShowTeamRPM = function() {
@@ -55,9 +56,8 @@ Tutorial.prototype.onStartShowTeamRPM = function() {
 Tutorial.prototype.onStartShowSpeedMeter = function() {
     console.log("Start Show Speed Meter");
     uielements.speedMeter.show();
-
-    setTimeout(function() {
-        uielements.speedMeter.isStartUpdate = true;
+    this.showTutorialTimeout = setTimeout(function() {
+        uielements.speedMeter.startUpdate();
     }, 1000);
 };
 
@@ -66,7 +66,7 @@ Tutorial.prototype.onsStartShowCongrats = function() {
     this.congrats = $('#congratsOverlay');
     this.congrats.addClass('show');
 
-    setTimeout(this.onHideCongrats.bind(this), 2500);
+    this.showTutorialTimeout = setTimeout(this.onHideCongrats.bind(this), 2500);
 };
 
 Tutorial.prototype.onHideCongrats = function() {
@@ -76,9 +76,21 @@ Tutorial.prototype.onHideCongrats = function() {
     animate.transitionEnd(this.congrats, this.showInstructions.bind(this, 4));
 };
 
-
 Tutorial.prototype.addRevolution = function(value) {
     model.totalRevolutions += value;
+};
+
+Tutorial.prototype.dispose = function() {
+    $('.instructions').each(function(){
+        $(this).removeClass('hide');
+        $(this).removeClass('show');
+    });
+    $('#congratsOverlay').removeClass('show');
+
+    if(this.showTutorialTimeout){
+        clearTimeout(this.showTutorialTimeout);
+    }
+
 };
 
 
@@ -94,8 +106,10 @@ var Engine = function() {
     this.engine3D = $('#photos');
     this.engineDomElement = document.getElementById('engine');
     this.engine3DDomElement = document.getElementById('photos');
+    this.bgTopDomElement = document.getElementById('engineBg');
     this.finishShowEngine = this.onFinishShowEngine.bind(this);
     this.finishHide3DEngine = this.onFinishHide3DEngine.bind(this);
+    this.finishHideGreenBg = this.onFinishHideGreenBg.bind(this);
 };
 
 Engine.prototype.loop = function() {
@@ -120,8 +134,8 @@ Engine.prototype.show = function() {
 };
 
 Engine.prototype.onFinishShowEngine = function() {
-    console.log("remove shader! And show engine");
-    gamescene.removeTunnel_1();
+
+
     animate.removeAnimationListener(this.engineDomElement, "AnimationEnd", this.finishShowEngine);
 };
 
@@ -144,16 +158,59 @@ Engine.prototype.onFinishHide3DEngine = function() {
     this.engine3D.css('display', 'none');
     //hide engine section also
     this.hide();
+    uielements.rpmMeter.teamRPMMeter.startUpdate();
     animate.removeAnimationListener(this.engine3DDomElement, "AnimationEnd", this.finishHide3DEngine);
-
-
-    setTimeout(function(){
-        console.log("change tunnel2");
-        gamescene.changeTunnel();
-    },100);
 
 };
 
 Engine.prototype.hide = function() {
     this.engine.attr('class', 'hide');
+//    animate.addAnimationListener(this.bgTopDomElement, "AnimationEnd", this.finishHideGreenBg);
+};
+
+Engine.prototype.onFinishHideGreenBg = function () {
+//    console.log("finish hide green");
+//    animate.removeAnimationListener(this.bgTopDomElement, "AnimationEnd", this.finishHideGreenBg);
+//    uielements.rpmMeter.teamRPMMeter.startUpdate();
+};
+
+var TransitionManager = function () {
+    this.finishHideGreenBg = this.onFinishHideGreenBg.bind(this);
+    this.finishShowGreenBg = this.onFinishShowGreenBg.bind(this);
+};
+
+TransitionManager.prototype.show = function (transitionId) {
+    var transition = $('#transition' + transitionId);
+    if(transitionId === 2) {
+        var domElement = document.getElementById('transition2Bg');
+        transition.addClass("show");
+        setTimeout(this.hide.bind(this,2),5000);
+        animate.addAnimationListener(domElement, "AnimationEnd", this.finishShowGreenBg);
+    }
+};
+
+TransitionManager.prototype.onFinishShowGreenBg = function () {
+    var domElement = document.getElementById('transition2Bg');
+    animate.removeAnimationListener(domElement, "AnimationEnd", this.finishShowGreenBg);
+    gamescene.removeTunnel_1();
+    setTimeout(function(){
+        console.log("change tunnel2");
+        gamescene.changeTunnel();
+    },100);
+};
+
+TransitionManager.prototype.hide = function (transitionId) {
+    var transition = $('#transition' + transitionId);
+    transition.attr('class','hide');
+    console.log("hide");
+    if(transitionId === 2) {
+        var domElement = document.getElementById('transition2Bg');
+        animate.addAnimationListener(domElement, "AnimationEnd", this.finishHideGreenBg);
+    }
+};
+
+TransitionManager.prototype.onFinishHideGreenBg = function () {
+    var domElement = document.getElementById('transition2Bg');
+    animate.removeAnimationListener(domElement, "AnimationEnd", this.finishHideGreenBg);
+    uielements.rpmMeter.teamRPMMeter.startUpdate();
 };

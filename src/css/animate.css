@@ -179,7 +179,44 @@
 }
 
 
+#transition2.show {
+    opacity:1;
+}
 
+/*#transition2.hide {
+    opacity:0;
+}*/
+
+#transition2.show .background .greenTop {
+    -webkit-animation: show-greenTop-ani 0.7s ease-out;
+    animation: show-engine-ani 0.7s ease-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+#transition2.show .background .greenBottom {
+    -webkit-animation: show-greenBottom-ani 0.7s ease-out;
+    animation: show-greenBottom-ani 0.7s ease-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+#transition2.hide .background .greenTop {
+    -webkit-animation: hide-greenTop-ani 0.7s ease-out;
+    animation: hide-greenTop-ani 0.7s ease-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+#transition2.hide .background .greenBottom {
+    -webkit-animation: hide-greenBottom-ani 0.7s ease-out;
+    animation: hide-greenBottom-ani 0.7s ease-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+
+/*-----------------------*/
 #engine.show {
 }
 
@@ -196,28 +233,28 @@
     100%   { transform: scaleY(0); opacity: 0}
 }
 
-#engine.show .background #greenTop {
+#engine.show .background .greenTop {
     -webkit-animation: show-greenTop-ani 0.7s ease-out;
     animation: show-engine-ani 0.7s ease-out;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
 
-#engine.show .background #greenBottom {
+#engine.show .background .greenBottom {
     -webkit-animation: show-greenBottom-ani 0.7s ease-out;
     animation: show-greenBottom-ani 0.7s ease-out;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
 
-#engine.hide .background #greenTop {
+#engine.hide .background .greenTop {
     -webkit-animation: hide-greenTop-ani 0.7s ease-out;
     animation: hide-greenTop-ani 0.7s ease-out;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
 
-#engine.hide .background #greenBottom {
+#engine.hide .background .greenBottom {
     -webkit-animation: hide-greenBottom-ani 0.7s ease-out;
     animation: hide-greenBottom-ani 0.7s ease-out;
     -webkit-animation-fill-mode: forwards;
