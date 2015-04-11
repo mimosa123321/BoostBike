@@ -1,15 +1,14 @@
-var main, screen_width, screen_height, video, gamescene, uielements, tutorial, canvas, ctx, engine;
+var main, cameraManager, screen_width, screen_height, video, gamescene, uielements, tutorial, canvas, ctx, engine;
 
 function initMain() {
     screen_width = window.innerWidth;
     screen_height = window.innerHeight;
-    //canvas = document.getElementById('myCanvas');
-    //ctx = canvas.getContext('2d');
     main = new Main();
 }
 
 var Main = function() {
     this.initVideo();
+    this.initCamera();
     this.initGameScene();
 };
 
@@ -20,6 +19,27 @@ Main.prototype.initVideo = function() {
 Main.prototype.stopVideo = function() {
     video.stopVideo();
 };
+
+Main.prototype.initCamera = function() {
+    cameraManager= new CameraManager();
+};
+
+Main.prototype.showGetReady = function() {
+    $('#getReadyContainer').addClass('show');
+};
+
+Main.prototype.hideGetReady = function() {
+    $('#getReadyContainer').attr('class','hide');
+};
+
+Main.prototype.enterPhotoShoot = function() {
+    //stop Video
+    main.stopVideo();
+    main.changeSection($('#video-wrapper'), null);
+    main.hideOverlay();
+};
+
+/*----------------------------------------------------------*/
 
 Main.prototype.initGameScene = function() {
     gamescene = new GameScene();
@@ -42,6 +62,12 @@ Main.prototype.initTutorial = function() {
 Main.prototype.initUIElements = function() {
     uielements = new GameUIElements();
 };
+
+
+Main.prototype.enterGame = function() {
+   main.startGameScene();
+};
+
 
 Main.prototype.updateLevel = function() {
     if (model.totalRevolutions >= model.revolutionPerLevel[model.currentLevel - 1]) {
@@ -81,19 +107,27 @@ Main.prototype.hideOverlay = function() {
     });
 };
 
+Main.prototype.showWrapper = function() {
+    $('#wrapper').addClass('show');
+};
+
+Main.prototype.hideWrapper = function() {
+    $('#wrapper').attr('class','hide');
+};
+
 // keyboard event
 var keyEvent = function(event) {
     var key = event.keyCode || event.which;
     var keychar = String.fromCharCode(key);
     if (keychar.toUpperCase() === "V") {
-        main.stopVideo();
-        main.changeSection($('#video-wrapper'), null);
-        main.hideOverlay();
-        main.startGameScene();
-        main.initUIElements();
-        setTimeout(function() {
-            main.initTutorial();
-        }, 3000);
+        //main.stopVideo();
+        //main.changeSection($('#video-wrapper'), null);
+        //main.hideOverlay();
+        //main.startGameScene();
+        //main.initUIElements();
+        //setTimeout(function() {
+        //    main.initTutorial();
+        //}, 3000);
     }
 
     if (key === 38) {
@@ -148,4 +182,7 @@ var prefixedRemoveEventListener = function(element, type, callback) {
 };
 
 //window.addEventListener('DOMContentLoaded', model.onReady);
-window.addEventListener('load', model.onReady);
+window.addEventListener('load', model.onPreload);
+
+
+/*get*/

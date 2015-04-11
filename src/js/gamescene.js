@@ -9,20 +9,11 @@ var GameScene = function() {
         alpha: false
     });
     //this.renderer.setClearColor( 0x193e75, 1);
-    this.renderer.setSize(screen_width, screen_width);
+    this.renderer.setSize(screen_width, screen_height);
     //this.renderer.setSize(screen_width, screen_width);
     $("#gameScene").append(this.renderer.domElement);
 
-    this.light = new THREE.DirectionalLight(0xff0000, 1.5);
-    this.light.position.set(1, 1, 0).normalize();
-    this.light2 = new THREE.DirectionalLight(0x0000ff, 1.5);
-    this.light2.position.set(-1, 1, 0).normalize();
-    this.light3 = new THREE.PointLight(0x44FFAA, 15, 25);
-    this.light3.position.set(0, -3, 0);
-    this.light4 = new THREE.PointLight(0xff4400, 20, 30);
-    this.light4.position.set(3, 3, 0);
-
-    this.camera = new THREE.PerspectiveCamera(70, screen_width / screen_width, 1, 1000);
+    this.camera = new THREE.PerspectiveCamera(70, screen_width / screen_height, 1, 1000);
     this.camera.position.set(0, 0, -100);
     this.camera.lookAt(this.scene.position);
 
@@ -30,7 +21,6 @@ var GameScene = function() {
     this.clock.start();
 
     this.initShaderToy();
-    this.render();
 };
 
 GameScene.prototype.initShaderToy = function() {
@@ -49,7 +39,7 @@ GameScene.prototype.initShaderToy = function() {
         },
         iResolution: {
             type: "v2",
-            value: new THREE.Vector2(screen_width, screen_width)
+            value: new THREE.Vector2(screen_width, screen_height)
         },
         iRedColor: {
             type: "f",
@@ -90,7 +80,7 @@ GameScene.prototype.initShaderToy = function() {
     });
     //mat.transparent = true;
     //mat.lights = true;
-    this.tobject = new THREE.Mesh(new THREE.PlaneGeometry(screen_height, screen_height, 1, 1), mat);
+    this.tobject = new THREE.Mesh(new THREE.PlaneGeometry(screen_width, screen_height, 1, 1), mat);
     this.scene.add(this.tobject);
 };
 
@@ -98,16 +88,17 @@ GameScene.prototype.show = function() {
     console.log("show game scene");
     $('#gameScene').find('canvas').addClass("show");
     $('#gameSceneGradient').addClass("show");
+    this.render();
 };
 
 GameScene.prototype.render = function() {
-    var delta = this.clock.getDelta();
-
     if (model.isGameStart) {
         //for tunnel 1
+        var delta = this.clock.getDelta();
         if (model.currentTunnel == 1) {
             if (this.tuniform) {
                 this.tuniform.iGlobalTime.value += delta + this.lightRaySpeed;
+                //this.tuniform.iGlobalTime.value += delta;
 
                 if (model.isStartTeamRPM && model.isAccelerate) {
                     //increase the light ray speed and length
@@ -127,7 +118,7 @@ GameScene.prototype.render = function() {
         }
 
         //for meters
-        if (uielements) {
+        /*if (uielements) {
             if (uielements.rpmMeter.isStartUpdate) {
                 uielements.rpmMeter.initMeterAnimation();
 
@@ -181,10 +172,12 @@ GameScene.prototype.render = function() {
                 engine.loop();
                 engine.engineTimer = 0;
             }
-        }
+        }*/
+        requestAnimationFrame(this.render.bind(this));
+        this.renderer.render(this.scene, this.camera);
+
     }
-    requestAnimationFrame(this.render.bind(this));
-    this.renderer.render(this.scene, this.camera);
+
 };
 
 GameScene.prototype.deleteShader = function() {

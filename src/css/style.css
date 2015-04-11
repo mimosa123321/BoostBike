@@ -24,13 +24,228 @@ img {
     overflow: hidden;
 }
 
+
 #wrapper {
     position: absolute;
     top:0;
     left:0;
     width:100%;
     height:100%;
+    z-index: 88;
+    opacity:1;
 }
+
+#preparation {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: black;
+
+}
+
+/*---------get Ready------*/
+#getReadyContainer {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:101;
+    opacity: 0;
+    background: url("../images/bg.jpg") no-repeat;
+    background-size: cover;
+}
+
+#getReadyContainer #tabletsContainer {
+    position:absolute;
+    top:0px;
+    left:0;
+    bottom:0;
+    right:0;
+    margin:auto;
+    width:748px;
+    height:586px;
+}
+
+
+#getReadyContainer #tablets {
+    position:absolute;
+    top:0px;
+    left:0;
+    bottom:0;
+    right:0;
+    width:749px;
+    height:482px;
+}
+
+#getReadyContainer #tablets img, #getReadyContainer #tabletsArrow img {
+    width:100%;
+    height:auto;
+}
+
+#getReadyContainer #tabletsArrow {
+    position: absolute;
+    top: -90px;
+    left: 260px;
+    bottom: 0;
+    right: 0;
+    width: 239px;
+    height: 332px;
+    -webkit-transform: translateY(-20px);
+    transform: translateY(-20px);
+}
+
+#getReadyContainer .text {
+    position: absolute;
+    left: 0;
+    bottom: 230px;
+    right: 0;
+    margin: auto;
+    text-align: center;
+}
+
+#getReadyContainer .text h1{
+    color: #003478;
+    font-size: 48px;
+    line-height: 48px;
+}
+
+#getReadyContainer .text h2{
+    color: #003478;
+    font-size: 36px;
+    line-height: 10px;
+}
+
+/*---------camera------*/
+#cameraFeedContainer {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:100;
+    opacity: 0;
+    background: url("../images/bg.jpg") no-repeat;
+    background-size: cover;
+}
+
+#cameraFeedContainer .text {
+    position:absolute;
+    top:170px;
+    left:0;
+    bottom:0;
+    right:0;
+    margin:auto;
+    width:100%;
+    height:auto;
+    text-align: center;
+}
+
+#cameraFeedContainer .text h1{
+    color: #003478;
+    font-size: 48px;
+    line-height: 48px;
+}
+
+#cameraFeedContainer .text h2{
+    color: #003478;
+    font-size: 36px;
+    line-height: 10px;
+}
+
+
+#cameraFeedContainer #myCamera {
+    position:absolute;
+    top:170px;
+    left:0;
+    bottom:0;
+    right:0;
+    margin:auto;
+    width: 848px !important;
+    height: 535px !important;
+}
+
+
+#camera-feed {
+
+    width: 100% !important;
+    height: 100% !important;
+
+}
+
+
+#camera-feed video {
+
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+#cameraFeedContainer #frame {
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    margin:auto;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#cameraFeedContainer img {
+    width:100%;
+    height:auto;
+}
+
+#frameDot {
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    margin:auto;
+    position: absolute;
+    width: 761px;
+    height: 437px;
+}
+
+#cameraFeedContainer #countDownValue {
+    position:absolute;
+    top:0;
+    width:100%;
+    text-align: center;
+    opacity: 0;
+}
+
+#cameraFeedContainer #countDownValue p {
+    font-size: 150px;
+    color:#2970a5;
+}
+
+#cameraFeedContainer #takenPhoto {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 715px;
+    height: auto;
+    right: 0;
+    margin: auto;
+}
+
+#photoFlash {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: white;
+    opacity: 0;
+}
+
 
 #wrapper #video-wrapper {
     position:absolute;
@@ -51,10 +266,10 @@ img {
     bottom: 0;
     right: 0;
     width: 100%;
-    height: 100vw;
+    height: 100%;
     margin: auto;
     -webkit-transform: scale(0.4);
-    border-radius: 999px;
+    /*border-radius: 999px;*/
     background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,1) 49%, rgba(0,0,0,1) 68%, rgba(0,0,0,1) 99%, rgba(0,0,0,1) 100%); /* FF3.6+ */
     background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0)), color-stop(24%,rgba(0,0,0,0)), color-stop(49%,rgba(0,0,0,1)), color-stop(68%,rgba(0,0,0,1)), color-stop(99%,rgba(0,0,0,1)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
     background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,1) 49%,rgba(0,0,0,1) 68%,rgba(0,0,0,1) 99%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
@@ -87,7 +302,7 @@ img {
     margin:auto;
     -webkit-transform-origin: 50% 50%;
     -webkit-transform: scale(0.3);
-    border-radius:999px;
+    /*border-radius:999px;*/
     opacity:1;
 }
 

@@ -1,7 +1,117 @@
+#wrapper.show {
+    -webkit-animation: show-ani 1s ease-out 0.5s;
+    animation: show-ani 1s ease-out 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+#wrapper.hide {
+    -webkit-animation: hide-ani 1s ease-out 0.5s;
+    animation: hide-ani 1s ease-out 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+
+
+#cameraFeedContainer.show {
+    -webkit-animation: show-camera-feed-ani 1s ease-out;
+    animation: show-camera-feed-ani 1s ease-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes show-camera-feed-ani {
+    0%   { opacity: 0 }
+    100%   { opacity: 1}
+}
+
+
+#cameraFeedContainer.hide{
+    -webkit-animation: hide-camera-feed-ani 0.6s ease-out;
+    animation: hide-camera-feed-ani 0.6s ease-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes hide-camera-feed-ani {
+    0%   { opacity: 1 }
+    100%   { opacity: 0}
+}
+
+#cameraFeedContainer #countDownValue.show {
+    -webkit-animation: show-countDownValue-ani 0.3s ease-out;
+    animation: show-countDownValue-ani 0.3s ease-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes show-countDownValue-ani {
+    0%   { opacity: 0 }
+    100%   { opacity: 1}
+}
+
+#cameraFeedContainer #countDownValue.hide {
+    -webkit-animation: hide-countDownValue-ani 0.3s ease-out;
+    animation: hide-countDownValue-ani 0.3s ease-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes hide-countDownValue-ani {
+    0%   { opacity: 1 }
+    100%   { opacity: 0}
+}
+
+
+#photoFlash.show {
+    -webkit-animation: show-flash-ani 1s;
+    animation: show-flash-ani 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes show-flash-ani {
+    0%   { opacity: 0 }
+    50%   { opacity: 0.8}
+    100%   { opacity: 0}
+}
+
+
+#getReadyContainer.show {
+    -webkit-animation: show-ani 1s ease-out 0.5s;
+    animation: show-ani 1s ease-out 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+#getReadyContainer.hide {
+    -webkit-animation: hide-ani 1s ease-out;
+    animation: hide-ani 1s ease-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+#getReadyContainer #tabletsArrow {
+    -webkit-animation: move-arrow-ani 1s;
+    animation: move-arrow-ani 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    animation-iteration-count:infinite;
+    -webkit-animation-iteration-count:infinite;
+}
+
+
+@-webkit-keyframes move-arrow-ani {
+    0%   { transform: translateY(-20px);  }
+    50%   { transform: translateY(20px);}
+    100%   { transform: translateY(-20px);}
+}
+
 
 #gameScene canvas.show {
-    -webkit-animation: show-canvas-ani 10s;
-    animation: show-canvas-ani 10s;
+    -webkit-animation: show-canvas-ani 8s;
+    animation: show-canvas-ani 8s;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
@@ -12,15 +122,15 @@
 }
 
 #gameSceneGradient.show {
-    -webkit-animation: show-canvasGraidient-ani 13s;
-    animation: show-canvasGraidient-ani 13s;
+    -webkit-animation: show-canvasGraidient-ani 11s;
+    animation: show-canvasGraidient-ani 11s;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
 
 @-webkit-keyframes show-canvasGraidient-ani {
     0%   { transform: scale(0.4); opacity: 1 }
-    100%   { transform: scale(1.4); opacity: 1}
+    100%   { transform: scale(1.7); opacity: 1}
 }
 
 #gameUIElements #tutorial .instructions.show h1 {
@@ -162,3 +272,13 @@
     100%   { transform: scale(0); opacity: 0}
 }
 
+
+@-webkit-keyframes show-ani {
+    0%   { opacity: 0 }
+    100%   { opacity: 1}
+}
+
+@-webkit-keyframes hide-ani {
+    0%   { opacity: 1 }
+    100%   { opacity: 0}
+}
