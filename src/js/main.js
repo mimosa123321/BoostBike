@@ -124,9 +124,13 @@ var keyEvent = function(event) {
     var key = event.keyCode || event.which;
     var keychar = String.fromCharCode(key);
     if (keychar.toUpperCase() === "V") {
-        //main.stopVideo();
-        //main.changeSection($('#video-wrapper'), null);
-        //main.hideOverlay();
+        main.enterPhotoShoot();
+        model.currentLevel = 1;
+        main.hideWrapper();
+
+        setTimeout(function(){
+            main.enterGame();
+        },500);
         //main.startGameScene();
         //main.initUIElements();
         //setTimeout(function() {

@@ -35,24 +35,13 @@ var model = {
     onReady:function() {
         initMain();
 
-        /*--------for testing-------------------*/
-        /**/ //TODO delete later
-        /*model.currentLevel = 1;
-        main.hideWrapper();
-
-        setTimeout(function(){
-            main.enterGame();
-        },100);
-
-        $('#mainOverlay').css("display","none");*/
-        /*--------for testing-------------------*/
-        console.log("Start Connection");
+        /*console.log("Start Connection");
         try {
             GameScreenCore.getInstance().init('#camera-feed'); //Init the GameScreen (required as it init the connect)
 
         } catch (e){
             console.log("jquery_ready_GameScreenCore_init", e, {result: 'failed'});
-        }
+        }*/
     }
 };
 

@@ -121,7 +121,7 @@ Engine.prototype.show = function() {
 
 Engine.prototype.onFinishShowEngine = function() {
     console.log("remove shader! And show engine");
-    gamescene.deleteShader();
+    gamescene.removeTunnel_1();
     animate.removeAnimationListener(this.engineDomElement, "AnimationEnd", this.finishShowEngine);
 };
 
@@ -146,11 +146,10 @@ Engine.prototype.onFinishHide3DEngine = function() {
     this.hide();
     animate.removeAnimationListener(this.engine3DDomElement, "AnimationEnd", this.finishHide3DEngine);
 
-    //
-    loadjscssfile("js/Three.js", "js");
 
     setTimeout(function(){
-        main.changeTunnel(2);
+        console.log("change tunnel2");
+        gamescene.changeTunnel();
     },100);
 
 };
