@@ -1,7 +1,6 @@
 var GameScene = function() {
     this.tuniform, this.tobject, this.clock, this.shakeValue = model.speed, this.addShakeValue = 1;
-    //this.bgSpeedPerRevolution = 3 / 300;
-    //this.rayLenthPerRevolution = 1 / 100;
+    this.texture;
     this.lightRaySpeed = 0;
 
     this.scene = new THREE.Scene();
@@ -191,25 +190,55 @@ GameScene.prototype.render = function() {
 GameScene.prototype.deleteShader = function() {
     this.scene.remove(this.tobject);
     this.tobject = null;
+    $('#gameScene').empty();
+
 };
 
 GameScene.prototype.changeTunnel = function(tunnelId) {
+    model.currentTunnel = tunnelId;
     if (tunnelId === 2) {
-        /*this.scene.add(this.light);
-         this.scene.add(this.light2);
-         this.scene.add(this.light3);
-         this.scene.add(this.light4);
-         this.scene.fog = new THREE.FogExp2(0x000000, 0.15);
-         var geometry = new THREE.CylinderGeometry(1, 1, 30, 32, 1, true);
-         var texture = THREE.ImageUtils.loadTexture("images/ash_uvgrid01.jpg");
-         texture.wrapT = THREE.RepeatWrapping;
-         var material = new THREE.MeshLambertMaterial({
-         color: 0xFFFFFF,
-         map: texture
-         });
-         this.tobject = new THREE.Mesh(geometry, material);
-         this.tobject.rotation.x = Math.PI / 2;
-         this.scene.add(this.tobject);
-         this.tobject.flipSided = true;*/
+        this.renderer = new THREE.WebGLRenderer({
+            antialias: true,
+            alpha: false
+        });
+
+        this.renderer.setClearColor( 0xff0000, 1 );
+        this.renderer.setSize( screen_width, screen_height );
+        $("#gameScene").append(this.renderer.domElement);
+
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera(40, screen_width / screen_height, 1, 10000 );
+        this.camera.position.set(0, 0, 7);
+        this.camera.lookAt(this.scene.position);
+        this.scene.add(this.camera);
+
+        var light	= new THREE.DirectionalLight( 0xff8000, 1.5 );
+        light.position.set( 1, 1, 0 ).normalize();
+        this.scene.add( this.light );
+
+        var light	= new THREE.DirectionalLight( 0xff8000, 1.5 );
+        light.position.set( -1, 1, 0 ).normalize();
+        this.scene.add( this.light );
+
+        var light	= new THREE.PointLight( 0x44FFAA, 15, 25 );
+        light.position.set( 0, -3, 0 );
+        this.scene.add( this.light );
+
+        var light	= new THREE.PointLight( 0xff4400, 20, 30 );
+        light.position.set( 3, 3, 0 );
+        this.scene.add( this.light );
+
+        this.scene.fog	= new THREE.FogExp2( 0x000000, 0.15 );
+
+        var geometry	= new THREE.CylinderGeometry( 1, 1, 30, 32, 1, true );
+        this.texture		= THREE.ImageUtils.loadTexture( "images/ash_uvgrid01.jpg" );
+        this.texture.wrapT	= THREE.RepeatWrapping;
+
+        var material	= new THREE.MeshLambertMaterial({color : 0xFFFFFF, map : this.texture});
+        var mesh	= new THREE.Mesh( geometry, material );
+        mesh.rotation.x	= Math.PI/2;
+        this.scene.add( mesh );
+
+        mesh.flipSided	= true;
     }
 };

@@ -24,6 +24,21 @@
     <!-- DEV END -->
 </head>
 <body onkeydown="keyEvent(event)" onkeyup="keyUpEvent(event)">
+<script>
+    function loadjscssfile(filename, filetype) {
+        if (filetype == "js") {
+            var fileref = document.createElement('script');
+            fileref.setAttribute("type", "text/javascript");
+            fileref.setAttribute("src", filename);
+        }else if (filetype=="css") {
+            var fileref=document.createElement("link");
+            fileref.setAttribute("rel", "stylesheet");
+            fileref.setAttribute("type", "text/css");
+            fileref.setAttribute("href", filename);
+        }
+        if (typeof fileref!="undefined")  document.getElementsByTagName("head")[0].appendChild(fileref);
+    }
+</script>
 <script type="text/vertexShader" id="vertexShader">
     varying vec3 iRay;
     varying vec2 vUv;

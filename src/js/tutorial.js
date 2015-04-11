@@ -147,7 +147,12 @@ Engine.prototype.onFinishHide3DEngine = function() {
     animate.removeAnimationListener(this.engine3DDomElement, "AnimationEnd", this.finishHide3DEngine);
 
     //
-    main.changeTunnel(2);
+    loadjscssfile("js/Three.js", "js");
+
+    setTimeout(function(){
+        main.changeTunnel(2);
+    },100);
+
 };
 
 Engine.prototype.hide = function() {
