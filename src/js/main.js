@@ -65,8 +65,12 @@ Main.prototype.initUIElements = function() {
 
 
 Main.prototype.enterGame = function() {
-   main.startGameScene();
-};
+    main.startGameScene();
+    main.initUIElements();
+    setTimeout(function () {
+        main.initTutorial();
+    }, 3000);
+}
 
 
 Main.prototype.updateLevel = function() {
