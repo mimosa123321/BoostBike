@@ -149,19 +149,19 @@ var Tunnel1 = function() {
     this.camera.lookAt(this.scene.position);
     this.scene.add(this.camera);
 
-    var light	= new THREE_M.DirectionalLight( 0xff8000, 1.5 );
+    var light	= new THREE_M.DirectionalLight( 0x073478, 1.5 );
     light.position.set( 1, 1, 0 ).normalize();
     this.scene.add( light );
 
-    var light	= new THREE_M.DirectionalLight( 0xff8000, 1.5 );
+    var light	= new THREE_M.DirectionalLight( 0x4788ba, 1.5 );
     light.position.set( -1, 1, 0 ).normalize();
     this.scene.add( light );
 
-    var light	= new THREE_M.PointLight( 0x44FFAA, 15, 25 );
+    var light	= new THREE_M.PointLight( 0x9c9c9c, 15, 25 );
     light.position.set( 0, -3, 0 );
     this.scene.add( light );
 
-    var light	= new THREE_M.PointLight( 0xff4400, 20, 30 );
+    var light	= new THREE_M.PointLight( 0x073478, 20, 30 );
     light.position.set( 3, 3, 0 );
     this.scene.add( light );
 
