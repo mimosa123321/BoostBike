@@ -15,6 +15,8 @@ var TransitionsManager = function() {
     this.endShowTransitions = this.onEndShowTransitions.bind(this);
     this.endHideTransitions = this.onEndHideTransitions.bind(this);
     this.currentTransitionId;
+
+    this.endGamePanel = new EndPage();
 };
 
 TransitionsManager.prototype.show = function(transitionId) {
@@ -26,7 +28,6 @@ TransitionsManager.prototype.show = function(transitionId) {
     if(transitionId === 2) {
         this.transition2.show();
     }
-
 
     animate.addAnimationListener(this.transitionsContainerDomElement, "AnimationEnd", this.endShowTransitions);
 };
@@ -42,6 +43,10 @@ TransitionsManager.prototype.onEndShowTransitions = function() {
 
     if(this.currentTransitionId === 3) {
         setTimeout( this.transition3.show(), 10);
+    }
+
+    if(this.currentTransitionId === 4) {
+        this.endGamePanel.show();
     }
 
     animate.removeAnimationListener(this.transitionsContainerDomElement, "AnimationEnd", this.endShowTransitions);
@@ -143,4 +148,16 @@ TransitionLevel3.prototype.hide3DEngine = function() {
 TransitionLevel3.prototype.onFinishHide3DEngine = function() {
     animate.removeAnimationListener(this.engine3DDomElement, "AnimationEnd", this.finishHide3DEngine);
     uielements.rpmMeter.teamRPMMeter.startUpdate();
+};
+
+var EndPage = function() {
+    this.endPage = $('#endGamePanel');
+};
+
+EndPage.prototype.show = function() {
+    this.endPage.attr('class',"show");
+};
+
+EndPage.prototype.hide = function() {
+    this.endPage.attr('class',"hide");
 };

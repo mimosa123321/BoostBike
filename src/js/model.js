@@ -8,7 +8,7 @@ var model = {
     speed :0,
     players_maxSpeed: 100,
     totalRevolutions: 0,
-    revolutionPerLevel: [78, 220, 520, 630],
+    revolutionPerLevel: [78, 214, 520, 614],
     currentLevel: 1,
     isSpinEngine: false,
     isAccelerate: false,

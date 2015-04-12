@@ -161,7 +161,7 @@ var keyEvent = function(event) {
 
     if (key === 38) {
         if (uielements.rpmMeter.teamRPMMeter.isStartUpdate) {
-            model.totalRevolutions += 1;
+            model.totalRevolutions += 4;
             model.isAccelerate = true;
         }
     }

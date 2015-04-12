@@ -124,11 +124,20 @@ GameScene.prototype.render = function() {
             }
         }
 
-        //level 4 - show Engine Layer
+        //level 5 - Win
         if (model.currentLevel === 5 && !model.isShowEnding) {
+            console.log("win!!");
+
             //stop team rpm
             uielements.rpmMeter.teamRPMMeter.stopUpdate();
+
+            //stop Counter
+            TimeManager.stop();
+            $('#endGameCountDown').css("opacity",0);
+            transitionsManager.show(4);
+
             model.isShowEnding = true;
+            this.isGameStart = false;
         }
         requestAnimationFrame(this.render.bind(this));
     }
@@ -139,9 +148,12 @@ GameScene.prototype.manageTransitions = function(id, showTime, hideTime) {
         transitionsManager.show(id);
     },showTime);
 
-    setTimeout(function() {
-        transitionsManager.hide(id);
-    },hideTime);
+    //4 == end page
+    if(id !== 4) {
+        setTimeout(function() {
+            transitionsManager.hide(id);
+        },hideTime);
+    }
 };
 
 GameScene.prototype.changeTunnel = function(tunnelId) {
