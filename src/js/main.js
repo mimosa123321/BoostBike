@@ -131,6 +131,7 @@ Main.prototype.hideWrapper = function() {
 };
 
 Main.prototype.restartGame = function() {
+    video.reset();
 
 };
 

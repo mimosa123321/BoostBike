@@ -139,7 +139,8 @@ var Tunnel2 = function() {
 
     this.scene = new THREE_M.Scene();
 
-    this.camera = new THREE_M.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 10000 );
+    this.camera = new THREE_M.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 10000 );
+    //camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 10000 );
 //        camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 100);
     this.camera.position.set(0, 0, 7);
     this.camera.lookAt(this.scene.position);
@@ -164,7 +165,7 @@ var Tunnel2 = function() {
     this.scene.fog	= new THREE_M.FogExp2( 0x000000, 0.15 );
 
     this.geom	= new THREE_M.CylinderGeometry( 1, 1, 30, 32, 1, true );
-    this.texture	= THREE_M.ImageUtils.loadTexture( "images/textures/ash_uvgrid01.jpg" );
+    this.texture	= THREE_M.ImageUtils.loadTexture( "images/water.jpg" );
     this.texture.wrapT	= THREE_M.RepeatWrapping;
 
     var material	= new THREE_M.MeshLambertMaterial({color : 0xFFFFFF, map :  this.texture});
@@ -195,10 +196,10 @@ Tunnel2.prototype.update = function() {
     this.texture.offset.y	%= 1;
 
     if(model.currentLevel === 4 && !this.isChangeTexture) {
-        this.texture = THREE_M.ImageUtils.loadTexture( "images/textures/wave.png"  );
-        this.mesh.material.map =  this.texture;
-        this.mesh.material.needsUpdate = true;
-        this.isChangeTexture = true;
+        //this.texture = THREE_M.ImageUtils.loadTexture( "images/textures/water.png"  );
+        //this.mesh.material.map =  this.texture;
+        //this.mesh.material.needsUpdate = true;
+        //this.isChangeTexture = true;
     }
     this.texture.needsUpdate	= true;
 

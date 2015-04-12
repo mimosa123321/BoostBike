@@ -12,6 +12,7 @@ Tutorial.prototype.showInstructions = function(pageId) {
         //add Animation End Listener //text sentence 3
         this.showRMPText = document.getElementById('showRPMText');
         animate.addAnimationListener(this.showRMPText, "AnimationStart", this.startShowRPMSText);
+        //this.showTutorialTimeout = setTimeout(this.hideInstructions.bind(this, pageId), 5000);
     } else if (pageId === 2) {
         this.onStartShowTeamRPM();
         this.showTutorialTimeout = setTimeout(this.addRevolution.bind(this, 25), 1500);
@@ -31,7 +32,7 @@ Tutorial.prototype.hideInstructions = function(pageId) {
         var nextPageId = parseInt(pageId) + 1;
         this.showTutorialTimeout = setTimeout(this.showInstructions.bind(this, nextPageId), 1500);
     } else if (pageId === 3) {
-        this.addRevolution(27);
+        this.addRevolution(28);
     } else if (pageId === 4) {
         this.showTutorialTimeout = setTimeout(function() {
             uielements.rpmMeter.teamRPMMeter.startUpdate();

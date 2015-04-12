@@ -1,9 +1,13 @@
 var model = {
     players_souvenir_1: null,
     players_souvenir_2: null,
-    player1_RPM: 80,
-    player2_RPM: 280,
-    totalRevolutions: 1,
+    player1_RPM: 0,
+    player2_RPM: 0,
+    player1_name: null,
+    player2_name: null,
+    speed :0,
+    players_maxSpeed: 100,
+    totalRevolutions: 0,
     revolutionPerLevel: [78, 220, 520, 630],
     currentLevel: 1,
     isShowCongrats: false,
@@ -15,7 +19,7 @@ var model = {
     isShowEnding: false,
     isEndGame:false,
     currentTunnel:1,
-    speed :60,
+
 
     onPreload: function() {
         console.log("DOM_ready - Preload Image");
@@ -36,13 +40,13 @@ var model = {
 
     onReady:function() {
         initMain();
-        /*console.log("Start Connection");
+        console.log("Start Connection");
         try {
             GameScreenCore.getInstance().init('#camera-feed'); //Init the GameScreen (required as it init the connect)
 
         } catch (e){
             console.log("jquery_ready_GameScreenCore_init", e, {result: 'failed'});
-        }*/
+        }
     }
 };
 
@@ -100,6 +104,107 @@ GameScreenCore.getInstance().gameStartCallback = function() {
     });*/
 };
 
+
+/**
+ * Callback that is triggered when the game tutorial is done
+ */
+GameScreenCore.getInstance().gameTutorialEndedCallback = function() {
+    /* */
+    /*// INJECT CODE HERE //*/
+    /* */
+    $("#game-state #state .value").html("Game");
+
+    $("#game-state #team-number").show();
+    $("#game-state #level").show();
+    $("#game-state #max-speed").show();
+    $("#game-state #current-speed").show();
+    $("#player-1").show();
+    $("#player-2").show();
+
+    $("#actions-wrapper").html("<button id='update-level'>Update level</button><button id='take-picture'>Take picture</button><button id='end-game'>End Game</button>");
+
+    $("#update-level").click(function() {
+        window.current_level++;
+        $("#game-state #level .value").html(window.current_level);
+        GameScreenCore.getInstance().gameInformationLevel(window.current_level);
+    });
+
+    $("#take-picture").click(function() {
+        window.players_souvenir_2 = GameScreenCore.getInstance().takePicture();
+        $("#game-state #picture-2 .value").html("Taken");
+    });
+
+    $("#end-game").click(function() {
+        if (window.players_souvenir_2  != "") {
+            GameScreenCore.getInstance().gameInformationGameEnded(
+                window.current_level, window.players_maxSpeed, window.players_souvenir_2
+            );
+        } else {
+            console.debug('take a picture first');
+        }
+    });
+
+};
+
+GameScreenCore.getInstance().updateUserInformationCallback =
+    function(
+        player1_name,
+        player2_name,
+        players_teamNumber
+    ) {
+        $("#player-1 .name .value").html(player1_name);
+        $("#player-2 .name .value").html(player2_name);
+        $("#game-state #team-number").html(players_teamNumber);
+
+        model.player1_name = player1_name;
+        model.player2_name = player2_name;
+
+    };
+
+GameScreenCore.getInstance().updateGameInformationCallback =
+    function(
+        player1_name, player1_rpm, player1_kmh,
+        player2_name, player2_rpm, player2_kmh,
+        players_teamNumber
+    ) {
+        /* */
+        /*// INJECT CODE HERE //*/
+        /* */
+
+        model.player1_RPM = (player1_rpm);
+        model.player2_RPM = (player2_rpm);
+        //$("#game-state #team-number .value").html(player1_name);
+
+        if ((player1_kmh + player2_kmh) > window.players_maxSpeed) {
+            window.players_maxSpeed = (player1_kmh + player2_kmh);
+            model.speed = window.players_maxSpeed;
+            //$("#game-state #max-speed .value").html(window.players_maxSpeed);
+        }
+        model.speed = player1_kmh + player2_kmh;
+
+        console.log( "model.speed="+model.speed);
+        //$("#game-state #current-speed .value").html(player1_kmh + player2_kmh);
+    };
+/**
+ * Callback that is triggered when the game is ended
+ */
+GameScreenCore.getInstance().gameEndedCallback = function() {
+
+    $("#actions-wrapper").html("");
+
+    $("#game-state #state .value").html("Ended");
+
+    $("#game-state #team-number").hide();
+    $("#game-state #level").hide();
+    $("#game-state #max-speed").hide();
+    $("#game-state #current-speed").hide();
+    $("#player-1").hide();
+    $("#player-2").hide();
+};
+
+
+
+
 /**
  * Trigger that force the game to inut / re-init
  */
@@ -147,6 +252,6 @@ GameScreenCore.getInstance().initializationCallback = function() {
         main.stopVideo();
     }*/
 
-    console.log("initialization");
+    console.log("initialization / re-initialization");
 };
 

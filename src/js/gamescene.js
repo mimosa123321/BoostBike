@@ -6,6 +6,8 @@ var GameScene = function() {
     this.scene = $('#gameScene');
     this.sceneCanvas = $('#gameScene').find('canvas');
     this.sceneGradient = $('#gameSceneGradient');
+    this.prev_player1_RPM = 0;
+    this.prev_player2_RPM = 0;
 };
 
 GameScene.prototype.show = function() {
@@ -35,36 +37,87 @@ GameScene.prototype.render = function() {
                 //for Update RPM Meter
                 uielements.rpmMeter.updateMeterValue(model.player1_RPM, model.player2_RPM);
 
-                //for better swing
-                var randomShakeValue = Math.floor(Math.random() * 10);
+                if (uielements.rpmMeter.teamRPMMeter.isStartUpdate) {
+                    if( model.currentLevel > 1) {
+                        console.log("model.totalRevolutions="+model.totalRevolutions);
+                        console.log("model.revolutionPerLevel[model.currentLevel-2]="+model.revolutionPerLevel[model.currentLevel-2]);
+                        if(Math.ceil(model.totalRevolutions) >= model.revolutionPerLevel[model.currentLevel-2]) {
+                            console.log("model.player1_RPM="+model.player1_RPM);
+                            console.log("this.prev_player1_RPM="+this.prev_player1_RPM);
+                            if(model.player1_RPM > this.prev_player1_RPM) {
+                                console.log("accelerating");
+                                model.isAccelerate = true;
+                                model.totalRevolutions += 10;
+                            }else if(model.player1_RPM < this.prev_player1_RPM){
+                                console.log("deccelerating");
+                                model.isAccelerate = false;
+                                model.totalRevolutions += 0;
 
-                if (this.shakeValue >= model.speed + randomShakeValue || this.shakeValue <= model.speed - randomShakeValue) {
-                    this.addShakeValue *= -1;
+                            }
+                            this.prev_player1_RPM = model.player1_RPM;
+
+                            if(model.player2_RPM > this.prev_player2_RPM) {
+                                model.isAccelerate = true;
+                                model.totalRevolutions += 10;
+                            }else if(model.player2_RPM < this.prev_player2_RPM) {
+                                model.isAccelerate = false;
+                                model.totalRevolutions += 0;
+                            }
+                            this.prev_player2_RPM = model.player2_RPM;
+                            if(model.totalRevolutions <=model.revolutionPerLevel[model.currentLevel-2]) {
+                                model.totalRevolutions = model.revolutionPerLevel[model.currentLevel-2];
+                            }
+                        }
+                    }
+
+                    /*if(model.player1_RPM > 10 ) {
+                     model.isAccelerate = true;
+                     model.totalRevolutions += 0.1;
+                     }else {
+                     model.isAccelerate = false;
+                     }
+
+                     if(model.player2_RPM > 10 ) {
+                     model.isAccelerate = true;
+                     model.totalRevolutions += 0.1;
+                     }else {
+                     model.isAccelerate = false;
+                     }*/
                 }
-
-                this.shakeValue += this.addShakeValue;
 
                 //for Update Team Meter
                 uielements.rpmMeter.updateTeamMeterValue();
 
+                //for better swing
+                var randomShakeValue = Math.floor(Math.random() * 10);
+
+                //this.shakeValue = model.speed;
+
+                /*if (this.shakeValue >= model.speed + randomShakeValue || this.shakeValue <= model.speed - randomShakeValue) {
+                 this.addShakeValue *= -1;
+                 }*/
+
+                //this.shakeValue += this.addShakeValue;
+
                 //for Update Speed Meter
-                uielements.speedMeter.updateValue(this.shakeValue);
+                uielements.speedMeter.updateValue(model.speed);
             }
 
-            if( uielements.rpmMeter.teamRPMMeter.isStartUpdate == true && !model.isAccelerate) {
-                console.log(model.totalRevolutions);
-                console.log(model.revolutionPerLevel[model.currentLevel-1]);
-                if( model.currentLevel > 1) {
-                    if(model.totalRevolutions > model.revolutionPerLevel[model.currentLevel-2]) {
-                        console.log("---");
-                        model.totalRevolutions -=1;
-                    }
-                }
-            }
+            /*if( uielements.rpmMeter.teamRPMMeter.isStartUpdate == true && !model.isAccelerate) {
+
+             if( model.currentLevel > 1) {
+             if(model.totalRevolutions > model.revolutionPerLevel[model.currentLevel-2]) {
+
+             model.totalRevolutions -=1;
+             }
+             }
+             }*/
         }
 
         //check current level
         main.updateLevel();
+
+        console.log("model.totalRevolutions="+model.totalRevolutions);
 
         //For Transition between Levels
         //level 2 - show Congrats Layer

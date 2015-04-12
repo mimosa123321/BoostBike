@@ -58,16 +58,26 @@ RPMMeter.prototype.reset = function() {
 var RPMVerticalMeter = function() {
 };
 
-RPMVerticalMeter.totalRPM = 360;
+RPMVerticalMeter.totalHeight = 360;
 RPMVerticalMeter.totalBlocks = 20;
 RPMVerticalMeter.blockHeight = 10;
+RPMVerticalMeter.MaxRPM = 450;
+RPMVerticalMeter.heightPerRPM = 360 / 450;
 
 RPMVerticalMeter.prototype.updateValue = function(value, targetMask, targetSVG) {
+    if( value >= RPMVerticalMeter.MaxRPM) {
+        value = RPMVerticalMeter.MaxRPM;
+    }
     var targetValue = this.convertRPMToUnit(value);
-    var maskPosY = parseInt(this.matrixToArray(targetMask.css('-webkit-transform'))[5]);
-    var svgPosY = parseInt(this.matrixToArray( targetSVG .css('-webkit-transform'))[5]);
+    //var maskPosY = parseInt(this.matrixToArray(targetMask.css('-webkit-transform'))[5]) - targetValue;
+    //var svgPosY = parseInt(this.matrixToArray( targetSVG .css('-webkit-transform'))[5]) + targetValue;
+    var maskPosY = RPMVerticalMeter.totalHeight - targetValue;
+    var svgPosY = -(RPMVerticalMeter.totalHeight) + targetValue;
 
-    if (maskPosY > targetValue) {
+    targetMask.css('-webkit-transform', 'translateY(' + maskPosY + 'px)');
+    targetSVG.css('-webkit-transform', 'translateY(' + svgPosY + 'px)');
+
+    /*if (maskPosY > targetValue) {
         var currentPosY = maskPosY - 1;
         targetMask.css('-webkit-transform', 'translateY(' + currentPosY + 'px)');
         targetSVG.css('-webkit-transform', 'translateY(' + -currentPosY + 'px)');
@@ -75,15 +85,28 @@ RPMVerticalMeter.prototype.updateValue = function(value, targetMask, targetSVG) 
 
     if (svgPosY < targetValue) {
         //var currentSVGPosY = svgPosY + 1;
-    }
+    }*/
 };
 
 RPMVerticalMeter.prototype.convertRPMToUnit = function(value) {
+    //console.log("value="+value);
     var offset = RPMVerticalMeter.totalBlocks * RPMVerticalMeter.blockHeight;
-    var blocksPerRPM = RPMVerticalMeter.totalBlocks / RPMVerticalMeter.totalRPM;
-    var noOfBlocks = blocksPerRPM * value;
-    var targerValue = offset - (noOfBlocks * RPMVerticalMeter.blockHeight);
-    return targerValue;
+    //var blocksPerRPM = RPMVerticalMeter.totalBlocks / RPMVerticalMeter.totalRPM;
+    //var noOfBlocks = blocksPerRPM * value;
+    //console.log("noOfBlocks="+noOfBlocks);
+    //var targerValue =  (noOfBlocks * RPMVerticalMeter.blockHeight) - offset;
+    //console.log("targetValue23="+(noOfBlocks * RPMVerticalMeter.blockHeight));
+    //console.log("offset="+targerValue);
+    //return targerValue;
+    var blocksPerRPM = RPMVerticalMeter.totalHeight / RPMVerticalMeter.MaxRPM;
+    var blockHeight = blocksPerRPM * value;
+    return blockHeight;
+
+
+    console.log(blockHeight);
+
+
+
 };
 
 RPMVerticalMeter.prototype.matrixToArray = function(str) {
@@ -115,7 +138,6 @@ TeamRPMMeter.prototype.startUpdate = function() {
 
 TeamRPMMeter.prototype.updateValue = function() {
     this.targetValue = this.convertRPMToEnergy();
-    console.log("this.targetValue="+this.targetValue);
     this.indicator.css('width', this.targetValue);
 };
 

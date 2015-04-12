@@ -27,6 +27,8 @@ SpeedMeter.prototype.startUpdate = function() {
 
 SpeedMeter.prototype.updateValue = function(value) {
 
+    //console.log("sped="+value);
+
     this.indictorTargetDegree = this.convertRPMToDegree(value);
 
     if (this.indictorCurrentDegree < this.indictorTargetDegree) {

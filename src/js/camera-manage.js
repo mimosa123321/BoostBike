@@ -23,13 +23,13 @@ CameraManager.prototype.countDownInterval = function() {
     var strCount = String(this.startCountDownValue);
     this.countDown.find('p').html(strCount);
     if(this.startCountDownValue <=0 ) {
-        this.countDownInterval = null;
         this.photoFlash();
         this.finishPhotoFlashListener();
         this.hideCountDown();
         this.frameDot.css('display','none');
         this.putTakenPhotoToFrame();
         clearInterval(this.countDownInterval);
+        this.countDownInterval = null;
     }
     console.log("count time =" +  this.startCountDownValue);
 };

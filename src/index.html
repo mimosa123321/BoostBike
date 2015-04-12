@@ -2,6 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, user-scalable=no, initial-scale=1.0">
     <title>Ecoboost Game Screen</title>
     <link rel="stylesheet" href="css/font.css">
     <link rel="stylesheet" href="css/flipclock.css">
@@ -108,160 +109,163 @@
         }
 </script>
 <div id="preload"><img src="images/engine3.png"></div>
-<div id="wrapper">
-    <div id="preparation">
-        <div id="cameraFeedContainer">
-            <div class="text"><h1>Smile</h1><br><h2>茄子</h2></div>
-            <div id="myCamera">
-                <div id="camera-feed"></div>
-                <div id="takenPhoto"><img src=""></div>
-                <div id="frame"><img src="images/photoframe.png"></div>
-                <div id="frameDot"><img src="images/photodot.png"></div>
-                <div id="countDownValue"><p>5</p></div>
-            </div>
-            <div id="photoFlash"></div>
-        </div>
-
-        <div id="getReadyContainer">
-            <div id="tabletsContainer">
-                <div id="tablets"><img src="images/tablet.png"></div>
-                <div id="tabletsArrow"><img src="images/arrow.png"> </div>
-            </div>
-            <div class="text"><h1>Press the start button on the tablet </h1><br><h2>按键开始</h2></div>
-        </div>
-
-        <div id="video-wrapper">
-            <video id="myVideo" preload="metadata" poster="" autoplay="autoplay" width="100%" height="100%" loop muted="muted"></video>
-        </div>
-    </div>
-</div>
-
-<div id="gameScene"></div>
-<div id="gameSceneGradient"></div>
-
-
-<div id="mainOverlay"></div>
-<div id="gameUIElements">
-    <div id="tutorial" class="sections">
-        <div class="instructions" id="instruction1">
-            <h1 class="text1">Start Pedaling Now</h1>
-            <h1 class="text2">You need to reach the highest speed together</h1>
-            <h1 class="text3" id="showRPMText">This is your personal rpm.</h1>
-        </div>
-
-        <div class="instructions" id="instruction2">
-            <h1 class="text1">This is your team live rpm guage.</h1>
-            <h1 class="text2">Simply adding your both personal rpm together.</h1>
-            <h1 class="text3">You will need to increase the team rpm <br>to reach new levels and experience the boost.</h1>
-        </div>
-
-        <div class="instructions" id="instruction3">
-            <h1 class="text1">Your Team Speed</h1>
-            <h1 class="text2">Team speed increases with each</h1>
-            <h1 class="text3">ecoboost you can activiate.</h1>
-        </div>
-
-        <div class="instructions" id="instruction4">
-            <h1 class="text1">You've already reached level 2!</h1>
-            <h1 class="text2">You are on your own now. Good luck!</h1>
-        </div>
-    </div>
-
-    <div id="rpms">
-        <div id="player1rpm">
-            <div class="elements" id="verticalMask">
-                <svg id="mySVG" xmlns="http://www.w3.org/2000/svg" width="100" height="360"
-                     xmlns:xlink="http://www.w3.org/1999/xlink" viewport="0 0 80 300" preserveAspectRatio="xMinYMin meet">
-                    <defs>
-                        <linearGradient id="myLinearGradient1"
-                                        x1="0%" y1="0%"
-                                        x2="0%" y2="100%"
-                                        spreadMethod="pad">
-                            <stop offset="0%"   stop-color="#e8662a" stop-opacity="1"/>
-                            <stop offset="50%"   stop-color="#955054" stop-opacity="1"/>
-                            <stop offset="100%" stop-color="#1a6eb4" stop-opacity="1"/>
-                        </linearGradient>
-                        <pattern id="pattern"
-                                 x="0" y="0" width="100" height="18"
-                                 patternUnits="userSpaceOnUse" >
-                            <rect x="0" y="0"  width="100" height="10"
-                                  rx="3" ry="3"
-                                  style="fill: #ffffff"/>
-                        </pattern>
-                        <mask id="myMask" x="0" y="0" width="100" height="360" >
-                            <rect x="0" y="0"  width="100" height="360"
-                                  style="fill: url(#pattern)"/>
-                        </mask>
-                    </defs>
-                    <rect id="meter2" x="0" y="0" width="100" height="360" style="fill: url(#myLinearGradient1); mask: url(#myMask)"/>
-                </svg>
-            </div>
-        </div>
-        <div id="player2rpm">
-            <div class="elements" id="verticalMask2">
-                <svg id="mySVG2" xmlns="http://www.w3.org/2000/svg" width="100" height="360"
-                     xmlns:xlink="http://www.w3.org/1999/xlink" viewport="0 0 80 300" preserveAspectRatio="xMinYMin meet">
-
-                    <rect id="meter" x="0" y="0" width="100" height="360" style="fill: url(#myLinearGradient1); mask: url(#myMask)"/>
-                </svg>
-            </div>
-        </div>
-    </div>
-    <div id="teamRPM">
-        <div class="elements">
-            <div class="bar">
-                <div class="background">
-                    <div class="levelColor"></div>
+<div id="ViewPort">
+    <div id="wrapper">
+        <div id="preparation">
+            <div id="cameraFeedContainer">
+                <div class="text"><h1>Smile</h1><br><h2>茄子</h2></div>
+                <div id="myCamera">
+                    <div id="camera-feed"></div>
+                    <div id="takenPhoto"><img src=""></div>
+                    <div id="frame"><img src="images/photoframe.png"></div>
+                    <div id="frameDot"><img src="images/photodot.png"></div>
+                    <div id="countDownValue"><p>5</p></div>
                 </div>
-                <div class="indicator">
-                    <div class="indicatorBg"></div>
-                    <div class="indicatorColor"></div>
+                <div id="photoFlash"></div>
+            </div>
 
+            <div id="getReadyContainer">
+                <div id="tabletsContainer">
+                    <div id="tablets"><img src="images/tablet.png"></div>
+                    <div id="tabletsArrow"><img src="images/arrow.png"> </div>
                 </div>
-                <!--<div class="bgGradient"></div>-->
-                <div class="levelBarFrames">
-                    <div id="number1" class="number">1</div>
-                    <div id="barLevel1" class="frames"></div>
-                    <div id="number2" class="number">2</div>
-                    <div id="barLevel2" class="frames"></div>
-                    <div id="number3" class="number">3</div>
-                    <div id="barLevel3" class="frames"></div>
-                    <div id="number4" class="number">4</div>
+                <div class="text"><h1>Press the start button on the tablet </h1><br><h2>按键开始</h2></div>
+            </div>
+
+            <div id="video-wrapper">
+                <video id="myVideo" preload="metadata" poster="" autoplay="autoplay" width="100%" height="100%" loop muted="muted"></video>
+            </div>
+        </div>
+    </div>
+
+    <div id="gameScene"></div>
+    <div id="gameSceneGradient"></div>
+
+
+    <div id="mainOverlay"></div>
+    <div id="gameUIElements">
+        <div id="tutorial" class="sections">
+            <div class="instructions" id="instruction1">
+                <h1 class="text1">Start Pedaling Now</h1>
+                <h1 class="text2">You need to reach the highest speed together</h1>
+                <h1 class="text3" id="showRPMText">This is your personal rpm.</h1>
+            </div>
+
+            <div class="instructions" id="instruction2">
+                <div id="instruArrow" style="display:none;"><img src="images/arrrow.png"></div>
+                <h1 class="text1">This is your team live rpm guage.</h1>
+                <h1 class="text2">Simply adding your both personal rpm together.</h1>
+                <h1 class="text3">You will need to increase the team rpm <br>to reach new levels and experience the boost.</h1>
+            </div>
+
+            <div class="instructions" id="instruction3">
+                <h1 class="text1">Your Team Speed</h1>
+                <h1 class="text2">Team speed increases with each</h1>
+                <h1 class="text3">ecoboost you can activiate.</h1>
+            </div>
+
+            <div class="instructions" id="instruction4">
+                <h1 class="text1">You've already reached level 2!</h1>
+                <h1 class="text2">You are on your own now. Good luck!</h1>
+            </div>
+        </div>
+
+        <div id="rpms">
+            <div id="player1rpm">
+                <div class="elements" id="verticalMask">
+                    <svg id="mySVG" xmlns="http://www.w3.org/2000/svg" width="100" height="360"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" viewport="0 0 80 300" preserveAspectRatio="xMinYMin meet">
+                        <defs>
+                            <linearGradient id="myLinearGradient1"
+                                            x1="0%" y1="0%"
+                                            x2="0%" y2="100%"
+                                            spreadMethod="pad">
+                                <stop offset="0%"   stop-color="#e8662a" stop-opacity="1"/>
+                                <stop offset="50%"   stop-color="#955054" stop-opacity="1"/>
+                                <stop offset="100%" stop-color="#1a6eb4" stop-opacity="1"/>
+                            </linearGradient>
+                            <pattern id="pattern"
+                                     x="0" y="0" width="100" height="18"
+                                     patternUnits="userSpaceOnUse" >
+                                <rect x="0" y="0"  width="100" height="10"
+                                      rx="3" ry="3"
+                                      style="fill: #ffffff"/>
+                            </pattern>
+                            <mask id="myMask" x="0" y="0" width="100" height="360" >
+                                <rect x="0" y="0"  width="100" height="360"
+                                      style="fill: url(#pattern)"/>
+                            </mask>
+                        </defs>
+                        <rect id="meter2" x="0" y="0" width="100" height="360" style="fill: url(#myLinearGradient1); mask: url(#myMask)"/>
+                    </svg>
+                </div>
+            </div>
+            <div id="player2rpm">
+                <div class="elements" id="verticalMask2">
+                    <svg id="mySVG2" xmlns="http://www.w3.org/2000/svg" width="100" height="360"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" viewport="0 0 80 300" preserveAspectRatio="xMinYMin meet">
+
+                        <rect id="meter" x="0" y="0" width="100" height="360" style="fill: url(#myLinearGradient1); mask: url(#myMask)"/>
+                    </svg>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="speedMeter">
-        <div class="elements">
-            <div class="background"></div>
-            <div class="indicator" id="speedRPMIndicator"></div>
+        <div id="teamRPM">
+            <div class="elements">
+                <div class="bar">
+                    <div class="background">
+                        <div class="levelColor"></div>
+                    </div>
+                    <div class="indicator">
+                        <div class="indicatorBg"></div>
+                        <div class="indicatorColor"></div>
 
+                    </div>
+                    <!--<div class="bgGradient"></div>-->
+                    <div class="levelBarFrames">
+                        <div id="number1" class="number">1</div>
+                        <div id="barLevel1" class="frames"></div>
+                        <div id="number2" class="number">2</div>
+                        <div id="barLevel2" class="frames"></div>
+                        <div id="number3" class="number">3</div>
+                        <div id="barLevel3" class="frames"></div>
+                        <div id="number4" class="number">4</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!--<div class="clock"></div>-->
-    </div>
-</div>
+        <div id="speedMeter">
+            <div class="elements">
+                <div class="background"></div>
+                <div class="indicator" id="speedRPMIndicator"></div>
 
-<div id="congratsOverlay" class="panel">
-    <div id="CongratsContainer">
-        <h1>Congratulations</h1>
-        <h1>恭喜您</h1>
-    </div>
-</div>
-
-<div id="transition2">
-    <div class="background">
-        <div class="greenTop" id="transition2Bg"></div>
-        <div class="greenBottom"></div>
+            </div>
+            <!--<div class="clock"></div>-->
+        </div>
     </div>
 
-</div>
-
-<div id="engine">
-    <div class="background">
-        <div id="greenTop" id="engineBg"></div>
-        <div id="greenBottom"></div>
+    <div id="congratsOverlay" class="panel">
+        <div id="CongratsContainer">
+            <h1>Congratulations</h1>
+            <h1>恭喜您</h1>
+        </div>
     </div>
-    <div id="photos"></div>
+
+    <div id="transition2">
+        <div class="background">
+            <div class="greenTop" id="transition2Bg"></div>
+            <div class="greenBottom"></div>
+        </div>
+
+    </div>
+
+    <div id="engine">
+        <div class="background">
+            <div id="greenTop" id="engineBg"></div>
+            <div id="greenBottom"></div>
+        </div>
+        <div id="photos"></div>
+    </div>
 </div>
 
 </body>

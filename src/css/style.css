@@ -24,6 +24,13 @@ img {
     overflow: hidden;
 }
 
+#ViewPort {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
 
 #wrapper {
     position: absolute;
@@ -325,6 +332,21 @@ img {
     height:100%;
 }
 
+#instruction2 h1 {
+    /*text-align: center;*/
+}
+
+#gameUIElements #tutorial #instruction2 #instruArrow {
+    position: absolute;
+    left: 176px;
+    top: -182px;
+    width: 78px;
+    height:109px;
+}
+#gameUIElements #tutorial #instruction2 #instruArrow img {
+    width:100%;
+}
+
 #gameUIElements #tutorial .instructions {
     text-align: center;
     position: absolute;
@@ -443,6 +465,7 @@ img {
     top:0;
     width:100px;
     height:360px;
+    -webkit-transition: all 0.3s linear;
     -webkit-transform: translateY(-360px);
 }
 
@@ -452,13 +475,11 @@ img {
     left: 0px;
     width: 100px;
     height: 360px;
+    -webkit-transition: all 0.3s linear;
     -webkit-transform: translateY(360px);
     /*border: 1px solid red;*/
     overflow: hidden;
 }
-
-
-
 
 #gameUIElements #teamRPM {
     position:absolute;
@@ -728,7 +749,12 @@ img {
 }
 
 #congratsOverlay h1 {
+    line-height:130px;
     position:relative;
+}
+
+#congratsOverlay h2 {
+    font-size:64px;
 }
 
 #congratsOverlay.show {
@@ -743,7 +769,7 @@ img {
     right:0;
     margin:auto;
     width: 899px;
-    height: 319px;
+    height: 260px;
     font-size: 52px;
 }
 
@@ -853,7 +879,7 @@ img {
 
 
 @media only screen and (min-width: 1440px) {
-    .instructions h1 { font-size: 3em; }
+    .instructions h1 { font-size: 44px; line-height: 63px; }
 }
 
 @media only screen and (max-width: 1439px) {
