@@ -5,12 +5,13 @@
 var SpeedMeter = function() {
     this.isStartUpdate = false;
     this.domElement = $('#speedMeter');
+    this.speedMeter_value = $('#speed_value');
 };
 
 SpeedMeter.initialSpeedValue = 20;
 SpeedMeter.totalSpeed = 200;
-SpeedMeter.initialSpeedDegree = -98;
-SpeedMeter.endSpeedDegree = 100;
+SpeedMeter.initialSpeedDegree = -105;
+SpeedMeter.endSpeedDegree = 105;
 
 SpeedMeter.prototype.show = function() {
     this.domElement.css('opacity', 1);
@@ -28,6 +29,7 @@ SpeedMeter.prototype.startUpdate = function() {
 SpeedMeter.prototype.updateValue = function(value) {
 
     //console.log("sped="+value);
+    this.speedMeter_value.html(value);
 
     this.indictorTargetDegree = this.convertRPMToDegree(value);
 

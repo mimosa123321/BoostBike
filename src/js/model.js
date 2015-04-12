@@ -10,7 +10,6 @@ var model = {
     totalRevolutions: 0,
     revolutionPerLevel: [78, 220, 520, 630],
     currentLevel: 1,
-    isShowCongrats: false,
     isSpinEngine: false,
     isAccelerate: false,
     isShowTransition1: false,

@@ -107,7 +107,7 @@ img {
 #getReadyContainer .text {
     position: absolute;
     left: 0;
-    bottom: 230px;
+    bottom: 200px;
     right: 0;
     margin: auto;
     text-align: center;
@@ -140,7 +140,7 @@ img {
 
 #cameraFeedContainer .text {
     position:absolute;
-    top:170px;
+    top:200px;
     left:0;
     bottom:0;
     right:0;
@@ -202,6 +202,35 @@ img {
     height: 100%;
 }
 
+#cameraFeedContainer #frame .frameCorner{
+    position:absolute;
+    width:62px;
+    height:62px;
+}
+
+#cameraFeedContainer #frame #frame1 {
+    left: 30px;
+    top: -34px;
+}
+
+#cameraFeedContainer #frame #frame2 {
+    left: 753px;
+    top: -34px;
+    -webkit-transform: rotate(90deg);
+}
+
+#cameraFeedContainer #frame #frame3 {
+    left: 753px;
+    top: 507px;
+    -webkit-transform: rotate(180deg);
+}
+
+#cameraFeedContainer #frame #frame4 {
+    left: 30px;
+    top: 507px;
+    -webkit-transform: rotate(270deg);
+}
+
 #cameraFeedContainer img {
     width:100%;
     height:auto;
@@ -229,7 +258,8 @@ img {
 
 #cameraFeedContainer #countDownValue p {
     font-size: 150px;
-    color:#2970a5;
+    color:#5a8ebb;
+    font-weight: bold;
 }
 
 #cameraFeedContainer #takenPhoto {
@@ -397,6 +427,18 @@ img {
     height: 360px;
 }
 
+#gameUIElements #rpms #player1rpm_bg {
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    width: 100px;
+    height: 360px;
+    -webkit-transform: translateY(360px);
+    transform: translateY(360px);
+    -webkit-filter: brightness(0.5);
+    z-index: 1;
+}
+
 /*#gameUIElements #rpms #player1rpm .elements {
     position: relative;
     float:left;
@@ -448,6 +490,18 @@ img {
     z-index: 5;
 }
 
+#gameUIElements #rpms #player1rpm #player1rpm_value
+{
+    position: absolute;
+    left: 119px;
+    bottom: -2px;
+    width: 200px;
+    color: white;
+    font-size: 19px;
+    font-weight: bold;
+    text-align: left;
+}
+
 
 /*player2rpm*/
 
@@ -457,6 +511,18 @@ img {
     bottom: 40px;
     width: 100px;
     height: 360px;
+}
+
+#gameUIElements #rpms #player2rpm_bg {
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    width: 100px;
+    height: 360px;
+    -webkit-transform: translateY(360px);
+    transform: translateY(360px);
+    -webkit-filter: brightness(0.5);
+    z-index: 1;
 }
 
 #gameUIElements #rpms #player2rpm svg , #gameUIElements #rpms #player1rpm svg{
@@ -479,6 +545,22 @@ img {
     -webkit-transform: translateY(360px);
     /*border: 1px solid red;*/
     overflow: hidden;
+    z-index: 2;
+}
+
+#gameUIElements #rpms #player2rpm #player2rpm_value {
+    position: absolute;
+    right: 118px;
+    bottom: -2px;
+    width: 200px;
+    color: white;
+    font-size: 19px;
+    font-weight: bold;
+    text-align: right;
+}
+
+#gameUIElements #rpms #player1rpm #player1rpm_value span, #gameUIElements #rpms #player2rpm #player2rpm_value span{
+    font-size: 26px;
 }
 
 #gameUIElements #teamRPM {
@@ -698,15 +780,24 @@ img {
 
 #gameUIElements #speedMeter .elements .indicator {
     position: absolute;
-    bottom: 50px;
+    bottom: 63px;
     left: 168px;
     width: 23px;
     height: 146px;
     background: url("../images/speedindicator.png") no-repeat;
     -webkit-transform-origin: 50% 100%;
     transform-origin: 50% 100%;
-    -webkit-transform: rotate(-98deg);
+    -webkit-transform: rotate(-103deg);
     z-index: 4;
+}
+
+#gameUIElements #speedMeter #speedMeter_value {
+    position: relative;
+    top: -46px;
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
 }
 
 
@@ -727,50 +818,77 @@ img {
     opacity: 1;
 }
 
-#congratsOverlay {
+
+/*----------------transition---------------------------*/
+#transitionsContainer {
     display: block;
     position:absolute;
     top:0;
     left:0;
-    right:0;
+    width:100%;
+    height:100%;
+    opacity:1;
+    z-index:1000;
+}
+
+#transitionsContainer #greenTop {
+    position:absolute;
+    top:0px;
+    left:0;
+    width:1920px;
+    height:50%;
+    background: url(../images/backplatetop.jpg) no-repeat;
+    background-size: cover;
+    -webkit-transform:translateY(-600px);
+}
+
+#transitionsContainer #greenBottom {
+    position:absolute;
+    top:50%;
+    left:0;
+    width:1920px;
+    height:50%;
+    background: url(../images/backplatebottom.jpg) no-repeat;
+    -webkit-transform:translateY(600px);
+    background-size: cover;
+}
+
+/**/
+
+#transition1 {
+    display: block;
+    position:absolute;
+    top:0;
+    left:0;
     bottom:0;
+    right:0;
+    width:854px;
+    height:202px;
     margin:auto;
-    width:76%;
-    height:790px;
+    opacity:0;
     -webkit-transition: opacity 0.6s ease-out;
     transition: opacity 0.6s ease-out;
-    padding:2em;
-    text-align: center;
-    background-color:rgba(18,13,66,0.8);
-    color:white;
-    opacity: 0;
-    border-radius: 15px;
-    z-index: 99;
 }
 
-#congratsOverlay h1 {
-    line-height:130px;
-    position:relative;
-}
-
-#congratsOverlay h2 {
-    font-size:64px;
-}
-
-#congratsOverlay.show {
+#transition1.show {
+    -webkit-transition: opacity 0.6s ease-out 1s;
+    transition: opacity 0.6s ease-out 1s;
     opacity:1;
 }
 
-#congratsOverlay #CongratsContainer {
-    position: absolute;
-    left:0;
-    top:0;
-    bottom:0;
-    right:0;
-    margin:auto;
-    width: 899px;
-    height: 260px;
-    font-size: 52px;
+#transition1 #congratsContainer {
+    position:relative;
+    text-align:center;
+    color:white;
+}
+
+#transition1 #congratsContainer h1 {
+    line-height: 91px;
+    font-size: 80px;
+}
+
+#transition1 #congratsContainer h2 {
+    font-size: 60px;
 }
 
 /*transition2*/
@@ -816,51 +934,8 @@ img {
     background-size: cover;
 }
 
-
 /*engine*/
-#engine {
-    position:absolute;
-    left:0;
-    top:0;
-    right:0;
-    bottom:0;
-    width:100%;
-    height:100%;
-    opacity:1;
-    z-index:100;
-}
-
-#engine .background {
-    position:absolute;
-    top:0px;
-    left:0;
-    width:100%;
-    height:100%;
-}
-
-#engine .background .greenTop {
-    position:absolute;
-    top:0px;
-    left:0;
-    width:1920px;
-    height:50%;
-    background: url(../images/backplatetop.jpg) no-repeat;
-    background-size: cover;
-    -webkit-transform:translateY(-600px);
-}
-
-#engine .background .greenBottom {
-    position:absolute;
-    top:50%;
-    left:0;
-    width:1920px;
-    height:50%;
-    background: url(../images/backplatebottom.jpg) no-repeat;
-    -webkit-transform:translateY(600px);
-    background-size: cover;
-}
-
-#engine #photos {
+#transition3 #engine {
     display:block;
     position:absolute;
     left:0;
@@ -868,15 +943,22 @@ img {
     right:0;
     bottom:0;
     margin:auto;
-    background-position: 0 0;
     width:720px;
     height:722px;
-    /*border: 1px red solid;*/
+    opacity:1;
+}
+
+#transition3 #engine #photos {
+    position:absolute;
+    left:0;
+    top:0;
+    width:720px;
+    height:722px;
+    background-position: 0 0;
     background: url('../images/engine3.png') no-repeat;
     opacity: 0;
     -webkit-transform:scale(0);
 }
-
 
 @media only screen and (min-width: 1440px) {
     .instructions h1 { font-size: 44px; line-height: 63px; }

@@ -12,8 +12,6 @@
     animation-fill-mode: forwards;
 }
 
-
-
 #cameraFeedContainer.show {
     -webkit-animation: show-camera-feed-ani 1s ease-out;
     animation: show-camera-feed-ani 1s ease-out;
@@ -25,7 +23,6 @@
     0%   { opacity: 0 }
     100%   { opacity: 1}
 }
-
 
 #cameraFeedContainer.hide{
     -webkit-animation: hide-camera-feed-ani 0.6s ease-out;
@@ -62,7 +59,6 @@
     0%   { opacity: 1 }
     100%   { opacity: 0}
 }
-
 
 #photoFlash.show {
     -webkit-animation: show-flash-ani 1s;
@@ -103,15 +99,15 @@
 
 
 @-webkit-keyframes move-arrow-ani {
-    0%   { transform: translateY(-20px);  }
-    50%   { transform: translateY(20px);}
-    100%   { transform: translateY(-20px);}
+    0%   { transform: translateY(-5px);  }
+    50%   { transform: translateY(10px);}
+    100%   { transform: translateY(-5px);}
 }
 
 
 #gameScene canvas.show {
-    -webkit-animation: show-canvas-ani 8s;
-    animation: show-canvas-ani 8s;
+    -webkit-animation: show-canvas-ani 4s;
+    animation: show-canvas-ani 4s;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
@@ -128,21 +124,33 @@
     animation-fill-mode: forwards;
 }
 
+#gameSceneGradient.hide {
+    -webkit-animation: hide-canvasGraidient-ani 0.6s;
+    animation: hide-canvasGraidient-ani 0.6s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
 @-webkit-keyframes show-canvasGraidient-ani {
     0%   { transform: scale(0.4); opacity: 1 }
-    100%   { transform: scale(1.7); opacity: 1}
+    50%   { transform: scale(1.7); opacity: 1}
+    100%   { transform: scale(2.4); opacity: 0}
+}
+@-webkit-keyframes  hide-canvasGraidient-ani {
+    0%   { transform: scale(1.7); opacity: 1 }
+    100%   { transform: scale(2); opacity: 0}
 }
 
 #gameUIElements #tutorial .instructions.show h1 {
-    -webkit-animation: show-instructions-ani .7s;
-    animation: show-instructions-ani .7s;
+    -webkit-animation: show-instructions-ani .5s;
+    animation: show-instructions-ani .5s;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
 
 #gameUIElements #tutorial .instructions.hide h1 {
-    -webkit-animation: hide-instructions-ani .7s;
-    animation: hide-instructions-ani .7s 1;
+    -webkit-animation: hide-instructions-ani .5s;
+    animation: hide-instructions-ani .5s;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
@@ -153,19 +161,19 @@
 }
 
 #gameUIElements #tutorial .instructions.show .text2 {
-    -webkit-animation-delay: 1s;
+    -webkit-animation-delay: 0.5s;
 }
 
 #gameUIElements #tutorial .instructions.show .text3 {
-    -webkit-animation-delay: 2.3s;
+    -webkit-animation-delay: 1s;
 }
 
 #gameUIElements #tutorial .instructions.hide .text2 {
-     -webkit-animation-delay: 0.4s;
+     -webkit-animation-delay: 0.2s;
 }
 
 #gameUIElements #tutorial .instructions.hide .text3 {
-    -webkit-animation-delay: 0.8s;
+    -webkit-animation-delay: 0.4s;
 }
 
 @-webkit-keyframes show-instructions-ani {
@@ -178,83 +186,29 @@
     100%   { transform: translate3d(0,-50px,0); opacity: 0}
 }
 
-
-#transition2.show {
-    opacity:1;
-}
-
-/*#transition2.hide {
-    opacity:0;
-}*/
-
-#transition2.show .background .greenTop {
+/*---------------------transition---------------------------*/
+#transitionsContainer.show #greenTop {
     -webkit-animation: show-greenTop-ani 0.7s ease-out;
     animation: show-engine-ani 0.7s ease-out;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
 
-#transition2.show .background .greenBottom {
+#transitionsContainer.show #greenBottom {
     -webkit-animation: show-greenBottom-ani 0.7s ease-out;
     animation: show-greenBottom-ani 0.7s ease-out;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
 
-#transition2.hide .background .greenTop {
+#transitionsContainer.hide #greenTop {
     -webkit-animation: hide-greenTop-ani 0.7s ease-out;
     animation: hide-greenTop-ani 0.7s ease-out;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
 
-#transition2.hide .background .greenBottom {
-    -webkit-animation: hide-greenBottom-ani 0.7s ease-out;
-    animation: hide-greenBottom-ani 0.7s ease-out;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-}
-
-
-/*-----------------------*/
-#engine.show {
-}
-
-#engine.hide {
-}
-
-@-webkit-keyframes show-engine-ani {
-    /*0%   { opacity: 0 }*/
-    /*100%   { opacity: 1}*/
-}
-
-@-webkit-keyframes hide-engine-ani {
-    0%   { transform: scaleY(1); opacity: 1 }
-    100%   { transform: scaleY(0); opacity: 0}
-}
-
-#engine.show .background .greenTop {
-    -webkit-animation: show-greenTop-ani 0.7s ease-out;
-    animation: show-engine-ani 0.7s ease-out;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-}
-
-#engine.show .background .greenBottom {
-    -webkit-animation: show-greenBottom-ani 0.7s ease-out;
-    animation: show-greenBottom-ani 0.7s ease-out;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-}
-
-#engine.hide .background .greenTop {
-    -webkit-animation: hide-greenTop-ani 0.7s ease-out;
-    animation: hide-greenTop-ani 0.7s ease-out;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-}
-
-#engine.hide .background .greenBottom {
+#transitionsContainer.hide #greenBottom {
     -webkit-animation: hide-greenBottom-ani 0.7s ease-out;
     animation: hide-greenBottom-ani 0.7s ease-out;
     -webkit-animation-fill-mode: forwards;
@@ -282,16 +236,34 @@
     100%   { -webkit-transform: translateY(600px)}
 }
 
+#transition2.show {
+    opacity:1;
+}
+
+/*-----------------------*/
+#transition3.show {
+    opacity:1;
+}
+
+@-webkit-keyframes show-engine-ani {
+    /*0%   { opacity: 0 }*/
+    /*100%   { opacity: 1}*/
+}
+
+@-webkit-keyframes hide-engine-ani {
+    0%   { transform: scaleY(1); opacity: 1 }
+    100%   { transform: scaleY(0); opacity: 0}
+}
 
 
-#photos.show {
+#transition3 #engine #photos.show {
     -webkit-animation: show-photos-ani 1s ease-out;
     animation: show-photos-ani 1s ease-out;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
 
-#photos.hide {
+#transition3 #engine #photos.hide {
     -webkit-animation: hide-photos-ani 0.8s ease-out;
     animation: hide-photos-ani 0.8s ease-out;
     -webkit-animation-fill-mode: forwards;

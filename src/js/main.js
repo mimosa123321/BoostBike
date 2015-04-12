@@ -1,4 +1,4 @@
-var main, cameraManager, video, gamescene, uielements, tutorial, engine, transitionManager;
+var main, cameraManager, video, gamescene, uielements, tutorial, engine, transitionsManager;
 var screen_width, screen_height;
 
 function initMain() {
@@ -56,8 +56,8 @@ Main.prototype.initTutorial = function() {
 };
 
 /*-------------------TransitionManager--------------------------------*/
-Main.prototype.initTransitionManager = function() {
-    transitionManager = new TransitionManager();
+Main.prototype.initTransitionsManager = function() {
+    transitionsManager = new TransitionsManager();
 };
 
 /*---------------------UI---------------------------------------------*/
@@ -68,7 +68,7 @@ Main.prototype.initUIElements = function() {
 Main.prototype.enterGame = function() {
     main.startGameScene();
     main.initUIElements();
-    main.initTransitionManager();
+    main.initTransitionsManager();
     main.initEngine();
     setTimeout(function () {
         main.initTutorial();

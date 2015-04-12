@@ -1,9 +1,10 @@
 /**
  * Created by mimosa on 4/11/15.
  */
-var Tunnel1 = function() {
+var Tunnel2 = function() {
     this.tuniform, this.tobject, this.clock;
     this.lightRaySpeed = 0;
+
 
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({
@@ -12,6 +13,8 @@ var Tunnel1 = function() {
     });
     //this.renderer.setClearColor( 0x193e75, 1);
     this.renderer.setSize(screen_width, screen_height);
+    this.renderer.domElement.style.webkitTransform = "scale(1)";
+
     $("#gameScene").append(this.renderer.domElement);
 
     this.camera = new THREE.PerspectiveCamera(70, screen_width / screen_height, 1, 1000);
@@ -25,7 +28,7 @@ var Tunnel1 = function() {
 };
 
 
-Tunnel1.prototype.initShaderToy = function() {
+Tunnel2.prototype.initShaderToy = function() {
     this.tuniform = {
         iGlobalTime: {
             type: 'f',
@@ -86,7 +89,7 @@ Tunnel1.prototype.initShaderToy = function() {
     this.scene.add(this.tobject);
 };
 
-Tunnel1.prototype.update = function() {
+Tunnel2.prototype.update = function() {
     var delta = this.clock.getDelta();
     if (this.tuniform) {
         this.tuniform.iGlobalTime.value += delta + this.lightRaySpeed;
@@ -113,14 +116,14 @@ Tunnel1.prototype.update = function() {
     }
 };
 
-Tunnel1.prototype.deleteShader = function() {
+Tunnel2.prototype.deleteShader = function() {
     this.scene.remove(this.tobject);
     this.tobject = null;
 };
 
 /*----------------------------------------------------------*/
 
-var Tunnel2 = function() {
+var Tunnel1 = function() {
     this.accelSpeed = 0;
     this.isChangeTexture = false;
     this.geom, this.mesh;
@@ -176,7 +179,7 @@ var Tunnel2 = function() {
     this.mesh.flipSided	= true;
 };
 
-Tunnel2.prototype.update = function() {
+Tunnel1.prototype.update = function() {
 
     if(uielements) {
         if (uielements.rpmMeter.teamRPMMeter.isStartUpdate && model.isAccelerate) {
@@ -212,6 +215,12 @@ Tunnel2.prototype.update = function() {
 //    this.camera.position.y	= Math.sin(angle - Math.PI/2) * radius + 0.5;
 //    this.camera.rotation.z	= angle;
     this.renderer.render(this.scene, this.camera);
+};
+
+
+Tunnel1.prototype.remove = function() {
+    this.scene.remove(this.mesh);
+    this.tobject = null;
 };
 
 

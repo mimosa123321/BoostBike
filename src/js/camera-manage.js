@@ -3,7 +3,7 @@ var CameraManager = function() {
     this.countDown = $('#countDownValue');
     this.takenPhoto = $('#takenPhoto');
     this.photoFlashContainer = $('#photoFlash');
-    this.frameDot = $('#frameDot');
+    //this.frameDot = $('#frameDot');
     this.countDownInterval;
     this.callGetReadyTimeout;
     this.startCountDownValue = 5;
@@ -21,12 +21,12 @@ CameraManager.prototype.hideCountDown= function() {
 CameraManager.prototype.countDownInterval = function() {
     this.startCountDownValue -=1;
     var strCount = String(this.startCountDownValue);
-    this.countDown.find('p').html(strCount);
-    if(this.startCountDownValue <=0 ) {
+    if(this.startCountDownValue > 0) {
+        this.countDown.find('p').html(strCount);
+    }else {
         this.photoFlash();
         this.finishPhotoFlashListener();
         this.hideCountDown();
-        this.frameDot.css('display','none');
         this.putTakenPhotoToFrame();
         clearInterval(this.countDownInterval);
         this.countDownInterval = null;
@@ -73,6 +73,5 @@ CameraManager.prototype.reset = function() {
     this.dispose();
     this.startCountDownValue = 5;
     this.countDown.find('p').html('5');
-    this.frameDot.css('display','block');
 };
 

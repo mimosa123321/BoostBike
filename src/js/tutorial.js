@@ -21,7 +21,7 @@ Tutorial.prototype.showInstructions = function(pageId) {
         this.showTutorialTimeout = setTimeout(this.addRevolution.bind(this, 25), 800);
     } else if (pageId === 4) {}
 
-    this.showTutorialTimeout = setTimeout(this.hideInstructions.bind(this, pageId), 5000);
+    this.showTutorialTimeout = setTimeout(this.hideInstructions.bind(this, pageId), 4000);
 };
 
 Tutorial.prototype.hideInstructions = function(pageId) {
@@ -30,7 +30,7 @@ Tutorial.prototype.hideInstructions = function(pageId) {
 
     if (pageId < 3) {
         var nextPageId = parseInt(pageId) + 1;
-        this.showTutorialTimeout = setTimeout(this.showInstructions.bind(this, nextPageId), 1500);
+        this.showTutorialTimeout = setTimeout(this.showInstructions.bind(this, nextPageId), 1000);
     } else if (pageId === 3) {
         this.addRevolution(28);
     } else if (pageId === 4) {
@@ -62,7 +62,7 @@ Tutorial.prototype.onStartShowSpeedMeter = function() {
     }, 1000);
 };
 
-Tutorial.prototype.onsStartShowCongrats = function() {
+/*Tutorial.prototype.onsStartShowCongrats = function() {
     console.log("show Congrats");
     this.congrats = $('#congratsOverlay');
     this.congrats.addClass('show');
@@ -75,7 +75,7 @@ Tutorial.prototype.onHideCongrats = function() {
     this.congrats.removeClass('show');
 
     animate.transitionEnd(this.congrats, this.showInstructions.bind(this, 4));
-};
+};*/
 
 Tutorial.prototype.addRevolution = function(value) {
     model.totalRevolutions += value;
@@ -175,43 +175,3 @@ Engine.prototype.onFinishHideGreenBg = function () {
 //    uielements.rpmMeter.teamRPMMeter.startUpdate();
 };
 
-var TransitionManager = function () {
-    this.finishHideGreenBg = this.onFinishHideGreenBg.bind(this);
-    this.finishShowGreenBg = this.onFinishShowGreenBg.bind(this);
-};
-
-TransitionManager.prototype.show = function (transitionId) {
-    var transition = $('#transition' + transitionId);
-    if(transitionId === 2) {
-        var domElement = document.getElementById('transition2Bg');
-        transition.addClass("show");
-        setTimeout(this.hide.bind(this,2),5000);
-        animate.addAnimationListener(domElement, "AnimationEnd", this.finishShowGreenBg);
-    }
-};
-
-TransitionManager.prototype.onFinishShowGreenBg = function () {
-    var domElement = document.getElementById('transition2Bg');
-    animate.removeAnimationListener(domElement, "AnimationEnd", this.finishShowGreenBg);
-    gamescene.removeTunnel_1();
-    setTimeout(function(){
-        console.log("change tunnel2");
-        gamescene.changeTunnel();
-    },100);
-};
-
-TransitionManager.prototype.hide = function (transitionId) {
-    var transition = $('#transition' + transitionId);
-    transition.attr('class','hide');
-    console.log("hide");
-    if(transitionId === 2) {
-        var domElement = document.getElementById('transition2Bg');
-        animate.addAnimationListener(domElement, "AnimationEnd", this.finishHideGreenBg);
-    }
-};
-
-TransitionManager.prototype.onFinishHideGreenBg = function () {
-    var domElement = document.getElementById('transition2Bg');
-    animate.removeAnimationListener(domElement, "AnimationEnd", this.finishHideGreenBg);
-    uielements.rpmMeter.teamRPMMeter.startUpdate();
-};

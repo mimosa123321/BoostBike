@@ -6,6 +6,7 @@ var GameScene = function() {
     this.scene = $('#gameScene');
     this.sceneCanvas = $('#gameScene').find('canvas');
     this.sceneGradient = $('#gameSceneGradient');
+    this.sceneGradientDOMElement = document.getElementById("gameSceneGradient");
     this.prev_player1_RPM = 0;
     this.prev_player2_RPM = 0;
 };
@@ -19,6 +20,12 @@ GameScene.prototype.show = function() {
 GameScene.prototype.start = function() {
     this.isGameStart = true;
     this.render();
+};
+
+GameScene.prototype.changeSceneGradientScale = function(value) {
+    this.sceneGradient.removeClass("show");
+    this.sceneGradient.css('-webkit-transform','scale('+value+')');
+    this.sceneGradient.css('opacity','1');
 };
 
 GameScene.prototype.render = function() {
@@ -39,17 +46,17 @@ GameScene.prototype.render = function() {
 
                 if (uielements.rpmMeter.teamRPMMeter.isStartUpdate) {
                     if( model.currentLevel > 1) {
-                        console.log("model.totalRevolutions="+model.totalRevolutions);
-                        console.log("model.revolutionPerLevel[model.currentLevel-2]="+model.revolutionPerLevel[model.currentLevel-2]);
+                        //console.log("model.totalRevolutions="+model.totalRevolutions);
+                        //console.log("model.revolutionPerLevel[model.currentLevel-2]="+model.revolutionPerLevel[model.currentLevel-2]);
                         if(Math.ceil(model.totalRevolutions) >= model.revolutionPerLevel[model.currentLevel-2]) {
-                            console.log("model.player1_RPM="+model.player1_RPM);
-                            console.log("this.prev_player1_RPM="+this.prev_player1_RPM);
+                            //console.log("model.player1_RPM="+model.player1_RPM);
+                            //console.log("this.prev_player1_RPM="+this.prev_player1_RPM);
                             if(model.player1_RPM > this.prev_player1_RPM) {
-                                console.log("accelerating");
+                                //console.log("accelerating");
                                 model.isAccelerate = true;
                                 model.totalRevolutions += 10;
                             }else if(model.player1_RPM < this.prev_player1_RPM){
-                                console.log("deccelerating");
+                                //console.log("deccelerating");
                                 model.isAccelerate = false;
                                 model.totalRevolutions += 0;
 
@@ -117,22 +124,18 @@ GameScene.prototype.render = function() {
         //check current level
         main.updateLevel();
 
-        console.log("model.totalRevolutions="+model.totalRevolutions);
+        //console.log("model.totalRevolutions="+model.totalRevolutions);
 
         //For Transition between Levels
-        //level 2 - show Congrats Layer
-        if (model.currentLevel === 2 && !model.isShowCongrats) {
-            setTimeout(function() {
-                tutorial.onsStartShowCongrats();
-            }, 1700);
-            model.isShowCongrats = true;
+        //level 2 - show Transition 1
+        if (model.currentLevel === 2 && !model.isShowTransition1) {
+            this.manageTransitions(1,1500,5500);
+            model.isShowTransition1 = true;
         }
 
         //level 3
         if (model.currentLevel === 3 && !model.isShowTransition2) {
-
-            transitionManager.show(2);
-
+            this.manageTransitions(2,1000,5500); //6500
             //stop team rpm
             uielements.rpmMeter.teamRPMMeter.isStartUpdate = false;
             model.isShowTransition2 = true;
@@ -141,9 +144,7 @@ GameScene.prototype.render = function() {
         //level 4 - show Engine Layer
         if (model.currentLevel === 4 && !model.isShowTransition3) {
             //show engine
-            transitionManager.show(3);
-            engine.show();
-
+            this.manageTransitions(3,1000,8500);
             //stop team rpm
             uielements.rpmMeter.teamRPMMeter.isStartUpdate = false;
             model.isShowTransition3 = true;
@@ -164,24 +165,33 @@ GameScene.prototype.render = function() {
             uielements.rpmMeter.teamRPMMeter.isStartUpdate = false;
             model.isShowEnding = true;
         }
-
-
-
         requestAnimationFrame(this.render.bind(this));
     }
 };
 
+GameScene.prototype.manageTransitions = function(id, showTime, hideTime) {
+    setTimeout(function() {
+        transitionsManager.show(id);
+    },showTime);
+
+    setTimeout(function() {
+        transitionsManager.hide(id);
+    },hideTime);
+};
+
 GameScene.prototype.changeTunnel = function(tunnelId) {
+    this.changeSceneGradientScale(1.7);
     this.tunnel2 = new Tunnel2();
     model.currentTunnel = 2;
 };
 
 GameScene.prototype.removeTunnel_1 = function() {
-    this.tunnel1.deleteShader();
+    this.tunnel1.remove();
     this.scene.empty();
 };
 
 GameScene.prototype.removeTunnel_2 = function() {
+    this.tunnel2.deleteShader();
     this.scene.empty();
 };
 

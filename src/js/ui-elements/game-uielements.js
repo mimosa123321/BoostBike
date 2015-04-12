@@ -19,6 +19,8 @@ var RPMMeter = function() {
     this.rpmMask2 = $('#verticalMask2');
     this.svg1 = $('#mySVG');
     this.svg2 = $('#mySVG2');
+    this.rpm_value1 = $('#player1_RPM_value');
+    this.rpm_value2 = $('#player2_RPM_value');
     this.domElement = document.getElementById('rpms');
     this.rpmVerticalMeter = new RPMVerticalMeter();
     this.rpmVerticalMeter2 = new RPMVerticalMeter();
@@ -34,8 +36,8 @@ RPMMeter.prototype.hide = function() {
 };
 
 RPMMeter.prototype.updateMeterValue = function(shakeValue, shakeValue2) {
-    this.rpmVerticalMeter.updateValue(shakeValue,this.rpmMask1,this.svg1 );
-    this.rpmVerticalMeter2.updateValue(shakeValue2,this.rpmMask2,this.svg2);
+    this.rpmVerticalMeter.updateValue(shakeValue,this.rpmMask1,this.svg1,this.rpm_value1 );
+    this.rpmVerticalMeter2.updateValue(shakeValue2,this.rpmMask2,this.svg2,this.rpm_value2);
 };
 
 RPMMeter.prototype.updateTeamMeterValue = function() {
@@ -64,7 +66,7 @@ RPMVerticalMeter.blockHeight = 10;
 RPMVerticalMeter.MaxRPM = 450;
 RPMVerticalMeter.heightPerRPM = 360 / 450;
 
-RPMVerticalMeter.prototype.updateValue = function(value, targetMask, targetSVG) {
+RPMVerticalMeter.prototype.updateValue = function(value, targetMask, targetSVG, playerRPMValue) {
     if( value >= RPMVerticalMeter.MaxRPM) {
         value = RPMVerticalMeter.MaxRPM;
     }
@@ -76,6 +78,8 @@ RPMVerticalMeter.prototype.updateValue = function(value, targetMask, targetSVG) 
 
     targetMask.css('-webkit-transform', 'translateY(' + maskPosY + 'px)');
     targetSVG.css('-webkit-transform', 'translateY(' + svgPosY + 'px)');
+
+    playerRPMValue.html(value);
 
     /*if (maskPosY > targetValue) {
         var currentPosY = maskPosY - 1;

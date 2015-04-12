@@ -23,6 +23,7 @@
     <script src="js/tutorial.js"></script>
     <script src="js/gamescene.js"></script>
     <script src="js/tunnels.js"></script>
+    <script src="js/transitions-manager.js"></script>
     <script src="js/ui-elements/speedmeter.js"></script>
     <script src="js/ui-elements/game-uielements.js"></script>
     <!-- DEV END -->
@@ -113,12 +114,17 @@
     <div id="wrapper">
         <div id="preparation">
             <div id="cameraFeedContainer">
-                <div class="text"><h1>Smile</h1><br><h2>茄子</h2></div>
+                <div class="text"><h1>茄子</h1><br><h2>Smile</h2></div>
                 <div id="myCamera">
                     <div id="camera-feed"></div>
                     <div id="takenPhoto"><img src=""></div>
-                    <div id="frame"><img src="images/photoframe.png"></div>
-                    <div id="frameDot"><img src="images/photodot.png"></div>
+                    <div id="frame">
+                        <img id="frame1" class="frameCorner" src="images/framecorner.png">
+                        <img id="frame2" class="frameCorner" src="images/framecorner.png">
+                        <img id="frame3" class="frameCorner" src="images/framecorner.png">
+                        <img id="frame4" class="frameCorner" src="images/framecorner.png">
+                    </div>
+                    <!--<div id="frameDot"><img src="images/photodot.png"></div>-->
                     <div id="countDownValue"><p>5</p></div>
                 </div>
                 <div id="photoFlash"></div>
@@ -129,7 +135,7 @@
                     <div id="tablets"><img src="images/tablet.png"></div>
                     <div id="tabletsArrow"><img src="images/arrow.png"> </div>
                 </div>
-                <div class="text"><h1>Press the start button on the tablet </h1><br><h2>按键开始</h2></div>
+                <div class="text"><h1>按键开始</h1><br><h2>Press the start button on the tablet</h2></div>
             </div>
 
             <div id="video-wrapper">
@@ -197,8 +203,17 @@
                             </mask>
                         </defs>
                         <rect id="meter2" x="0" y="0" width="100" height="360" style="fill: url(#myLinearGradient1); mask: url(#myMask)"/>
+
                     </svg>
                 </div>
+                <div id="player1rpm_bg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="360"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" viewport="0 0 80 300" preserveAspectRatio="xMinYMin meet">
+
+                        <rect x="0" y="0" width="100" height="360" style="fill: url(#myLinearGradient1); mask: url(#myMask)"/>
+                    </svg>
+                </div>
+                <div id="player1rpm_value"><span id="player1_RPM_value">0</span> RPM</div>
             </div>
             <div id="player2rpm">
                 <div class="elements" id="verticalMask2">
@@ -208,6 +223,14 @@
                         <rect id="meter" x="0" y="0" width="100" height="360" style="fill: url(#myLinearGradient1); mask: url(#myMask)"/>
                     </svg>
                 </div>
+                <div id="player2rpm_bg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="360"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" viewport="0 0 80 300" preserveAspectRatio="xMinYMin meet">
+
+                        <rect x="0" y="0" width="100" height="360" style="fill: url(#myLinearGradient1); mask: url(#myMask)"/>
+                    </svg>
+                </div>
+                <div id="player2rpm_value"><span id="player2_RPM_value">0</span> RPM</div>
             </div>
         </div>
         <div id="teamRPM">
@@ -238,33 +261,42 @@
             <div class="elements">
                 <div class="background"></div>
                 <div class="indicator" id="speedRPMIndicator"></div>
-
             </div>
-            <!--<div class="clock"></div>-->
+
+            <div id="speedMeter_value"><span id="speed_value">0</span> km/h</div>
         </div>
     </div>
 
-    <div id="congratsOverlay" class="panel">
-        <div id="CongratsContainer">
-            <h1>Congratulations</h1>
-            <h1>恭喜您</h1>
+    <div id="transitionsContainer">
+        <div id="greenTop"></div>
+        <div id="greenBottom"></div>
+        <div id="transition1">
+            <div id="congratsContainer">
+                <h1>恭喜您!</h1>
+                <h2>Congratulations!</h2>
+            </div>
         </div>
+        <div id="transition2"></div>
+        <div id="transition3">
+            <div id="engine">
+                <div id="photos"></div>
+            </div>
+        </div>
+
+        <!--<div id="transition2">
+            <div class="background">
+                <!--<div class="greenTop" id="transition2Bg"></div>-->
+        <!--<div class="greenBottom"></div>
     </div>
+</div>-->
 
-    <div id="transition2">
-        <div class="background">
-            <div class="greenTop" id="transition2Bg"></div>
-            <div class="greenBottom"></div>
-        </div>
-
+        <!--<div id="engine">
+            <div class="background">
+                <!--<div id="greenTop" id="engineBg"></div>-->
+        <!--<div id="greenBottom"></div>
     </div>
-
-    <div id="engine">
-        <div class="background">
-            <div id="greenTop" id="engineBg"></div>
-            <div id="greenBottom"></div>
-        </div>
-        <div id="photos"></div>
+    <div id="photos"></div>
+</div>-->
     </div>
 </div>
 
