@@ -18,7 +18,7 @@ var model = {
     isShowEnding: false,
     isEndGame:false,
     currentTunnel:1,
-
+    gameTimer: 45,
 
     onPreload: function() {
         console.log("DOM_ready - Preload Image");

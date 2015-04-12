@@ -74,7 +74,7 @@ TransitionsManager.prototype.onEndHideTransitions = function() {
     }
 
     if(this.currentTransitionId ===3) {
-        uielements.rpmMeter.teamRPMMeter.startUpdate();
+        //start update after hide engine
     }
 };
 
@@ -116,7 +116,7 @@ var TransitionLevel3 =  function() {
     this.engineDomElement = document.getElementById('engine');
     this.engine3DDomElement = document.getElementById('photos');
     //this.finishShowEngine = this.onFinishShowEngine.bind(this);
-    //this.finishHide3DEngine = this.onFinishHide3DEngine.bind(this);
+    this.finishHide3DEngine = this.onFinishHide3DEngine.bind(this);
 
 };
 
@@ -137,5 +137,10 @@ TransitionLevel3.prototype.show3DEngine = function() {
 TransitionLevel3.prototype.hide3DEngine = function() {
     model.isSpinEngine = false;
     this.engine3dPhotos.attr('class', 'hide');
-    //animate.addAnimationListener(this.engine3DDomElement, "AnimationEnd", this.finishHide3DEngine);
+    animate.addAnimationListener(this.engine3DDomElement, "AnimationEnd", this.finishHide3DEngine);
+};
+
+TransitionLevel3.prototype.onFinishHide3DEngine = function() {
+    animate.removeAnimationListener(this.engine3DDomElement, "AnimationEnd", this.finishHide3DEngine);
+    uielements.rpmMeter.teamRPMMeter.startUpdate();
 };

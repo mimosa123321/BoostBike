@@ -76,49 +76,14 @@ GameScene.prototype.render = function() {
                             }
                         }
                     }
-
-                    /*if(model.player1_RPM > 10 ) {
-                     model.isAccelerate = true;
-                     model.totalRevolutions += 0.1;
-                     }else {
-                     model.isAccelerate = false;
-                     }
-
-                     if(model.player2_RPM > 10 ) {
-                     model.isAccelerate = true;
-                     model.totalRevolutions += 0.1;
-                     }else {
-                     model.isAccelerate = false;
-                     }*/
                 }
 
                 //for Update Team Meter
                 uielements.rpmMeter.updateTeamMeterValue();
 
-                //for better swing
-                var randomShakeValue = Math.floor(Math.random() * 10);
-
-                //this.shakeValue = model.speed;
-
-                /*if (this.shakeValue >= model.speed + randomShakeValue || this.shakeValue <= model.speed - randomShakeValue) {
-                 this.addShakeValue *= -1;
-                 }*/
-
-                //this.shakeValue += this.addShakeValue;
-
                 //for Update Speed Meter
                 uielements.speedMeter.updateValue(model.speed);
             }
-
-            /*if( uielements.rpmMeter.teamRPMMeter.isStartUpdate == true && !model.isAccelerate) {
-
-             if( model.currentLevel > 1) {
-             if(model.totalRevolutions > model.revolutionPerLevel[model.currentLevel-2]) {
-
-             model.totalRevolutions -=1;
-             }
-             }
-             }*/
         }
 
         //check current level
@@ -137,7 +102,7 @@ GameScene.prototype.render = function() {
         if (model.currentLevel === 3 && !model.isShowTransition2) {
             this.manageTransitions(2,1000,5500); //6500
             //stop team rpm
-            uielements.rpmMeter.teamRPMMeter.isStartUpdate = false;
+            uielements.rpmMeter.teamRPMMeter.stopUpdate();
             model.isShowTransition2 = true;
         }
 
@@ -146,7 +111,7 @@ GameScene.prototype.render = function() {
             //show engine
             this.manageTransitions(3,1000,8500);
             //stop team rpm
-            uielements.rpmMeter.teamRPMMeter.isStartUpdate = false;
+            uielements.rpmMeter.teamRPMMeter.stopUpdate();
             model.isShowTransition3 = true;
         }
 
@@ -161,8 +126,8 @@ GameScene.prototype.render = function() {
 
         //level 4 - show Engine Layer
         if (model.currentLevel === 5 && !model.isShowEnding) {
-
-            uielements.rpmMeter.teamRPMMeter.isStartUpdate = false;
+            //stop team rpm
+            uielements.rpmMeter.teamRPMMeter.stopUpdate();
             model.isShowEnding = true;
         }
         requestAnimationFrame(this.render.bind(this));
