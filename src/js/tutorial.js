@@ -15,10 +15,10 @@ Tutorial.prototype.showInstructions = function(pageId) {
         //this.showTutorialTimeout = setTimeout(this.hideInstructions.bind(this, pageId), 5000);
     } else if (pageId === 2) {
         this.onStartShowTeamRPM();
-        this.showTutorialTimeout = setTimeout(this.addRevolution.bind(this, 25), 1500);
+        this.showTutorialTimeout = setTimeout(this.addRevolution.bind(this, 22), 1500);
     } else if (pageId === 3) {
         this.onStartShowSpeedMeter();
-        this.showTutorialTimeout = setTimeout(this.addRevolution.bind(this, 25), 800);
+        this.showTutorialTimeout = setTimeout(this.addRevolution.bind(this, 23), 800);
     } else if (pageId === 4) {}
 
     this.showTutorialTimeout = setTimeout(this.hideInstructions.bind(this, pageId), 4000);
@@ -32,7 +32,7 @@ Tutorial.prototype.hideInstructions = function(pageId) {
         var nextPageId = parseInt(pageId) + 1;
         this.showTutorialTimeout = setTimeout(this.showInstructions.bind(this, nextPageId), 1000);
     } else if (pageId === 3) {
-        this.addRevolution(28);
+        this.addRevolution(23);
     } else if (pageId === 4) {
         this.showTutorialTimeout = setTimeout(function() {
             uielements.rpmMeter.teamRPMMeter.startUpdate();

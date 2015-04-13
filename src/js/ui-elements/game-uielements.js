@@ -2,6 +2,7 @@ var GameUIElements = function() {
     this.isStartUpdate = false;
     this.rpmMeter = new RPMMeter();
     this.speedMeter = new SpeedMeter();
+    this.topBarIcon = new TopBarIcon();
 };
 
 GameUIElements.prototype.startUpdate = function() {
@@ -63,12 +64,11 @@ var RPMVerticalMeter = function() {
 RPMVerticalMeter.totalHeight = 360;
 RPMVerticalMeter.totalBlocks = 20;
 RPMVerticalMeter.blockHeight = 10;
-RPMVerticalMeter.MaxRPM = 450;
 RPMVerticalMeter.heightPerRPM = 360 / 450;
 
 RPMVerticalMeter.prototype.updateValue = function(value, targetMask, targetSVG, playerRPMValue) {
-    if( value >= RPMVerticalMeter.MaxRPM) {
-        value = RPMVerticalMeter.MaxRPM;
+    if( value >= model.maxRPM) {
+        value = model.maxRPM;
     }
     var targetValue = this.convertRPMToUnit(value);
     //var maskPosY = parseInt(this.matrixToArray(targetMask.css('-webkit-transform'))[5]) - targetValue;
@@ -95,7 +95,7 @@ RPMVerticalMeter.prototype.updateValue = function(value, targetMask, targetSVG, 
 RPMVerticalMeter.prototype.convertRPMToUnit = function(value) {
     //console.log("value="+value);
     var offset = RPMVerticalMeter.totalBlocks * RPMVerticalMeter.blockHeight;
-    var blocksPerRPM = RPMVerticalMeter.totalHeight / RPMVerticalMeter.MaxRPM;
+    var blocksPerRPM = RPMVerticalMeter.totalHeight / model.maxRPM;
     var blockHeight = blocksPerRPM * value;
     return blockHeight;
 };
@@ -111,9 +111,9 @@ var TeamRPMMeter = function() {
     this.indicator = $('#teamRPM').find('.indicator');
 };
 
-TeamRPMMeter.barLength = 1200;
-//TeamRPMMeter.totalRevolutionNeeded = 320;
-TeamRPMMeter.totalRevolutionNeeded = 640; //two people
+TeamRPMMeter.barLength = 1140;
+TeamRPMMeter.totalRevolutionNeeded = (model.maxRPM / 60 * model.gameTimer) * 2;
+//TeamRPMMeter.totalRevolutionNeeded = 640; //two people
 
 TeamRPMMeter.prototype.show = function() {
     this.rpmeter.css('opacity', 1);
@@ -149,4 +149,23 @@ TeamRPMMeter.prototype.reset = function() {
     this.hide();
     this.isStartUpdate = false;
     this.indicator.css('width', '0');
+};
+
+
+var TopBarIcon =  function(){
+    this.icon = $('#boost1');
+    this.iconText = $('#boost1').find('span');
+};
+
+TopBarIcon.prototype.moveToNext = function() {
+    this.icon.css('webkit-transform','translateX(570px)');
+    this.icon.css('transform','translateX(570px)');
+    this.iconText.html('x2');
+
+};
+
+TopBarIcon.prototype.moveToBack = function() {
+    this.icon.css('webkit-transform','translateX(0px)');
+    this.icon.css('transform','translateX(0px)');
+    this.iconText.html('x1');
 };

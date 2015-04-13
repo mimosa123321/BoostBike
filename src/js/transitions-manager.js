@@ -76,6 +76,8 @@ TransitionsManager.prototype.onEndHideTransitions = function() {
     }
     if(this.currentTransitionId ===2) {
         uielements.rpmMeter.teamRPMMeter.startUpdate();
+        //move boost icon
+        uielements.topBarIcon.moveToNext();
     }
 
     if(this.currentTransitionId ===3) {

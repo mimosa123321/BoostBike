@@ -210,12 +210,12 @@ img {
 
 #cameraFeedContainer #frame #frame1 {
     left: 30px;
-    top: -34px;
+    top: -36px;
 }
 
 #cameraFeedContainer #frame #frame2 {
     left: 753px;
-    top: -34px;
+    top: -36px;
     -webkit-transform: rotate(90deg);
 }
 
@@ -298,27 +298,21 @@ img {
 
 #gameSceneGradient {
     position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    margin: auto;
-    -webkit-transform: scale(0.4);
-    /*border-radius: 999px;*/
-    background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,1) 49%, rgba(0,0,0,1) 68%, rgba(0,0,0,1) 99%, rgba(0,0,0,1) 100%); /* FF3.6+ */
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0)), color-stop(24%,rgba(0,0,0,0)), color-stop(49%,rgba(0,0,0,1)), color-stop(68%,rgba(0,0,0,1)), color-stop(99%,rgba(0,0,0,1)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
-    background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,1) 49%,rgba(0,0,0,1) 68%,rgba(0,0,0,1) 99%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,1) 49%,rgba(0,0,0,1) 68%,rgba(0,0,0,1) 99%,rgba(0,0,0,1) 100%); /* Opera 12+ */
-    background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,1) 49%,rgba(0,0,0,1) 68%,rgba(0,0,0,1) 99%,rgba(0,0,0,1) 100%); /* IE10+ */
-    background: radial-gradient(ellipse at center,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,1) 49%,rgba(0,0,0,1) 68%,rgba(0,0,0,1) 99%,rgba(0,0,0,1) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
-
-
-    /*border:1px solid red;*/
-    /*z-index:99;*/
+    width: 250%;
+    height: 250%;
+    top: 50%;
+    left: 50%;
+    margin: -1350px 0 0 -2400px;
+    -webkit-transform: scale(0);
+    /* border-radius: 999px; */
+    background: -moz-radial-gradient(center, ellipse cover, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,1) 49%, rgba(0,0,0,1) 68%, rgba(0,0,0,1) 99%, rgba(0,0,0,1) 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0)), color-stop(24%,rgba(0,0,0,0)), color-stop(49%,rgba(0,0,0,1)), color-stop(68%,rgba(0,0,0,1)), color-stop(99%,rgba(0,0,0,1)), color-stop(100%,rgba(0,0,0,1)));
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,1) 49%,rgba(0,0,0,1) 68%,rgba(0,0,0,1) 99%,rgba(0,0,0,1) 100%);
+    background: -o-radial-gradient(center, ellipse cover, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,1) 49%,rgba(0,0,0,1) 68%,rgba(0,0,0,1) 99%,rgba(0,0,0,1) 100%);
+    background: -ms-radial-gradient(center, ellipse cover, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,1) 49%,rgba(0,0,0,1) 68%,rgba(0,0,0,1) 99%,rgba(0,0,0,1) 100%);
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,1) 49%,rgba(0,0,0,1) 68%,rgba(0,0,0,1) 99%,rgba(0,0,0,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=1 );
+    background-position: 50% 50%;
 }
 
 #gameScene {
@@ -581,10 +575,10 @@ img {
 
 
 #gameUIElements #teamRPM .elements {
-    position:relative;
-    margin:44px auto 0 auto;
-    width:1152px;
-    height:36px;
+    position: relative;
+    margin: 44px auto 0 auto;
+    width: 1200px;
+    height: 36px;
     /*border:1px solid green;*/
 
 }
@@ -600,7 +594,7 @@ img {
     width: 100%;
     height: 100%;
     border-radius: 15px;
-    padding: 15px 24px 15px 24px;
+    padding: 15px 0 15px 0;
     background: rgb(7,52,120); /* Old browsers */
     background: -moz-linear-gradient(left,  rgba(7,52,120,1) 0%, rgba(79,140,185,1) 50%, rgba(7,52,120,1) 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(7,52,120,1)), color-stop(50%,rgba(79,140,185,1)), color-stop(100%,rgba(7,52,120,1))); /* Chrome,Safari4+ */
@@ -612,14 +606,14 @@ img {
 }
 
 #gameUIElements #teamRPM .elements .bar .background .levelColor {
-    position:relative;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 1140px;
+    height: 100%;
     margin: 0 auto;
-    border-bottom: 1px solid white;
     background-color: white;
+    border-radius: 10px;
 }
 
 #gameUIElements #teamRPM .elements .bar .bgGradient {
@@ -652,18 +646,18 @@ img {
     top: 25px;
     width: 6px;
     height: 19px;
-    background-color: #1f81c5;
+    background-color: #00416E;
 }
 
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #barLevel1 {
-    left: 166px;
+    left: 141px;
 }
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #barLevel2 {
-    left: 430px;
+    left: 426px;
 }
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #barLevel3 {
-    left: 1000px;
+    left: 994px;
 }
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames .number {
@@ -675,7 +669,7 @@ img {
 }
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #number1{
-    left: 90px;
+    left: 68px;
 
 }
 
@@ -688,57 +682,53 @@ img {
 }
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #number4{
-    left: 1086px;
+    left: 1047px;
 }
 
 #gameUIElements #teamRPM .elements .indicator {
     position: absolute;
-    width: 1px;
-    height: 105%;
-    padding: 15px 0px 15px 24px;
+    left: 30px;
+    top: 15px;
+    width: 1140px;
+    height: 36px;
     -webkit-transition: all 0.3s linear;
 }
 
 #gameUIElements #teamRPM .elements .indicator .indicatorColor {
-    position:relative;
-    left:-2px;
-    top:0;
-    width:100%;
-    height:100%;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 37px;
     margin: 0 auto;
-    background: rgb(0,59,90); /* Old browsers */
-    background: -moz-linear-gradient(left,  rgba(0,59,90,1) 0%, rgba(0,136,245,1) 47%, rgba(114,255,255,1) 94%, rgba(255,255,255,1) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,59,90,1)), color-stop(47%,rgba(0,136,245,1)), color-stop(94%,rgba(114,255,255,1)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(left,  rgba(0,59,90,1) 0%,rgba(0,136,245,1) 47%,rgba(114,255,255,1) 94%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(left,  rgba(0,59,90,1) 0%,rgba(0,136,245,1) 47%,rgba(114,255,255,1) 94%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(left,  rgba(0,59,90,1) 0%,rgba(0,136,245,1) 47%,rgba(114,255,255,1) 94%,rgba(255,255,255,1) 100%); /* IE10+ */
-    background: linear-gradient(to right,  rgba(0,59,90,1) 0%,rgba(0,136,245,1) 47%,rgba(114,255,255,1) 94%,rgba(255,255,255,1) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#003b5a', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 */
-
-    border-radius: 5px;
-    opacity:0.8;
-    /*background: url(../images/energybar.jpg) no-repeat;*/
-    /*background-size: cover;*/
-    /*-webkit-filter: blur(2px);*/
+    background: rgb(0,59,90);
+    background: -moz-linear-gradient(left, rgba(0,59,90,1) 0%, rgba(0,136,245,1) 47%, rgba(114,255,255,1) 94%, rgba(255,255,255,1) 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,59,90,1)), color-stop(47%,rgba(0,136,245,1)), color-stop(94%,rgba(114,255,255,1)), color-stop(100%,rgba(255,255,255,1)));
+    background: -webkit-linear-gradient(left, rgba(0,59,90,1) 0%,rgba(0,136,245,1) 47%,rgba(114,255,255,1) 94%,rgba(255,255,255,1) 100%);
+    background: -o-linear-gradient(left, rgba(0,59,90,1) 0%,rgba(0,136,245,1) 47%,rgba(114,255,255,1) 94%,rgba(255,255,255,1) 100%);
+    background: -ms-linear-gradient(left, rgba(0,59,90,1) 0%,rgba(0,136,245,1) 47%,rgba(114,255,255,1) 94%,rgba(255,255,255,1) 100%);
+    background: linear-gradient(to right, rgba(0,59,90,1) 0%,rgba(0,136,245,1) 47%,rgba(114,255,255,1) 94%,rgba(255,255,255,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#003b5a', endColorstr='#ffffff',GradientType=1 );
+    border-radius: 10px;
+    opacity: 0.8;
 }
 
 .indicatorBg {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 75%;
-    margin: 8px 0 8px 11px;
-    background: rgb(0,49,69); /* Old browsers */
-    background: -moz-linear-gradient(left,  rgba(0,49,69,1) 0%, rgba(147,208,233,1) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,49,69,1)), color-stop(100%,rgba(147,208,233,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(left,  rgba(0,49,69,1) 0%,rgba(147,208,233,1) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(left,  rgba(0,49,69,1) 0%,rgba(147,208,233,1) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(left,  rgba(0,49,69,1) 0%,rgba(147,208,233,1) 100%); /* IE10+ */
-    background: linear-gradient(to right,  rgba(0,49,69,1) 0%,rgba(147,208,233,1) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#003145', endColorstr='#93d0e9',GradientType=1 ); /* IE6-9 */
-
-    border-radius: 15px;
+    left: -9px;
+    top: -7px;
+    width: 1156px;
+    height: 52px;
+    margin: 0px;
+    background: rgb(0,49,69);
+    background: -moz-linear-gradient(left, rgba(0,49,69,1) 0%, rgba(147,208,233,1) 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,49,69,1)), color-stop(100%,rgba(147,208,233,1)));
+    background: -webkit-linear-gradient(left, rgba(0,49,69,1) 0%,rgba(147,208,233,1) 100%);
+    background: -o-linear-gradient(left, rgba(0,49,69,1) 0%,rgba(147,208,233,1) 100%);
+    background: -ms-linear-gradient(left, rgba(0,49,69,1) 0%,rgba(147,208,233,1) 100%);
+    background: linear-gradient(to right, rgba(0,49,69,1) 0%,rgba(147,208,233,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#003145', endColorstr='#93d0e9',GradientType=1 );
+    border-radius: 10px;
     opacity: 0.7;
 }
 
@@ -750,19 +740,21 @@ img {
 #gameUIElements #teamRPM #boostIcons .boost{
     position: relative;
     float: left;
-}
-
-#gameUIElements #teamRPM #boostIcons #boost1 {
-    left: 750px;
+    width:107px;
+    height:140px;
+    left: 737px;
     top: 40px;
+    background: url("../images/engineiconbg.png") no-repeat;
+    -webkit-transition: all 0.6s ease-out;
 }
 
 #gameUIElements #teamRPM #boostIcons .boost span {
     position: relative;
-    top: -13px;
-    font-size: 39px;
+    top: 52px;
+    font-size: 26px;
     color: #073478;
     font-weight: bold;
+    left: 7px;
 }
 
 #gameUIElements #teamRPM #boostIcons #boost2 {
@@ -770,10 +762,12 @@ img {
     top: 40px;
 }
 
-
 #gameUIElements #teamRPM #boostIcons img{
-    width:53px;
-    height:auto;
+    position: relative;
+    left: 23px;
+    top: 60px;
+    width: 47px;
+    height: auto;
 }
 
 
@@ -868,22 +862,42 @@ img {
     top:0px;
     left:0;
     width:1920px;
-    height:50%;
-    background: url(../images/backplatetop.jpg) no-repeat;
+    height:1080px;
+    background: url(../images/backplatetop.png) no-repeat;
     background-size: cover;
-    -webkit-transform:translateY(-600px);
+    -webkit-transform:translateY(-1080px);
+    /*z-index:2;*/
 }
 
 #transitionsContainer #greenBottom {
     position:absolute;
-    top:50%;
+    top:0;
     left:0;
     width:1920px;
-    height:50%;
-    background: url(../images/backplatebottom.jpg) no-repeat;
-    -webkit-transform:translateY(600px);
+    height:1080px;
+    background: url(../images/backplatebottom.png) no-repeat;
+    -webkit-transform:translateY(1080px);
     background-size: cover;
+    /*z-index:1;*/
 }
+
+
+#transitionsContainer.show #greenTop{
+    -webkit-transform:translateY(-1080px);
+}
+
+#transitionsContainer.show #greenBottom{
+    -webkit-transform:translateY(1080px);
+}
+
+#transitionsContainer.hide #greenTop{
+    -webkit-transform:translateY(0px);
+}
+
+#transitionsContainer.hide #greenBottom{
+    -webkit-transform:translateY(0px);
+}
+
 
 /**/
 

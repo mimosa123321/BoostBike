@@ -169,7 +169,7 @@ GameScene.prototype.manageTransitions = function(id, showTime, hideTime) {
 };
 
 GameScene.prototype.changeTunnel = function(tunnelId) {
-    this.changeSceneGradientScale(1.7);
+    this.changeSceneGradientScale(0.8);
     this.tunnel2 = new Tunnel2();
     model.currentTunnel = 2;
 };

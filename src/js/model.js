@@ -1,4 +1,5 @@
 var model = {
+    maxRPM: 450,
     players_souvenir_1: null,
     players_souvenir_2: null,
     player1_RPM: 0,
@@ -8,7 +9,8 @@ var model = {
     speed :0,
     players_maxSpeed: 100,
     totalRevolutions: 0,
-    revolutionPerLevel: [78, 214, 520, 614],
+    revolutionPercentagePerLevel:[0.1,0.25,0.5,0.15],
+    revolutionPerLevel: [],
     currentLevel: 1,
     isSpinEngine: false,
     isAccelerate: false,
@@ -18,8 +20,8 @@ var model = {
     isShowEnding: false,
     isEndGame:false,
     currentTunnel:1,
-    gameTimer: 10,
-    takePhotoMoment: 10 - 5,
+    gameTimer: 45,
+    takePhotoMoment: 45 - 10,
     ranking:null,
 
     onPreload: function() {
@@ -40,6 +42,7 @@ var model = {
     },
 
     onReady:function() {
+        model.calcRevPerLevel();
         initMain();
         console.log("Start Connection");
         try {
@@ -48,6 +51,23 @@ var model = {
         } catch (e){
             console.log("jquery_ready_GameScreenCore_init", e, {result: 'failed'});
         }
+    },
+
+    calcRevPerLevel:function() {
+        for(var i=0; i<model.revolutionPercentagePerLevel.length; i++) {
+            var totalTeamRevNeeded = ((model.maxRPM / 60) * model.gameTimer) * 2;
+            var revolutionsNeeded;
+            if(i == 0) {
+                revolutionsNeeded = (totalTeamRevNeeded * model.revolutionPercentagePerLevel[i]);
+            }else {
+                revolutionsNeeded =  (totalTeamRevNeeded * model.revolutionPercentagePerLevel[i]) + model.revolutionPerLevel[i-1];
+            }
+
+            model.revolutionPerLevel.push(revolutionsNeeded);
+            console.log(model.revolutionPerLevel);
+        }
+        console.log("totalTeamRevNeeded="+totalTeamRevNeeded);
+        console.log("revolutionPerLevel="+model.revolutionPerLevel);
     }
 };
 
