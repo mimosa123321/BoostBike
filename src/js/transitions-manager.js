@@ -46,7 +46,7 @@ TransitionsManager.prototype.onEndShowTransitions = function() {
     }
 
     if(this.currentTransitionId === 4) {
-        this.endGamePanel.show();
+        TimeManager.transitionsResultEndCallBack();
     }
 
     animate.removeAnimationListener(this.transitionsContainerDomElement, "AnimationEnd", this.endShowTransitions);
@@ -160,4 +160,12 @@ EndPage.prototype.show = function() {
 
 EndPage.prototype.hide = function() {
     this.endPage.attr('class',"hide");
+};
+
+EndPage.prototype.getData = function() {
+    $('.resultSpeed').html(model.speed);
+    $('.resultLevel').html(model.currentLevel);
+    $('.resultRank').html(model.ranking);
+    console.log("show result panel after get");
+    setTimeout(this.show(),1000);
 };

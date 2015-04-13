@@ -58,19 +58,21 @@ var NetworkMessage = {
 	            Player1IsReady: 0x05
 	        }
 		},
-		GameEnded:
-	    {
-	        Action:
-	        {
-	            GameServer: 0x01
-	        },
-	        Attributes:
-	        {
-	        	players_teamLevel: "int",
-	        	players_maxSpeed: "int",
-	        	players_souvenir: "string"
-	        }
-	    },
+        GameEnded:
+        {
+            Action:
+            {
+                GameServer: 0x01,
+                GameScreen: 0x02
+            },
+            Attributes:
+            {
+                players_teamLevel: "int",
+                players_maxSpeed: "int",
+                players_souvenir: "string",
+                players_position: "int"
+            }
+        },
 	    GameInformation:
 	    {
 	        Action:
@@ -164,12 +166,13 @@ var NetworkMessage = {
 };
 
 //Network GameEnded Message parser / constructor
-var NetworkGameEnded = function(action, teamLevel, maxSpeed, souvenir) {
-	this.identifier = NetworkMessage.Identifier.GameEnded;
-	this.action = parseInt(action);
-	this.players_teamLevel = parseInt(teamLevel);
-	this.players_maxSpeed = parseInt(maxSpeed);
-	this.players_souvenir = souvenir;
+var NetworkGameEnded = function(action, teamLevel, maxSpeed, souvenir, position) {
+    this.identifier = NetworkMessage.Identifier.GameEnded;
+    this.action = parseInt(action);
+    this.players_teamLevel = parseInt(teamLevel);
+    this.players_maxSpeed = parseInt(maxSpeed);
+    this.players_souvenir = souvenir;
+    this.players_position = parseInt(position);
 };
 
 //Network CameraFeed Message parser / constructor
@@ -449,7 +452,18 @@ GameScreenFactory.prototype.webSocketOnMessage = function(event){
 			this.gameStartCallback();
 		}
 
-	} catch(e) {}
+        //GameEnded With Position
+        if 	(
+            networkData.identifier == NetworkMessage.Identifier.GameEnded
+            &&
+            networkData.action == NetworkMessage.Kinds.GameEnded.Action.GameScreen
+        ) {
+            console.log("webSocketOnMessage", event, {result: 'gamescreen_game_is_eneded'});
+            this.gameEndedCallback(parseInt(networkData.players_position));
+        }
+
+
+    } catch(e) {}
 };
 
 //WebSocket On Error CallBack
@@ -500,21 +514,20 @@ GameScreenFactory.prototype.gameInformationTutorialEnded = function(){
 
 
 GameScreenFactory.prototype.gameInformationGameEnded = function(players_teamLevel, players_maxSpeed, players_souvenir){
-	console.log("gameInformationGameEnded", null, {result: 'call'});
+    console.log("gameInformationGameEnded", null, {result: 'call'});
 
-	var data = new NetworkGameEnded(
-		NetworkMessage.Kinds.GameEnded.Action.GameServer,
-		players_teamLevel, 
-		players_maxSpeed, 
-		players_souvenir
-	);
+    var data = new NetworkGameEnded(
+        NetworkMessage.Kinds.GameEnded.Action.GameServer,
+        players_teamLevel,
+        players_maxSpeed,
+        players_souvenir,
+        0
+    );
 
-	this.gameScreenState = GameScreenState.Ending;
-	console.log("gameInformationGameEnded", data, {result: 'sent'});
-	this.webSocketSend(data);
-	this.gameEndedCallback();
+    this.gameScreenState = GameScreenState.Ending;
+    console.log("gameInformationGameEnded", data, {result: 'sent'});
+    this.webSocketSend(data);
 };
-
 
 //Take the picture and send it to the gameServer
 GameScreenFactory.prototype.cameraFeedTakePicture = function(){

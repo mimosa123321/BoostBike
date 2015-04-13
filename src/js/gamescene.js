@@ -94,25 +94,37 @@ GameScene.prototype.render = function() {
         //For Transition between Levels
         //level 2 - show Transition 1
         if (model.currentLevel === 2 && !model.isShowTransition1) {
-            this.manageTransitions(1,1500,5500);
             model.isShowTransition1 = true;
+            this.manageTransitions(1,1500,5500);
+
+            //send call back when tutorial ends
+            GameScreenCore.getInstance().gameInformationTutorialEnded();
+
+            //send call back when game level update
+            GameScreenCore.getInstance().gameInformationLevel(model.currentLevel);
         }
 
         //level 3
-        if (model.currentLevel === 3 && !model.isShowTransition2) {
+        if (model.gameTimer != 0 && model.currentLevel === 3 && !model.isShowTransition2) {
+            model.isShowTransition2 = true;
             this.manageTransitions(2,1000,5500); //6500
             //stop team rpm
             uielements.rpmMeter.teamRPMMeter.stopUpdate();
-            model.isShowTransition2 = true;
+
+            //send call back when game level update
+            GameScreenCore.getInstance().gameInformationLevel(model.currentLevel);
         }
 
         //level 4 - show Engine Layer
-        if (model.currentLevel === 4 && !model.isShowTransition3) {
+        if (model.gameTimer != 0 && model.currentLevel === 4 && !model.isShowTransition3) {
+            model.isShowTransition3 = true;
             //show engine
             this.manageTransitions(3,1000,8500);
             //stop team rpm
             uielements.rpmMeter.teamRPMMeter.stopUpdate();
-            model.isShowTransition3 = true;
+
+            //send call back when game level update
+            GameScreenCore.getInstance().gameInformationLevel(model.currentLevel);
         }
 
         //for 3d Engine Spinning
@@ -125,7 +137,7 @@ GameScene.prototype.render = function() {
         }
 
         //level 5 - Win
-        if (model.currentLevel === 5 && !model.isShowEnding) {
+        if (model.gameTimer != 0 && model.currentLevel === 5 && !model.isShowEnding) {
             console.log("win!!");
 
             //stop team rpm

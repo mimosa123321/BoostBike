@@ -18,7 +18,9 @@ var model = {
     isShowEnding: false,
     isEndGame:false,
     currentTunnel:1,
-    gameTimer: 45,
+    gameTimer: 10,
+    takePhotoMoment: 10 - 5,
+    ranking:null,
 
     onPreload: function() {
         console.log("DOM_ready - Preload Image");
@@ -99,8 +101,8 @@ GameScreenCore.getInstance().gameStartCallback = function() {
     //$("#game-state #state .value").html("Tutorial");
     //$("#actions-wrapper").html("<button id='end-tutorial'>End Tutorial</button>");
     /*$("#end-tutorial").click(function() {
-        GameScreenCore.getInstance().gameInformationTutorialEnded();
-    });*/
+     GameScreenCore.getInstance().gameInformationTutorialEnded();
+     });*/
 };
 
 
@@ -111,37 +113,37 @@ GameScreenCore.getInstance().gameTutorialEndedCallback = function() {
     /* */
     /*// INJECT CODE HERE //*/
     /* */
-    $("#game-state #state .value").html("Game");
+    /*$("#game-state #state .value").html("Game");
 
-    $("#game-state #team-number").show();
-    $("#game-state #level").show();
-    $("#game-state #max-speed").show();
-    $("#game-state #current-speed").show();
-    $("#player-1").show();
-    $("#player-2").show();
+     $("#game-state #team-number").show();
+     $("#game-state #level").show();
+     $("#game-state #max-speed").show();
+     $("#game-state #current-speed").show();
+     $("#player-1").show();
+     $("#player-2").show();
 
-    $("#actions-wrapper").html("<button id='update-level'>Update level</button><button id='take-picture'>Take picture</button><button id='end-game'>End Game</button>");
+     $("#actions-wrapper").html("<button id='update-level'>Update level</button><button id='take-picture'>Take picture</button><button id='end-game'>End Game</button>");
 
-    $("#update-level").click(function() {
-        window.current_level++;
-        $("#game-state #level .value").html(window.current_level);
-        GameScreenCore.getInstance().gameInformationLevel(window.current_level);
-    });
+     $("#update-level").click(function() {
+     window.current_level++;
+     $("#game-state #level .value").html(window.current_level);
+     GameScreenCore.getInstance().gameInformationLevel(window.current_level);
+     });
 
-    $("#take-picture").click(function() {
-        window.players_souvenir_2 = GameScreenCore.getInstance().takePicture();
-        $("#game-state #picture-2 .value").html("Taken");
-    });
+     $("#take-picture").click(function() {
+     window.players_souvenir_2 = GameScreenCore.getInstance().takePicture();
+     $("#game-state #picture-2 .value").html("Taken");
+     });
 
-    $("#end-game").click(function() {
-        if (window.players_souvenir_2  != "") {
-            GameScreenCore.getInstance().gameInformationGameEnded(
-                window.current_level, window.players_maxSpeed, window.players_souvenir_2
-            );
-        } else {
-            console.debug('take a picture first');
-        }
-    });
+     $("#end-game").click(function() {
+     if (window.players_souvenir_2  != "") {
+     GameScreenCore.getInstance().gameInformationGameEnded(
+     window.current_level, window.players_maxSpeed, window.players_souvenir_2
+     );
+     } else {
+     console.debug('take a picture first');
+     }
+     });*/
 
 };
 
@@ -187,18 +189,13 @@ GameScreenCore.getInstance().updateGameInformationCallback =
 /**
  * Callback that is triggered when the game is ended
  */
-GameScreenCore.getInstance().gameEndedCallback = function() {
+GameScreenCore.getInstance().gameEndedCallback = function(position) {
+    //console.log("end screen position="+position);
+    model.ranking = position;
 
-    $("#actions-wrapper").html("");
-
-    $("#game-state #state .value").html("Ended");
-
-    $("#game-state #team-number").hide();
-    $("#game-state #level").hide();
-    $("#game-state #max-speed").hide();
-    $("#game-state #current-speed").hide();
-    $("#player-1").hide();
-    $("#player-2").hide();
+    transitionsManager.endGamePanel.getData();
+    model.isShowEnding = true;
+    gamescene.isGameStart = false;
 };
 
 
@@ -248,8 +245,8 @@ GameScreenCore.getInstance().initializationCallback = function() {
     //$("#player-2").hide();
 
     /*if(GameScreenCore.getInstance().gameScreenState == GameScreenState.ScreenSaver) {
-        main.stopVideo();
-    }*/
+     main.stopVideo();
+     }*/
 
     console.log("initialization / re-initialization");
 };

@@ -5,7 +5,12 @@ var TimeManager = {
         if(!TimeManager.timeInterval) {
             TimeManager.timeInterval = setInterval(function(){
                 model.gameTimer -= 1;
-                console.log(" model.gameTimer="+ model.gameTimer);
+
+                console.log("gameTimer="+model.gameTimer);
+                if(model.gameTimer === model.takePhotoMoment) {
+                    model.players_souvenir_2 = GameScreenCore.getInstance().takePicture();
+                }
+
                 if(model.gameTimer > 0 && model.gameTimer <= 5 ) {
                     $('#endGameCountDown').css("opacity",1);
                     $('#endGameCountDownValue').html(model.gameTimer);
@@ -14,7 +19,6 @@ var TimeManager = {
                     $('#endGameCountDown').css("opacity",0);
                     TimeManager.stop();
                     transitionsManager.show(4);
-                    //
                 }
             },1000);
         }
@@ -26,5 +30,13 @@ var TimeManager = {
             clearInterval(TimeManager.timeInterval);
             TimeManager.timeInterval = null;
         }
+    },
+
+    transitionsResultEndCallBack:function() {
+        console.log("call the result when the gate is closed.");
+        //send call back
+        GameScreenCore.getInstance().gameInformationGameEnded(
+            model.currentLevel, model.speed, model.players_souvenir_2
+        );
     }
 };
