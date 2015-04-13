@@ -78,6 +78,9 @@ TransitionsManager.prototype.onEndHideTransitions = function() {
         uielements.rpmMeter.teamRPMMeter.startUpdate();
         //move boost icon
         uielements.topBarIcon.moveToNext();
+
+        //allow accelerate
+        model.isAllowAccel = true;
     }
 
     if(this.currentTransitionId ===3) {

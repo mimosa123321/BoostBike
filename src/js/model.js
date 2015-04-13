@@ -7,6 +7,8 @@ var model = {
     player1_name: null,
     player2_name: null,
     speed :0,
+    accelerateSpeed:0,
+    isAllowAccel:false,
     players_maxSpeed: 100,
     totalRevolutions: 0,
     revolutionPercentagePerLevel:[0.1,0.25,0.5,0.15],
@@ -194,7 +196,6 @@ GameScreenCore.getInstance().updateGameInformationCallback =
 
         model.player1_RPM = (player1_rpm);
         model.player2_RPM = (player2_rpm);
-        //$("#game-state #team-number .value").html(player1_name);
 
         if ((player1_kmh + player2_kmh) > window.players_maxSpeed) {
             window.players_maxSpeed = (player1_kmh + player2_kmh);
@@ -202,8 +203,6 @@ GameScreenCore.getInstance().updateGameInformationCallback =
             //$("#game-state #max-speed .value").html(window.players_maxSpeed);
         }
         model.speed = player1_kmh + player2_kmh;
-
-        console.log( "model.speed="+model.speed);
         //$("#game-state #current-speed .value").html(player1_kmh + player2_kmh);
     };
 /**

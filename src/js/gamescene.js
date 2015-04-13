@@ -46,28 +46,20 @@ GameScene.prototype.render = function() {
 
                 if (uielements.rpmMeter.teamRPMMeter.isStartUpdate) {
                     if( model.currentLevel > 1) {
-                        //console.log("model.totalRevolutions="+model.totalRevolutions);
-                        //console.log("model.revolutionPerLevel[model.currentLevel-2]="+model.revolutionPerLevel[model.currentLevel-2]);
                         if(Math.ceil(model.totalRevolutions) >= model.revolutionPerLevel[model.currentLevel-2]) {
-                            //console.log("model.player1_RPM="+model.player1_RPM);
-                            //console.log("this.prev_player1_RPM="+this.prev_player1_RPM);
                             if(model.player1_RPM > this.prev_player1_RPM) {
                                 //console.log("accelerating");
-                                model.isAccelerate = true;
-                                model.totalRevolutions += 10;
+                                model.totalRevolutions += 5;
                             }else if(model.player1_RPM < this.prev_player1_RPM){
                                 //console.log("deccelerating");
-                                model.isAccelerate = false;
                                 model.totalRevolutions += 0;
-
                             }
                             this.prev_player1_RPM = model.player1_RPM;
 
+                            //player2_RPM
                             if(model.player2_RPM > this.prev_player2_RPM) {
-                                model.isAccelerate = true;
-                                model.totalRevolutions += 10;
+                                model.totalRevolutions += 5;
                             }else if(model.player2_RPM < this.prev_player2_RPM) {
-                                model.isAccelerate = false;
                                 model.totalRevolutions += 0;
                             }
                             this.prev_player2_RPM = model.player2_RPM;
@@ -83,13 +75,14 @@ GameScene.prototype.render = function() {
 
                 //for Update Speed Meter
                 uielements.speedMeter.updateValue(model.speed);
+                uielements.speedMeter.checkAcceleration();
             }
         }
 
         //check current level
         main.updateLevel();
 
-        //console.log("model.totalRevolutions="+model.totalRevolutions);
+        //console.log("model.accelerateSpeed="+model.accelerateSpeed);
 
         //For Transition between Levels
         //level 2 - show Transition 1
@@ -172,6 +165,10 @@ GameScene.prototype.changeTunnel = function(tunnelId) {
     this.changeSceneGradientScale(0.8);
     this.tunnel2 = new Tunnel2();
     model.currentTunnel = 2;
+
+    //restore the speed here
+    model.isAllowAccel = false;
+    model.accelerateSpeed = 0;
 };
 
 GameScene.prototype.removeTunnel_1 = function() {

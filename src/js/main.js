@@ -66,6 +66,7 @@ Main.prototype.initUIElements = function() {
 };
 
 Main.prototype.enterGame = function() {
+    model.isAllowAccel = true;
     main.startGameScene();
     main.initUIElements();
     main.initTransitionsManager();
@@ -147,11 +148,6 @@ var keyEvent = function(event) {
         setTimeout(function(){
             main.enterGame();
         },500);
-        //main.startGameScene();
-        //main.initUIElements();
-        //setTimeout(function() {
-        //    main.initTutorial();
-        //}, 3000);
     }
 
     if (keychar.toUpperCase() === "R") {
@@ -161,8 +157,9 @@ var keyEvent = function(event) {
 
     if (key === 38) {
         if (uielements.rpmMeter.teamRPMMeter.isStartUpdate) {
-            model.totalRevolutions += 4;
+            model.totalRevolutions += 5;
             model.isAccelerate = true;
+            model.accelerateSpeed += 0.0002;
         }
     }
 };

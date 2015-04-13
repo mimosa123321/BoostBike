@@ -12,6 +12,7 @@ SpeedMeter.initialSpeedValue = 20;
 SpeedMeter.totalSpeed = 200;
 SpeedMeter.initialSpeedDegree = -105;
 SpeedMeter.endSpeedDegree = 105;
+SpeedMeter.maxAccelerateSpeed = 30;
 
 SpeedMeter.prototype.show = function() {
     this.domElement.css('opacity', 1);
@@ -47,4 +48,33 @@ SpeedMeter.prototype.convertRPMToDegree = function(value) {
     var degreePerRPM = totalRPMDegree / SpeedMeter.totalSpeed;
     var degree = ((value * degreePerRPM) + offsetDegree);
     return Math.floor(degree);
+};
+
+SpeedMeter.prototype.checkAcceleration = function() {
+    var diff;
+    var tunnel;
+    if(model.currentTunnel === 1) {
+        tunnel = Tunnel1;
+    }
+
+    if(model.currentTunnel === 2) {
+        tunnel = Tunnel2;
+    }
+
+    diff = tunnel.MAX_SPEED - tunnel.MIN_SPEED;
+    var accerPerSpeed = diff / 50;
+
+    if(model.isAllowAccel) {
+        if(model.speed > 0) {
+            model.accelerateSpeed = (accerPerSpeed * model.speed) + tunnel.MIN_SPEED;
+        }
+    }
+
+    if(model.accelerateSpeed == 0) {
+        model.accelerateSpeed = tunnel.MIN_SPEED;
+    }
+
+    if(model.accelerateSpeed >= tunnel.MAX_SPEED) {
+        //model.accelerateSpeed = Tunnel1.MAX_SPEED;
+    }
 };
