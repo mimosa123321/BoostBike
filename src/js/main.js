@@ -10,6 +10,7 @@ function initMain() {
 
 var Main = function() {
     this.showViewPort();
+    //console.log("!!!!");
     this.initStats();
     this.initVideo();
     this.initCamera();
@@ -25,6 +26,7 @@ Main.prototype.initStats = function() {
     stats = new Stats();
     stats.domElement.style.position	= 'absolute';
     stats.domElement.style.bottom	= '0px';
+    stats.domElement.style.opacity = 0;
     document.body.appendChild( stats.domElement );
 };
 

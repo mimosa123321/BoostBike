@@ -249,7 +249,7 @@ var GameScreenFactory = function () {
 	);
 
 	this.connectedCallback = function(){};
-	this.initializationCallback = function(){};
+    this.initializationCallback = function(){};
 	this.cameraFeedCallback = function(){};
 	this.getReadyCallback = function(){};
 	this.pictureCaptureCallback = function(playerID){};
@@ -571,8 +571,7 @@ GameScreenFactory.prototype.takePicture = function(){
 		console.warn("TakePicture", e, {result: 'failed'});
 	}	
 
-	//return players_souvenir;
-	return "";
+	return players_souvenir;
 };
 
 

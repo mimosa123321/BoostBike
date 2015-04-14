@@ -25,6 +25,7 @@ var model = {
     gameTimer: 45,
     takePhotoMoment: 45 - 10,
     ranking:null,
+    isNeedReload:false,
 
     onPreload: function() {
         console.log("DOM_ready - Preload Image");
@@ -47,12 +48,11 @@ var model = {
         model.calcRevPerLevel();
         initMain();
         console.log("Start Connection");
-        /*try {
+        try {
             GameScreenCore.getInstance().init('#camera-feed'); //Init the GameScreen (required as it init the connect)
-
         } catch (e){
             console.log("jquery_ready_GameScreenCore_init", e, {result: 'failed'});
-        }*/
+        }
     },
 
     calcRevPerLevel:function() {
@@ -268,6 +268,12 @@ GameScreenCore.getInstance().initializationCallback = function() {
      }*/
 
     console.log("initialization / re-initialization");
-    main.restartGame();
+    if(model.isNeedReload) {
+        main.restartGame();
+
+    }else {
+        model.isNeedReload = true;
+    }
+
 };
 
