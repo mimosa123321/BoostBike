@@ -47,12 +47,12 @@ var model = {
         model.calcRevPerLevel();
         initMain();
         console.log("Start Connection");
-        try {
+        /*try {
             GameScreenCore.getInstance().init('#camera-feed'); //Init the GameScreen (required as it init the connect)
 
         } catch (e){
             console.log("jquery_ready_GameScreenCore_init", e, {result: 'failed'});
-        }
+        }*/
     },
 
     calcRevPerLevel:function() {

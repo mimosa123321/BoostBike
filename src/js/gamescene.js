@@ -9,12 +9,14 @@ var GameScene = function() {
     this.sceneGradientDOMElement = document.getElementById("gameSceneGradient");
     this.prev_player1_RPM = 0;
     this.prev_player2_RPM = 0;
+    this.hideSceneGradient = this.onHideSceneGradient.bind(this);
 };
 
 GameScene.prototype.show = function() {
     console.log("show game scene");
     this.sceneCanvas.addClass("show");
-    this.sceneGradient.addClass("show");
+    this.sceneGradient.attr("class","show");
+    animate.addAnimationListener(this.sceneGradientDOMElement, "AnimationEnd", this.hideSceneGradient);
 };
 
 GameScene.prototype.start = function() {
@@ -22,10 +24,15 @@ GameScene.prototype.start = function() {
     this.render();
 };
 
+GameScene.prototype.onHideSceneGradient = function() {
+    animate.removeAnimationListener(this.sceneGradientDOMElement, "AnimationEnd", this.hideSceneGradient);
+    this.sceneGradient.attr("class","hide");
+};
+
 GameScene.prototype.changeSceneGradientScale = function(value) {
-    this.sceneGradient.removeClass("show");
+    this.sceneGradient.attr("class","");
     this.sceneGradient.css('-webkit-transform','scale('+value+')');
-    this.sceneGradient.css('opacity','1');
+    this.sceneGradient.css('opacity','0.8');
 };
 
 GameScene.prototype.render = function() {
@@ -165,7 +172,7 @@ GameScene.prototype.manageTransitions = function(id, showTime, hideTime) {
 };
 
 GameScene.prototype.changeTunnel = function(tunnelId) {
-    this.changeSceneGradientScale(0.8);
+    this.changeSceneGradientScale(1);
     this.tunnel2 = new Tunnel2();
     model.currentTunnel = 2;
 
