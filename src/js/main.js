@@ -1,5 +1,6 @@
 var main, cameraManager, video, gamescene, uielements, tutorial, engine, transitionsManager;
 var screen_width, screen_height;
+var stats;
 
 function initMain() {
     screen_width = window.innerWidth;
@@ -8,9 +9,17 @@ function initMain() {
 }
 
 var Main = function() {
+    this.initStats();
     this.initVideo();
     this.initCamera();
     this.initGameScene();
+};
+
+Main.prototype.initStats = function() {
+    stats = new Stats();
+    stats.domElement.style.position	= 'absolute';
+    stats.domElement.style.bottom	= '0px';
+    document.body.appendChild( stats.domElement );
 };
 
 Main.prototype.initVideo = function() {

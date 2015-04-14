@@ -145,6 +145,9 @@ GameScene.prototype.render = function() {
             this.isGameStart = false;
         }
         requestAnimationFrame(this.render.bind(this));
+
+        // update stats
+        stats.update();
     }
 };
 

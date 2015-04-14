@@ -53,28 +53,38 @@ SpeedMeter.prototype.convertRPMToDegree = function(value) {
 SpeedMeter.prototype.checkAcceleration = function() {
     var diff;
     var tunnel;
+    var targetAccelSpeed;
+    var changeValue;
     if(model.currentTunnel === 1) {
         tunnel = Tunnel1;
+        changeValue = 0.002;
     }
 
     if(model.currentTunnel === 2) {
         tunnel = Tunnel2;
+        changeValue = 0.001;
     }
 
     diff = tunnel.MAX_SPEED - tunnel.MIN_SPEED;
-    var accerPerSpeed = diff / 50;
+    var accerPerSpeed = diff / 100;
 
     if(model.isAllowAccel) {
         if(model.speed > 0) {
-            model.accelerateSpeed = (accerPerSpeed * model.speed) + tunnel.MIN_SPEED;
+            targetAccelSpeed = (accerPerSpeed * model.speed) + tunnel.MIN_SPEED;
+            if(model.accelerateSpeed < targetAccelSpeed) {
+                model.accelerateSpeed += changeValue;
+            }else if(model.accelerateSpeed >= targetAccelSpeed) {
+                model.accelerateSpeed = targetAccelSpeed;
+            }
         }
     }
 
+    //set Limitation.
     if(model.accelerateSpeed == 0) {
         model.accelerateSpeed = tunnel.MIN_SPEED;
     }
 
     if(model.accelerateSpeed >= tunnel.MAX_SPEED) {
-        //model.accelerateSpeed = Tunnel1.MAX_SPEED;
+        model.accelerateSpeed = tunnel.MAX_SPEED;
     }
 };
