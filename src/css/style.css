@@ -647,17 +647,17 @@ img {
 }
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames {
-    position:absolute;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
+    position: absolute;
+    left: 30px;
+    top: 15px;
+    width: 1140px;
+    height: 100%;
 }
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames .frames {
     position: absolute;
     left: 0px;
-    top: 25px;
+    top: 10px;
     width: 6px;
     height: 19px;
     background-color: #00416E;
@@ -665,38 +665,38 @@ img {
 
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #barLevel1 {
-    left: 141px;
+    left: 57px;
 }
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #barLevel2 {
-    left: 426px;
+    left: 342px;
 }
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #barLevel3 {
-    left: 994px;
+    left: 912px;
 }
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames .number {
     position: absolute;
-    top: 12px;
+    top: -5px;
     color:#003478;
     font-size: 30px;
     font-weight: bold;
 }
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #number1{
-    left: 68px;
+    left: 23px;
 
 }
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #number2{
-    left: 287px;
+    left: 181px;
 }
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #number3{
-    left: 703px
+    left: 632px;
 }
 
 #gameUIElements #teamRPM .elements .bar .levelBarFrames #number4{
-    left: 1047px;
+    left: 1028px;
 }
 
 #gameUIElements #teamRPM .elements .indicator {
@@ -756,7 +756,7 @@ img {
     float: left;
     width:107px;
     height:140px;
-    left: 737px;
+    left: 682px;
     top: 40px;
     background: url("../images/engineiconbg.png") no-repeat;
     -webkit-transition: all 0.6s ease-out;

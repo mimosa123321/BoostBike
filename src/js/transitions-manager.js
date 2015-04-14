@@ -21,15 +21,15 @@ var TransitionsManager = function() {
 
 TransitionsManager.prototype.show = function(transitionId) {
     this.currentTransitionId = transitionId;
-    this.transitionsContainer.attr("class","show");
-    if(transitionId === 1) {
+    this.transitionsContainer.attr("class", "show");
+    if (transitionId === 1) {
         this.transition1.show();
     }
-    if(transitionId === 2) {
+    if (transitionId === 2) {
         this.transition2.show();
     }
 
-    if(transitionId === 3) {
+    if (transitionId === 3) {
         this.transition3.show();
     }
 
@@ -37,19 +37,19 @@ TransitionsManager.prototype.show = function(transitionId) {
 };
 
 TransitionsManager.prototype.onEndShowTransitions = function() {
-    if(this.currentTransitionId === 2) {
+    if (this.currentTransitionId === 2) {
         gamescene.removeTunnel_1();
-        setTimeout(function(){
+        setTimeout(function() {
             console.log("change tunnel2");
             gamescene.changeTunnel();
-        },100);
+        }, 100);
     }
 
-    if(this.currentTransitionId === 3) {
-        setTimeout( this.transition3.show3DEngine(), 10);
+    if (this.currentTransitionId === 3) {
+        setTimeout(this.transition3.show3DEngine(), 10);
     }
 
-    if(this.currentTransitionId === 4) {
+    if (this.currentTransitionId === 4) {
         TimeManager.transitionsResultEndCallBack();
     }
 
@@ -57,33 +57,33 @@ TransitionsManager.prototype.onEndShowTransitions = function() {
 };
 
 TransitionsManager.prototype.hide = function(transitionId) {
-    if(transitionId === 1) {
+    if (transitionId === 1) {
         this.transition1.hide();
     }
 
-    if(transitionId === 2) {
+    if (transitionId === 2) {
         this.transition2.hide();
     }
 
-    if(transitionId === 3) {
+    if (transitionId === 3) {
         this.transition3.hide();
         this.transition3.hide3DEngine();
     }
 
-    setTimeout(function(){
-        $('#transitionsContainer').attr("class","hide");
-    },800);
+    setTimeout(function() {
+        $('#transitionsContainer').attr("class", "hide");
+    }, 800);
 
 
     animate.addAnimationListener(this.transitionsContainerDomElement, "AnimationEnd", this.endHideTransitions);
 };
 
 TransitionsManager.prototype.onEndHideTransitions = function() {
-    if(this.currentTransitionId ===1) {
+    if (this.currentTransitionId === 1) {
         animate.removeAnimationListener(this.transitionsContainerDomElement, "AnimationEnd", this.endHideTransitions);
         tutorial.showInstructions(4);
     }
-    if(this.currentTransitionId ===2) {
+    if (this.currentTransitionId === 2) {
         uielements.rpmMeter.teamRPMMeter.startUpdate();
         //move boost icon
         uielements.topBarIcon.moveToNext();
@@ -92,13 +92,13 @@ TransitionsManager.prototype.onEndHideTransitions = function() {
         model.isAllowAccel = true;
     }
 
-    if(this.currentTransitionId ===3) {
+    if (this.currentTransitionId === 3) {
         //start update after hide engine
     }
 };
 
 /*-----------------*/
-var TransitionLevel1 =  function() {
+var TransitionLevel1 = function() {
     this.transition = $('#transition1');
 };
 
@@ -112,7 +112,7 @@ TransitionLevel1.prototype.hide = function() {
 };
 
 /*-----------------*/
-var TransitionLevel2 =  function() {
+var TransitionLevel2 = function() {
     this.transition = $('#transition2');
 };
 
@@ -126,7 +126,7 @@ TransitionLevel2.prototype.hide = function() {
 };
 
 /*-----------------*/
-var TransitionLevel3 =  function() {
+var TransitionLevel3 = function() {
     this.transition = $('#transition3');
     this.frameHeight = 722;
     this.engineTimer = 0;
@@ -174,11 +174,11 @@ var EndPage = function() {
 };
 
 EndPage.prototype.show = function() {
-    this.endPage.attr('class',"show");
+    this.endPage.attr('class', "show");
 };
 
 EndPage.prototype.hide = function() {
-    this.endPage.attr('class',"hide");
+    this.endPage.attr('class', "hide");
 };
 
 EndPage.prototype.getData = function() {
@@ -186,5 +186,26 @@ EndPage.prototype.getData = function() {
     $('.resultLevel').html(model.currentLevel);
     $('.resultRank').html(model.ranking);
     console.log("show result panel after get");
-    setTimeout(this.show(),1000);
+    setTimeout(this.show(), 1000);
+};
+
+
+
+var Engine = function() {
+    this.photoContainer = $('#photos');
+    this.frameHeight = 722;
+    this.engineTimer = 0;
+    //
+};
+
+Engine.prototype.loop = function() {
+    var posY = parseInt(this.photoContainer.css("background-position-y"));
+    var newPosY = posY - this.frameHeight;
+
+    var dest = this.frameHeight * 140;
+
+    if (newPosY < -dest) {
+        newPosY = 0;
+    }
+    this.photoContainer.css("background-position-y", newPosY + 'px');
 };

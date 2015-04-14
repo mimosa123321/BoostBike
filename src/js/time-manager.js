@@ -1,39 +1,37 @@
 var TimeManager = {
-    timeInterval : null,
-    start:function() {
+    timeInterval: null,
+    start: function() {
         console.log(" start Timer ");
-        if(!TimeManager.timeInterval) {
-            TimeManager.timeInterval = setInterval(function(){
+        if (!TimeManager.timeInterval) {
+            TimeManager.timeInterval = setInterval(function() {
                 model.gameTimer -= 1;
-
-                console.log("gameTimer="+model.gameTimer);
-                if(model.gameTimer === model.takePhotoMoment) {
+                if (model.gameTimer === model.takePhotoMoment) {
                     model.players_souvenir_2 = GameScreenCore.getInstance().takePicture();
                 }
 
-                if(model.gameTimer > 0 && model.gameTimer <= 5 ) {
-                    $('#endGameCountDown').css("opacity",1);
+                if (model.gameTimer > 0 && model.gameTimer <= 5) {
+                    $('#endGameCountDown').css("opacity", 1);
                     $('#endGameCountDownValue').html(model.gameTimer);
-                }else if(model.gameTimer <= 0) {
+                } else if (model.gameTimer <= 0) {
                     console.log("game End");
-                    $('#endGameCountDown').css("opacity",0);
+                    gamescene.isGameStart = false;
+                    $('#endGameCountDown').css("opacity", 0);
                     TimeManager.stop();
                     transitionsManager.show(4);
                 }
-            },1000);
+            }, 1000);
         }
     },
 
-    stop:function() {
+    stop: function() {
         console.log(" stop Timer ");
-        if(TimeManager.timeInterval) {
+        if (TimeManager.timeInterval) {
             clearInterval(TimeManager.timeInterval);
             TimeManager.timeInterval = null;
         }
     },
 
-    transitionsResultEndCallBack:function() {
-        console.log("call the result when the gate is closed.");
+    transitionsResultEndCallBack: function() {
         var totalRevolutionsExceptTutorial = model.totalRevolutions - model.revolutionPerLevel[0];
         //send call back
         GameScreenCore.getInstance().gameInformationGameEnded(

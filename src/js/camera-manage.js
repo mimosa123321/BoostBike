@@ -9,21 +9,21 @@ var CameraManager = function() {
     this.startCountDownValue = 5;
 };
 
-CameraManager.prototype.startCountDown= function() {
+CameraManager.prototype.startCountDown = function() {
     this.countDown.addClass("show");
-    this.countDownInterval = setInterval(this.countDownInterval.bind(this),1000);
+    this.countDownInterval = setInterval(this.countDownInterval.bind(this), 1000);
 };
 
-CameraManager.prototype.hideCountDown= function() {
-    this.countDown.attr('class','hide');
+CameraManager.prototype.hideCountDown = function() {
+    this.countDown.attr('class', 'hide');
 };
 
 CameraManager.prototype.countDownInterval = function() {
-    this.startCountDownValue -=1;
+    this.startCountDownValue -= 1;
     var strCount = String(this.startCountDownValue);
-    if(this.startCountDownValue > 0) {
+    if (this.startCountDownValue > 0) {
         this.countDown.find('p').html(strCount);
-    }else {
+    } else {
         this.photoFlash();
         this.finishPhotoFlashListener();
         this.hideCountDown();
@@ -31,21 +31,21 @@ CameraManager.prototype.countDownInterval = function() {
         clearInterval(this.countDownInterval);
         this.countDownInterval = null;
     }
-    console.log("count time =" +  this.startCountDownValue);
+    console.log("count time =" + this.startCountDownValue);
 };
 
-CameraManager.prototype.photoFlash= function() {
+CameraManager.prototype.photoFlash = function() {
     this.photoFlashContainer.addClass("show");
 };
 
 CameraManager.prototype.finishPhotoFlashListener = function() {
     this.callGetReadyTimeout = setTimeout(function() {
         GameScreenCore.getInstance().getReadyCallback();
-    },4000);
+    }, 4000);
 };
 
 CameraManager.prototype.putTakenPhotoToFrame = function() {
-    this.takenPhoto.find('img').attr('src',model.players_souvenir_1);
+    this.takenPhoto.find('img').attr('src', model.players_souvenir_1);
 };
 
 CameraManager.prototype.show = function() {
@@ -53,19 +53,19 @@ CameraManager.prototype.show = function() {
 };
 
 CameraManager.prototype.hide = function() {
-    this.camera.attr('class','hide');
+    this.camera.attr('class', 'hide');
 };
 
 CameraManager.prototype.dispose = function() {
-    if(this.countDownInterval) {
+    if (this.countDownInterval) {
         clearInterval(this.countDownInterval);
         this.countDownInterval = null;
     }
-    if(this.callGetReadyTimeout) {
+    if (this.callGetReadyTimeout) {
         this.callGetReadyTimeout = null;
     }
     this.hideCountDown();
-    this.takenPhoto.find('img').attr('src','');
+    this.takenPhoto.find('img').attr('src', '');
     this.hide();
 };
 
@@ -74,4 +74,3 @@ CameraManager.prototype.reset = function() {
     this.startCountDownValue = 5;
     this.countDown.find('p').html('5');
 };
-

@@ -42,12 +42,12 @@ module.exports = function(grunt) {
             options: {
                 mangle: false,
                 compress: {
-                    drop_console: false
+                    drop_console: true
                 }
             },
             my_target: {
                 files: {
-                    'build/js/main.min.js': ['src/js/jquery-1.11.1.min.js','src/js/imagesloaded/imagesloaded.pkgd.min.js','src/js/buzz/buzz.min.js','src/js/three.min.js','src/js/flipclock/flipclock.js','src/js/model.js','src/js/main.js','src/js/tutorial.js','src/js/gamescene.js','src/js/speedmeter.js','src/js/game-uielements.js','src/js/video.js']
+                    'build/js/main.min.js': ['src/js/lib/jquery-1.11.1.min.js','src/js/lib/imagesloaded/imagesloaded.pkgd.min.js','src/js/websocket/core.js','src/js/lib/WebcamJS/webcam.min.js','src/js/lib/buzz/buzz.min.js','src/js/lib/Stats.js','src/js/model.js','src/js/sound-manager.js','src/js/main.js','src/js/video.js','src/js/camera-manage.js','src/js/tutorial.js','src/js/time-manager.js','src/js/gamescene.js','src/js/tunnels.js','src/js/transitions-manager.js','src/js/ui-elements/speedmeter.js','src/js/ui-elements/game-uielements.js']
                 }
             }
         },
@@ -121,4 +121,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-pngmin');
 
     grunt.registerTask('default', ['jsbeautifier','clean', 'copy', 'cssmin', 'uglify', 'sed','pngmin']);
+    //grunt.registerTask('default', ['jsbeautifier','clean', 'copy', 'cssmin', 'uglify', 'sed']);
 };

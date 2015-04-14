@@ -9,7 +9,7 @@ GameUIElements.prototype.startUpdate = function() {
     this.isStartUpdate = true;
 };
 
-GameUIElements.prototype.reset = function () {
+GameUIElements.prototype.reset = function() {
     this.rpmMeter.reset();
 
 };
@@ -33,12 +33,12 @@ RPMMeter.prototype.show = function() {
 };
 
 RPMMeter.prototype.hide = function() {
-    this.domElement.attr('class','hide');
+    this.domElement.attr('class', 'hide');
 };
 
 RPMMeter.prototype.updateMeterValue = function(shakeValue, shakeValue2) {
-    this.rpmVerticalMeter.updateValue(shakeValue,this.rpmMask1,this.svg1,this.rpm_value1 );
-    this.rpmVerticalMeter2.updateValue(shakeValue2,this.rpmMask2,this.svg2,this.rpm_value2);
+    this.rpmVerticalMeter.updateValue(shakeValue, this.rpmMask1, this.svg1, this.rpm_value1);
+    this.rpmVerticalMeter2.updateValue(shakeValue2, this.rpmMask2, this.svg2, this.rpm_value2);
 };
 
 RPMMeter.prototype.updateTeamMeterValue = function() {
@@ -58,16 +58,15 @@ RPMMeter.prototype.reset = function() {
 
 
 /*RPMVerticalMeter*/
-var RPMVerticalMeter = function() {
-};
+var RPMVerticalMeter = function() {};
 
 RPMVerticalMeter.totalHeight = 360;
 RPMVerticalMeter.totalBlocks = 20;
 RPMVerticalMeter.blockHeight = 10;
-RPMVerticalMeter.heightPerRPM = 360 / 450;
+RPMVerticalMeter.heightPerRPM = 360 / model.maxRPM;
 
 RPMVerticalMeter.prototype.updateValue = function(value, targetMask, targetSVG, playerRPMValue) {
-    if( value >= model.maxRPM) {
+    if (value >= model.maxRPM) {
         value = model.maxRPM;
     }
     var targetValue = this.convertRPMToUnit(value);
@@ -161,20 +160,20 @@ TeamRPMMeter.prototype.reset = function() {
 };
 
 
-var TopBarIcon =  function(){
+var TopBarIcon = function() {
     this.icon = $('#boost1');
     this.iconText = $('#boost1').find('span');
 };
 
 TopBarIcon.prototype.moveToNext = function() {
-    this.icon.css('webkit-transform','translateX(570px)');
-    this.icon.css('transform','translateX(570px)');
+    this.icon.css('webkit-transform', 'translateX(570px)');
+    this.icon.css('transform', 'translateX(570px)');
     this.iconText.html('x2');
 
 };
 
 TopBarIcon.prototype.moveToBack = function() {
-    this.icon.css('webkit-transform','translateX(0px)');
-    this.icon.css('transform','translateX(0px)');
+    this.icon.css('webkit-transform', 'translateX(0px)');
+    this.icon.css('transform', 'translateX(0px)');
     this.iconText.html('x1');
 };

@@ -55,12 +55,12 @@ SpeedMeter.prototype.checkAcceleration = function() {
     var tunnel;
     var targetAccelSpeed;
     var changeValue;
-    if(model.currentTunnel === 1) {
+    if (model.currentTunnel === 1) {
         tunnel = Tunnel1;
-        changeValue = 0.002;
+        changeValue = 0.0005;
     }
 
-    if(model.currentTunnel === 2) {
+    if (model.currentTunnel === 2) {
         tunnel = Tunnel2;
         changeValue = 0.001;
     }
@@ -68,23 +68,39 @@ SpeedMeter.prototype.checkAcceleration = function() {
     diff = tunnel.MAX_SPEED - tunnel.MIN_SPEED;
     var accerPerSpeed = diff / 100;
 
-    if(model.isAllowAccel) {
-        if(model.speed > 0) {
+    if (model.isAllowAccel) {
+        if (model.speed >= 0) {
             targetAccelSpeed = (accerPerSpeed * model.speed) + tunnel.MIN_SPEED;
-            if(model.accelerateSpeed < targetAccelSpeed) {
-                model.accelerateSpeed += changeValue;
-            }else if(model.accelerateSpeed >= targetAccelSpeed) {
-                model.accelerateSpeed = targetAccelSpeed;
+            if (model.accelerateSpeed < targetAccelSpeed) {
+                var afterAccelSpeed = model.accelerateSpeed + changeValue;
+
+                if (afterAccelSpeed >= targetAccelSpeed) {
+                    model.accelerateSpeed = targetAccelSpeed;
+                    return;
+                } else {
+                    model.accelerateSpeed += changeValue;
+                }
+
+            } else if (model.accelerateSpeed > targetAccelSpeed) {
+                var afterAccelSpeed = model.accelerateSpeed - changeValue;
+
+                if (afterAccelSpeed <= targetAccelSpeed) {
+                    model.accelerateSpeed = targetAccelSpeed;
+                    return;
+                } else {
+                    model.accelerateSpeed -= changeValue;
+                }
             }
         }
     }
 
     //set Limitation.
-    if(model.accelerateSpeed == 0) {
+    if (model.accelerateSpeed == 0) {
         model.accelerateSpeed = tunnel.MIN_SPEED;
     }
 
-    if(model.accelerateSpeed >= tunnel.MAX_SPEED) {
+    if (model.accelerateSpeed >= tunnel.MAX_SPEED) {
         model.accelerateSpeed = tunnel.MAX_SPEED;
     }
+
 };

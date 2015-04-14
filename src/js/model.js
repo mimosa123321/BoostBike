@@ -1,17 +1,17 @@
 var model = {
-    maxRPM: 450,
+    maxRPM: 450, //change the difficulitie
     players_souvenir_1: null,
     players_souvenir_2: null,
     player1_RPM: 0,
     player2_RPM: 0,
     player1_name: null,
     player2_name: null,
-    speed :0,
-    accelerateSpeed:0,
-    isAllowAccel:false,
+    speed: 0,
+    accelerateSpeed: 0,
+    isAllowAccel: false,
     players_maxSpeed: 100,
     totalRevolutions: 0,
-    revolutionPercentagePerLevel:[0.1,0.25,0.5,0.15],
+    revolutionPercentagePerLevel: [0.05, 0.25, 0.5, 0.2],
     revolutionPerLevel: [],
     currentLevel: 1,
     isSpinEngine: false,
@@ -20,12 +20,13 @@ var model = {
     isShowTransition2: false,
     isShowTransition3: false,
     isShowEnding: false,
-    isEndGame:false,
-    currentTunnel:1,
+    isEndGame: false,
+    currentTunnel: 1,
     gameTimer: 45,
     takePhotoMoment: 45 - 10,
-    ranking:null,
-    isNeedReload:false,
+    ranking: null,
+    isNeedReload: false,
+    isTutorial: false,
 
     onPreload: function() {
         console.log("DOM_ready - Preload Image");
@@ -44,32 +45,34 @@ var model = {
         });
     },
 
-    onReady:function() {
+    onReady: function() {
         model.calcRevPerLevel();
         initMain();
         console.log("Start Connection");
         try {
             GameScreenCore.getInstance().init('#camera-feed'); //Init the GameScreen (required as it init the connect)
-        } catch (e){
-            console.log("jquery_ready_GameScreenCore_init", e, {result: 'failed'});
+        } catch (e) {
+            console.log("jquery_ready_GameScreenCore_init", e, {
+                result: 'failed'
+            });
         }
     },
 
-    calcRevPerLevel:function() {
-        for(var i=0; i<model.revolutionPercentagePerLevel.length; i++) {
+    calcRevPerLevel: function() {
+        for (var i = 0; i < model.revolutionPercentagePerLevel.length; i++) {
             var totalTeamRevNeeded = ((model.maxRPM / 60) * model.gameTimer) * 2;
             var revolutionsNeeded;
-            if(i == 0) {
+            if (i == 0) {
                 revolutionsNeeded = (totalTeamRevNeeded * model.revolutionPercentagePerLevel[i]);
-            }else {
-                revolutionsNeeded =  (totalTeamRevNeeded * model.revolutionPercentagePerLevel[i]) + model.revolutionPerLevel[i-1];
+            } else {
+                revolutionsNeeded = (totalTeamRevNeeded * model.revolutionPercentagePerLevel[i]) + model.revolutionPerLevel[i - 1];
             }
 
             model.revolutionPerLevel.push(revolutionsNeeded);
             console.log(model.revolutionPerLevel);
         }
-        console.log("totalTeamRevNeeded="+totalTeamRevNeeded);
-        console.log("revolutionPerLevel="+model.revolutionPerLevel);
+        console.log("totalTeamRevNeeded=" + totalTeamRevNeeded);
+        console.log("revolutionPerLevel=" + model.revolutionPerLevel);
     }
 };
 
@@ -96,7 +99,7 @@ GameScreenCore.getInstance().pictureCaptureCallback = function(player_ID) {
 
     window.setTimeout(function() {
         window.players_souvenir_1 = GameScreenCore.getInstance().cameraFeedTakePicture(); //Take picture and send it
-        model.players_souvenir_1 =  window.players_souvenir_1;
+        model.players_souvenir_1 = window.players_souvenir_1;
     }, 5000);
 };
 
@@ -117,9 +120,9 @@ GameScreenCore.getInstance().gameStartCallback = function() {
     model.currentLevel = 1;
     main.hideWrapper();
 
-    setTimeout(function(){
+    setTimeout(function() {
         main.enterGame();
-    },500);
+    }, 500);
     //$("#game-state #state .value").html("Tutorial");
     //$("#actions-wrapper").html("<button id='end-tutorial'>End Tutorial</button>");
     /*$("#end-tutorial").click(function() {
@@ -268,12 +271,11 @@ GameScreenCore.getInstance().initializationCallback = function() {
      }*/
 
     console.log("initialization / re-initialization");
-    if(model.isNeedReload) {
+    if (model.isNeedReload) {
         main.restartGame();
 
-    }else {
+    } else {
         model.isNeedReload = true;
     }
 
 };
-

@@ -1,4 +1,5 @@
-var main, cameraManager, video, gamescene, uielements, tutorial, engine, transitionsManager;
+var main, cameraManager, video, gamescene, uielements, tutorial, engine, transitionsManager, delta, then, timetick = 0,
+    myTimer = 0;
 var screen_width, screen_height;
 var stats;
 
@@ -18,16 +19,16 @@ var Main = function() {
     attractorSound.play().fadeIn().loop();
 };
 
-Main.prototype.showViewPort=function() {
-    $('#ViewPort').css("opacity",1);
+Main.prototype.showViewPort = function() {
+    $('#ViewPort').css("opacity", 1);
 };
 
 Main.prototype.initStats = function() {
     stats = new Stats();
-    stats.domElement.style.position	= 'absolute';
-    stats.domElement.style.bottom	= '0px';
-    stats.domElement.style.opacity = 0;
-    document.body.appendChild( stats.domElement );
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.bottom = '0px';
+    //stats.domElement.style.opacity = 0;
+    document.body.appendChild(stats.domElement);
 };
 
 Main.prototype.initVideo = function() {
@@ -39,7 +40,7 @@ Main.prototype.stopVideo = function() {
 };
 
 Main.prototype.initCamera = function() {
-    cameraManager= new CameraManager();
+    cameraManager = new CameraManager();
 };
 
 Main.prototype.showGetReady = function() {
@@ -47,7 +48,7 @@ Main.prototype.showGetReady = function() {
 };
 
 Main.prototype.hideGetReady = function() {
-    $('#getReadyContainer').attr('class','hide');
+    $('#getReadyContainer').attr('class', 'hide');
 };
 
 Main.prototype.enterPhotoShoot = function() {
@@ -90,7 +91,7 @@ Main.prototype.enterGame = function() {
     main.initUIElements();
     main.initTransitionsManager();
     main.initEngine();
-    setTimeout(function () {
+    setTimeout(function() {
         main.initTutorial();
     }, 3000);
 };
@@ -147,12 +148,12 @@ Main.prototype.showWrapper = function() {
 };
 
 Main.prototype.hideWrapper = function() {
-    $('#wrapper').attr('class','hide');
+    $('#wrapper').attr('class', 'hide');
 };
 
 Main.prototype.restartGame = function() {
-    $('#ViewPort').css("opacity",0);
-    animate.transitionEnd($('#ViewPort'),function(){
+    $('#ViewPort').css("opacity", 0);
+    animate.transitionEnd($('#ViewPort'), function() {
         window.location.reload();
     });
 };
@@ -166,9 +167,9 @@ var keyEvent = function(event) {
         model.currentLevel = 1;
         main.hideWrapper();
 
-        setTimeout(function(){
+        setTimeout(function() {
             main.enterGame();
-        },500);
+        }, 500);
     }
 
     if (keychar.toUpperCase() === "R") {
