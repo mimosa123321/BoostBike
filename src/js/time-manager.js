@@ -34,9 +34,10 @@ var TimeManager = {
 
     transitionsResultEndCallBack:function() {
         console.log("call the result when the gate is closed.");
+        var totalRevolutionsExceptTutorial = model.totalRevolutions - model.revolutionPerLevel[0];
         //send call back
         GameScreenCore.getInstance().gameInformationGameEnded(
-            model.currentLevel, model.speed, model.players_souvenir_2
-        );
+            model.currentLevel, model.speed, model.players_souvenir_2, totalRevolutionsExceptTutorial
+        ); //TODO: add totalRPM (instead of the 0)
     }
 };

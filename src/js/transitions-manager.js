@@ -29,6 +29,10 @@ TransitionsManager.prototype.show = function(transitionId) {
         this.transition2.show();
     }
 
+    if(transitionId === 3) {
+        this.transition3.show();
+    }
+
     animate.addAnimationListener(this.transitionsContainerDomElement, "AnimationEnd", this.endShowTransitions);
 };
 
@@ -42,7 +46,7 @@ TransitionsManager.prototype.onEndShowTransitions = function() {
     }
 
     if(this.currentTransitionId === 3) {
-        setTimeout( this.transition3.show(), 10);
+        setTimeout( this.transition3.show3DEngine(), 10);
     }
 
     if(this.currentTransitionId === 4) {
@@ -57,7 +61,12 @@ TransitionsManager.prototype.hide = function(transitionId) {
         this.transition1.hide();
     }
 
+    if(transitionId === 2) {
+        this.transition2.hide();
+    }
+
     if(transitionId === 3) {
+        this.transition3.hide();
         this.transition3.hide3DEngine();
     }
 
@@ -132,9 +141,14 @@ var TransitionLevel3 =  function() {
 
 TransitionLevel3.prototype.show = function() {
     console.log("transition 3 show");
-    //this.transition.addClass("show");
-    this.show3DEngine();
+    this.transition.addClass("show");
+    //this.show3DEngine();
 };
+
+TransitionLevel3.prototype.hide = function() {
+    this.transition.removeClass("show");
+};
+
 
 TransitionLevel3.prototype.show3DEngine = function() {
     this.engine3dPhotos.addClass('show');

@@ -125,8 +125,8 @@
 }
 
 #gameSceneGradient.hide {
-    -webkit-animation: hide-canvasGraidient-ani 2s;
-    animation: hide-canvasGraidient-ani 2s;
+    -webkit-animation: hide-canvasGraidient-ani 2.5s;
+    animation: hide-canvasGraidient-ani 2.5s;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
@@ -285,7 +285,7 @@
 
 @-webkit-keyframes show-photos-ani {
     0%   { transform: scale(0); opacity: 0 }
-    100%   { transform: scale(0.7); opacity: 1}
+    100%   { transform: scale(1); opacity: 1}
 }
 
 @-webkit-keyframes hide-photos-ani {

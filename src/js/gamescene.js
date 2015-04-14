@@ -37,6 +37,7 @@ GameScene.prototype.changeSceneGradientScale = function(value) {
 
 GameScene.prototype.render = function() {
     if (this.isGameStart) {
+        requestAnimationFrame(this.render.bind(this));
         if (model.currentTunnel == 1) {
             this.tunnel1.update();
         }
@@ -53,6 +54,7 @@ GameScene.prototype.render = function() {
 
                 if (uielements.rpmMeter.teamRPMMeter.isStartUpdate) {
                     if( model.currentLevel > 1) {
+                        //uielements.rpmMeter.teamRPMMeter.accumulatedTeamRPM();
                         if(Math.ceil(model.totalRevolutions) >= model.revolutionPerLevel[model.currentLevel-2]) {
                             if(model.player1_RPM > this.prev_player1_RPM) {
                                 //console.log("accelerating");
@@ -151,7 +153,7 @@ GameScene.prototype.render = function() {
             model.isShowEnding = true;
             this.isGameStart = false;
         }
-        requestAnimationFrame(this.render.bind(this));
+
 
         // update stats
         stats.update();

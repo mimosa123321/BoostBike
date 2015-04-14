@@ -18,6 +18,7 @@
     <script src="js/lib/buzz/buzz.min.js"></script>
     <script src="js/lib/Stats.js"></script>
     <script src="js/model.js"></script>
+    <script src="js/sound-manager.js"></script>
     <script src="js/main.js"></script>
     <script src="js/video.js"></script>
     <script src="js/camera-manage.js"></script>
@@ -154,27 +155,27 @@
     <div id="gameUIElements">
         <div id="tutorial" class="sections">
             <div class="instructions" id="instruction1">
-                <h1 class="text1">Start Pedaling Now</h1>
-                <h1 class="text2">You need to reach the highest speed together</h1>
-                <h1 class="text3" id="showRPMText">This is your personal rpm.</h1>
+                <h1 class="text1"><span>现在启动踏板</span><br>Start Pedaling Now</h1>
+                <h1 class="text2"><span>你和你的队友需要一起达到最快速度</span><br>You need to reach the highest speed together</h1>
+                <h1 class="text3" id="showRPMText"><span>这是你的rpm</span><br>This is your personal rpm.</h1>
             </div>
 
             <div class="instructions" id="instruction2">
                 <div id="instruArrow" style="display:none;"><img src="images/arrrow.png"></div>
-                <h1 class="text1">This is your team live rpm guage.</h1>
-                <h1 class="text2">Simply adding your both personal rpm together.</h1>
-                <h1 class="text3">You will need to increase the team rpm <br>to reach new levels and experience the boost.</h1>
+                <h1 class="text1"><span>这是你团队的积累rpm测量仪</span><br>This is your team live rpm guage.</h1>
+                <h1 class="text2"><span>你們一起踏板</span><br>Simply adding your both personal rpm together.</h1>
+                <h1 class="text3"><span>並增加团队的积累rpm去达到新的水平和提升经验</span><br>You will need to increase the team rpm <br>to reach new levels and experience the boost.</h1>
             </div>
 
             <div class="instructions" id="instruction3">
-                <h1 class="text1">Your Team Speed</h1>
-                <h1 class="text2">Team speed increases with each</h1>
-                <h1 class="text3">ecoboost you can activiate.</h1>
+                <h1 class="text1"><span>这是你团队速度测量仪</span><br>Your Team Speed</h1>
+                <h1 class="text2"><span>增加团队速度</span><br>Team speed increases with each</h1>
+                <h1 class="text3"><span>以得到EcoBoost发动机</span><br>ecoboost you can activiate.</h1>
             </div>
 
             <div class="instructions" id="instruction4">
-                <h1 class="text1">You've already reached level 2!</h1>
-                <h1 class="text2">You are on your own now. Good luck!</h1>
+                <h1 class="text1"><span>你们现在靠自己了!</span><br>You've already reached level 2!</h1>
+                <h1 class="text2"><span>祝你们好运！</span><br>You are on your own now. Good luck!</h1>
             </div>
         </div>
 
@@ -278,14 +279,25 @@
     <div id="transitionsContainer">
         <div id="greenBottom"></div>
         <div id="greenTop"></div>
+        <!--<div id="greenVerticalBottom"></div>-->
+        <!--<div id="greenVerticalTop"></div>-->
         <div id="transition1">
             <div id="congratsContainer">
                 <h1>恭喜您!</h1>
                 <h2>Congratulations!</h2>
             </div>
         </div>
-        <div id="transition2"></div>
+        <div id="transition2">
+            <div id="congratsContainer2">
+                <h1>好样的！你团队已经到达3级！<br>继续努力吧！</h1>
+                <h2>Bravo! You reach Level 3! <br>Keep it up! </h2>
+            </div>
+        </div>
         <div id="transition3">
+            <div id="congratsContainer3">
+                <h1>好样的！你团队已经到达4级！<br>你发火了！</h1>
+                <h2>Wow! You reach Level 4! <br>You are on fire now!</h2>
+            </div>
             <div id="engine">
                 <div id="photos"></div>
             </div>

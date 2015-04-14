@@ -268,5 +268,6 @@ GameScreenCore.getInstance().initializationCallback = function() {
      }*/
 
     console.log("initialization / re-initialization");
+    main.restartGame();
 };
 

@@ -9,10 +9,16 @@ function initMain() {
 }
 
 var Main = function() {
+    this.showViewPort();
     this.initStats();
     this.initVideo();
     this.initCamera();
     this.initGameScene();
+    attractorSound.play().fadeIn().loop();
+};
+
+Main.prototype.showViewPort=function() {
+    $('#ViewPort').css("opacity",1);
 };
 
 Main.prototype.initStats = function() {
@@ -75,6 +81,8 @@ Main.prototype.initUIElements = function() {
 };
 
 Main.prototype.enterGame = function() {
+    attractorSound.pause();
+    gamePlaySound.play().fadeIn().loop();
     model.isAllowAccel = true;
     main.startGameScene();
     main.initUIElements();
@@ -141,8 +149,10 @@ Main.prototype.hideWrapper = function() {
 };
 
 Main.prototype.restartGame = function() {
-    video.reset();
-
+    $('#ViewPort').css("opacity",0);
+    animate.transitionEnd($('#ViewPort'),function(){
+        window.location.reload();
+    });
 };
 
 // keyboard event
@@ -161,8 +171,10 @@ var keyEvent = function(event) {
 
     if (keychar.toUpperCase() === "R") {
         console.log("reset");
-        video.reset();
+
+        main.restartGame();
     }
+
 
     if (key === 38) {
         if (uielements.rpmMeter.teamRPMMeter.isStartUpdate) {

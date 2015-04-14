@@ -70,7 +70,8 @@ var NetworkMessage = {
                 players_teamLevel: "int",
                 players_maxSpeed: "int",
                 players_souvenir: "string",
-                players_position: "int"
+                players_position: "int",
+                players_totalRPM: "int"
             }
         },
 	    GameInformation:
@@ -166,13 +167,14 @@ var NetworkMessage = {
 };
 
 //Network GameEnded Message parser / constructor
-var NetworkGameEnded = function(action, teamLevel, maxSpeed, souvenir, position) {
+var NetworkGameEnded = function(action, teamLevel, maxSpeed, souvenir, position, totalRPM) {
     this.identifier = NetworkMessage.Identifier.GameEnded;
     this.action = parseInt(action);
     this.players_teamLevel = parseInt(teamLevel);
     this.players_maxSpeed = parseInt(maxSpeed);
     this.players_souvenir = souvenir;
     this.players_position = parseInt(position);
+    this.players_totalRPM = parseInt(totalRPM);
 };
 
 //Network CameraFeed Message parser / constructor
@@ -513,7 +515,7 @@ GameScreenFactory.prototype.gameInformationTutorialEnded = function(){
 
 
 
-GameScreenFactory.prototype.gameInformationGameEnded = function(players_teamLevel, players_maxSpeed, players_souvenir){
+GameScreenFactory.prototype.gameInformationGameEnded = function(players_teamLevel, players_maxSpeed, players_souvenir, players_totalRPM){
     console.log("gameInformationGameEnded", null, {result: 'call'});
 
     var data = new NetworkGameEnded(
@@ -521,7 +523,8 @@ GameScreenFactory.prototype.gameInformationGameEnded = function(players_teamLeve
         players_teamLevel,
         players_maxSpeed,
         players_souvenir,
-        0
+        0,
+        players_totalRPM
     );
 
     this.gameScreenState = GameScreenState.Ending;
@@ -568,7 +571,8 @@ GameScreenFactory.prototype.takePicture = function(){
 		console.warn("TakePicture", e, {result: 'failed'});
 	}	
 
-	return players_souvenir;
+	//return players_souvenir;
+	return "";
 };
 
 

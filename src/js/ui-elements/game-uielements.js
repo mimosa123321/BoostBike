@@ -145,6 +145,15 @@ TeamRPMMeter.prototype.convertRPMToEnergy = function() {
     return targetBarLength;
 };
 
+TeamRPMMeter.prototype.accumulatedTeamRPM = function() {
+    var player1_RPS = model.player1_RPM / 60;
+    var player2_RPS = model.player2_RPM / 60;
+
+    var team_RPS = player1_RPS + player2_RPS;
+
+    model.totalRevolutions += team_RPS;
+};
+
 TeamRPMMeter.prototype.reset = function() {
     this.hide();
     this.isStartUpdate = false;
