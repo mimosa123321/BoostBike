@@ -80,9 +80,9 @@
             ray.xy = 2.0*(gl_FragCoord.xy-iResolution.xy*.5)/iResolution.x;
             ray.z = 0.5;
 
-            float offset = iGlobalTime*.05;
+            float offset = iGlobalTime*.02;
             /*float speed2 = (cos(offset)+1.0)*1.0;*/
-            float speed2 = (0.3 + iRayLength)*1.0;
+            float speed2 = (0.1 + iRayLength)*1.0;
             float speed = speed2+.1;
             /*offset += sin(offset)*.96;*/
             offset += (offset)*.96;

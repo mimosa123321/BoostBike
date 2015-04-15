@@ -42,7 +42,8 @@ var NetworkMessage = {
         GameEnded: 0x007A,
         Leaderboard: 0x009A,
         ReadyForRestart: 0x010A,
-        Test: 0x0002
+        Test: 0x0002,
+        Ping: 0x0003
     },
     Kinds: {
         CameraFeed: {
@@ -204,6 +205,11 @@ var NetworkGameInformation = function(
     this.players_teamNumber = parseInt(players_teamNumber);
 };
 
+//Netowrk ping message
+var NetworkPing = function() {
+    this.identifier = NetworkMessage.Identifier.Ping;
+}
+
 
 //Constructor
 var GameScreenFactory = function() {
@@ -236,6 +242,7 @@ var GameScreenFactory = function() {
     this.updateGameInformationCallback = function() {};
     this.updateUserInformationCallback = function(player1_name, player2_name, players_teamNumber) {};
 };
+
 
 //Init process
 GameScreenFactory.prototype.init = function(cameraFeedID) {
@@ -292,7 +299,7 @@ GameScreenFactory.prototype.webSocketOnOpen = function(event) {
         result: 'connected'
     });
     this.isConnected = true;
-    this.keepAlive(this.isKeepingAlive); //We restore the keep aline if needed
+    this.keepAlive(true);
 
     //Send Hello to the gameServer
     var data = new NetworkHandshake(NetworkMessage.Kinds.Handshake.Action.Hello, NetworkMessage.Kinds.Handshake.ClientType.GameScreen);
@@ -595,7 +602,8 @@ GameScreenFactory.prototype.takePicture = function() {
 
 //Ping the server 
 GameScreenFactory.prototype.ping = function() {
-    this.webSocketSend('{"ping":1}');
+    var ping = new NetworkPing();
+    this.webSocketSend(ping);
 };
 
 
@@ -616,7 +624,7 @@ GameScreenFactory.prototype.keepAlive = function(state) {
                 window.clearInterval(GameScreenCore.getInstance().keepAliveInstance);
             }
         },
-        1000
+        4500
     );
 };
 

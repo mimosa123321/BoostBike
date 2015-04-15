@@ -48,6 +48,7 @@ GameScene.prototype.render = function() {
         }
 
         if (model.currentTunnel == 2) {
+            this.tunnel2.checkRayLength();
             this.tunnel2.update();
         }
 
@@ -74,9 +75,12 @@ GameScene.prototype.render = function() {
                 //for Update Team Meter
                 uielements.rpmMeter.updateTeamMeterValue();
 
-                //for Update Speed Meter
-                uielements.speedMeter.updateValue(model.speed);
-                uielements.speedMeter.checkAcceleration();
+                if(uielements.speedMeter.isStartUpdate) {
+                    //for Update Speed Meter
+                    uielements.speedMeter.updateValue(Math.ceil(model.speed * model.boostSpeed));
+                    uielements.speedMeter.checkAcceleration();
+                    uielements.speedMeter.getMaxSpeed();
+                }
             }
         }
 
@@ -101,9 +105,14 @@ GameScene.prototype.render = function() {
         //level 3
         if (model.gameTimer != 0 && model.currentLevel === 3 && !model.isShowTransition2) {
             model.isShowTransition2 = true;
+            model.boostSpeed = 1.3;
             this.manageTransitions(2, 1000, 5500); //6500
+
             //stop team rpm
             uielements.rpmMeter.teamRPMMeter.stopUpdate();
+
+            //stop speed meter
+            uielements.speedMeter.stopUpdate();
 
             //send call back when game level update
             GameScreenCore.getInstance().gameInformationLevel(model.currentLevel);
@@ -112,10 +121,14 @@ GameScene.prototype.render = function() {
         //level 4 - show Engine Layer
         if (model.gameTimer != 0 && model.currentLevel === 4 && !model.isShowTransition3) {
             model.isShowTransition3 = true;
+            model.boostSpeed = 2;
             //show engine
             this.manageTransitions(3, 1000, 8500);
             //stop team rpm
             uielements.rpmMeter.teamRPMMeter.stopUpdate();
+
+            //stop speed meter
+            uielements.speedMeter.stopUpdate();
 
             //send call back when game level update
             GameScreenCore.getInstance().gameInformationLevel(model.currentLevel);
@@ -132,7 +145,7 @@ GameScene.prototype.render = function() {
 
         //level 5 - Win
         if (model.gameTimer != 0 && model.currentLevel === 5 && !model.isShowEnding) {
-            console.log("win!!");
+            model.isWin = true;
 
             //stop team rpm
             uielements.rpmMeter.teamRPMMeter.stopUpdate();
@@ -145,7 +158,6 @@ GameScene.prototype.render = function() {
             model.isShowEnding = true;
             this.isGameStart = false;
         }
-
 
         // update stats
         stats.update();

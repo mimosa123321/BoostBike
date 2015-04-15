@@ -96,7 +96,7 @@ Tunnel1.prototype.remove = function() {
 
 var Tunnel2 = function() {
     this.tuniform, this.tobject, this.clock;
-    this.lightRaySpeed = 0;
+    this.lightRayLength = 0;
 
 
     this.scene = new THREE.Scene();
@@ -120,8 +120,11 @@ var Tunnel2 = function() {
     this.initShaderToy();
 };
 
-Tunnel2.MAX_SPEED = 0.3;
+Tunnel2.MAX_SPEED = 0.6;
 Tunnel2.MIN_SPEED = 0;
+
+Tunnel2.MAX_LIGHTRAYLENGTH = 1.0;
+Tunnel2.MIN_LIGHTRAYLENGTH = 0.0;
 
 
 Tunnel2.prototype.initShaderToy = function() {
@@ -189,9 +192,43 @@ Tunnel2.prototype.update = function() {
     var delta = this.clock.getDelta();
     if (this.tuniform) {
         this.tuniform.iGlobalTime.value += delta + model.accelerateSpeed;
-        //this.tuniform.iGlobalTime.value += delta;
+        this.tuniform.iRayLength.value = this.lightRayLength;
         this.renderer.render(this.scene, this.camera);
     }
+};
+
+Tunnel2.prototype.checkRayLength = function() {
+    var changeValue = 0.005;
+    var lengthPerSpeed = Tunnel2.MAX_LIGHTRAYLENGTH / (SpeedMeter.totalSpeed);
+    var targetLength = (lengthPerSpeed * Math.ceil(model.speed * model.boostSpeed))  + Tunnel2.MIN_LIGHTRAYLENGTH;
+    var afterLength;
+    if(this.lightRayLength < targetLength) {
+        afterLength = this.lightRayLength + changeValue;
+        if(afterLength >= targetLength) {
+            this.lightRayLength = targetLength;
+            return;
+        }else {
+            this.lightRayLength += changeValue;
+        }
+    }else if(this.lightRayLength > targetLength) {
+        afterLength = this.lightRayLength - changeValue;
+        if(afterLength <= targetLength) {
+            this.lightRayLength = targetLength;
+            return;
+        }else {
+            this.lightRayLength -= changeValue;
+        }
+    }
+
+    //set Limitation.
+    if (this.lightRayLength <= Tunnel2.MIN_LIGHTRAYLENGTH) {
+        this.lightRayLength = Tunnel2.MIN_LIGHTRAYLENGTH;
+    }
+
+    if (this.lightRayLength >= Tunnel2.MAX_LIGHTRAYLENGTH) {
+        this.lightRayLength = Tunnel2.MAX_LIGHTRAYLENGTH;
+    }
+
 };
 
 Tunnel2.prototype.deleteShader = function() {

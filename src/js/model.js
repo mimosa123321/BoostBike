@@ -1,5 +1,5 @@
 var model = {
-    maxRPM: 450, //change the difficulitie
+    maxRPM: 350, //change the difficulitie//default 450
     players_souvenir_1: null,
     players_souvenir_2: null,
     player1_RPM: 0,
@@ -7,6 +7,7 @@ var model = {
     player1_name: null,
     player2_name: null,
     speed: 0,
+    boostSpeed : 1,
     accelerateSpeed: 0,
     isAllowAccel: false,
     players_maxSpeed: 100,
@@ -22,11 +23,13 @@ var model = {
     isShowEnding: false,
     isEndGame: false,
     currentTunnel: 1,
-    gameTimer: 45,
-    takePhotoMoment: 45 - 10,
+    gameTimer: 45,  //default 45
+    takePhotoMoment: 30 - 10,
     ranking: null,
     isNeedReload: false,
     isTutorial: false,
+    isWin: false,
+    playersMaxSpeed: 0,
 
     onPreload: function() {
         console.log("DOM_ready - Preload Image");
@@ -273,7 +276,7 @@ GameScreenCore.getInstance().initializationCallback = function() {
     console.log("initialization / re-initialization");
     if (model.isNeedReload) {
         main.restartGame();
-
+        return;
     } else {
         model.isNeedReload = true;
     }

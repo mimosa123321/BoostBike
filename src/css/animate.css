@@ -187,15 +187,15 @@
 
 /*---------------------transition---------------------------*/
 #transitionsContainer.show #greenTop {
-    -webkit-animation: show-greenTop-ani 1s ease-out 1s;
-    animation: show-engine-ani 1s ease-out 1s;
+    -webkit-animation: show-greenTop-ani 1s ease-out;
+    animation: show-engine-ani 1s ease-out;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
 
 #transitionsContainer.show #greenBottom {
-    -webkit-animation: show-greenBottom-ani 1s ease-out 1s;
-    animation: show-greenBottom-ani 1s ease-out 1s;
+    -webkit-animation: show-greenBottom-ani 1s ease-out;
+    animation: show-greenBottom-ani 1s ease-out;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
@@ -251,15 +251,15 @@
 }
 
 #transitionsContainer.hide #greenLeft {
-    -webkit-animation: hide-greenLeft-ani 1s ease-out 1s;
-    animation: hide-greenTop-ani 1s ease-out 1s;
+    -webkit-animation: hide-greenLeft-ani 1s ease-out;
+    animation: hide-greenTop-ani 1s ease-out;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
 
 #transitionsContainer.hide #greenRight {
-    -webkit-animation: hide-greenRight-ani 1s ease-out 1s;
-    animation: hide-greenRight-ani 1s ease-out 1s;
+    -webkit-animation: hide-greenRight-ani 1s ease-out;
+    animation: hide-greenRight-ani 1s ease-out;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }

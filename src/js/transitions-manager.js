@@ -22,6 +22,7 @@ var TransitionsManager = function() {
 TransitionsManager.prototype.show = function(transitionId) {
     this.currentTransitionId = transitionId;
     this.transitionsContainer.attr("class", "show");
+
     if (transitionId === 1) {
         this.transition1.show();
     }
@@ -31,6 +32,22 @@ TransitionsManager.prototype.show = function(transitionId) {
 
     if (transitionId === 3) {
         this.transition3.show();
+    }
+
+    //play Sound
+    if (this.currentTransitionId != 4) {
+        transitionSound.play();
+    } else {
+        if (!soundManager.isGamePlaySoundPause) {
+            gamePlaySound.pause();
+            soundManager.isGamePlaySoundPause = true;
+        }
+
+        if (model.isWin) {
+            winSound.play();
+        } else {
+            loseSound.play()
+        }
     }
 
     animate.addAnimationListener(this.transitionsContainerDomElement, "AnimationEnd", this.endShowTransitions);
@@ -85,6 +102,7 @@ TransitionsManager.prototype.onEndHideTransitions = function() {
     }
     if (this.currentTransitionId === 2) {
         uielements.rpmMeter.teamRPMMeter.startUpdate();
+        uielements.speedMeter.startUpdate();
         //move boost icon
         uielements.topBarIcon.moveToNext();
 
@@ -95,6 +113,12 @@ TransitionsManager.prototype.onEndHideTransitions = function() {
     if (this.currentTransitionId === 3) {
         //start update after hide engine
     }
+
+    //pause sound
+    if (this.currentTransitionId != 4) {
+        transitionSound.pause();
+    }
+
 };
 
 /*-----------------*/
@@ -167,6 +191,7 @@ TransitionLevel3.prototype.hide3DEngine = function() {
 TransitionLevel3.prototype.onFinishHide3DEngine = function() {
     animate.removeAnimationListener(this.engine3DDomElement, "AnimationEnd", this.finishHide3DEngine);
     uielements.rpmMeter.teamRPMMeter.startUpdate();
+    uielements.speedMeter.startUpdate();
 };
 
 var EndPage = function() {
@@ -182,7 +207,7 @@ EndPage.prototype.hide = function() {
 };
 
 EndPage.prototype.getData = function() {
-    $('.resultSpeed').html(model.speed);
+    $('.resultSpeed').html(model.playersMaxSpeed * model.boostSpeed);
     $('.resultLevel').html(model.currentLevel);
     $('.resultRank').html(model.ranking);
     console.log("show result panel after get");

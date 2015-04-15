@@ -12,6 +12,10 @@ var TimeManager = {
                 if (model.gameTimer > 0 && model.gameTimer <= 5) {
                     $('#endGameCountDown').css("opacity", 1);
                     $('#endGameCountDownValue').html(model.gameTimer);
+
+                    //play Sound
+                    countDownSound.play();
+
                 } else if (model.gameTimer <= 0) {
                     console.log("game End");
                     gamescene.isGameStart = false;
@@ -35,7 +39,7 @@ var TimeManager = {
         var totalRevolutionsExceptTutorial = model.totalRevolutions - model.revolutionPerLevel[0];
         //send call back
         GameScreenCore.getInstance().gameInformationGameEnded(
-            model.currentLevel, model.speed, model.players_souvenir_2, totalRevolutionsExceptTutorial
+            model.currentLevel, model.playersMaxSpeed * model.boostSpeed, model.players_souvenir_2, totalRevolutionsExceptTutorial
         ); //TODO: add totalRPM (instead of the 0)
     }
 };

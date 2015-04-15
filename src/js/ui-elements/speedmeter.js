@@ -27,6 +27,11 @@ SpeedMeter.prototype.startUpdate = function() {
     this.isStartUpdate = true;
 };
 
+SpeedMeter.prototype.stopUpdate = function() {
+    this.isStartUpdate = false;
+};
+
+
 SpeedMeter.prototype.updateValue = function(value) {
 
     //console.log("sped="+value);
@@ -66,13 +71,13 @@ SpeedMeter.prototype.checkAcceleration = function() {
     }
 
     diff = tunnel.MAX_SPEED - tunnel.MIN_SPEED;
-    var accerPerSpeed = diff / 100;
-
+    var accerPerSpeed = diff / (SpeedMeter.totalSpeed);
+    var afterAccelSpeed;
     if (model.isAllowAccel) {
         if (model.speed >= 0) {
             targetAccelSpeed = (accerPerSpeed * model.speed) + tunnel.MIN_SPEED;
             if (model.accelerateSpeed < targetAccelSpeed) {
-                var afterAccelSpeed = model.accelerateSpeed + changeValue;
+                afterAccelSpeed = model.accelerateSpeed + changeValue;
 
                 if (afterAccelSpeed >= targetAccelSpeed) {
                     model.accelerateSpeed = targetAccelSpeed;
@@ -82,7 +87,7 @@ SpeedMeter.prototype.checkAcceleration = function() {
                 }
 
             } else if (model.accelerateSpeed > targetAccelSpeed) {
-                var afterAccelSpeed = model.accelerateSpeed - changeValue;
+                afterAccelSpeed = model.accelerateSpeed - changeValue;
 
                 if (afterAccelSpeed <= targetAccelSpeed) {
                     model.accelerateSpeed = targetAccelSpeed;
@@ -95,7 +100,7 @@ SpeedMeter.prototype.checkAcceleration = function() {
     }
 
     //set Limitation.
-    if (model.accelerateSpeed == 0) {
+    if (model.accelerateSpeed <= tunnel.MIN_SPEED) {
         model.accelerateSpeed = tunnel.MIN_SPEED;
     }
 
@@ -103,4 +108,12 @@ SpeedMeter.prototype.checkAcceleration = function() {
         model.accelerateSpeed = tunnel.MAX_SPEED;
     }
 
+};
+
+
+
+SpeedMeter.prototype.getMaxSpeed = function() {
+    if (model.playersMaxSpeed < model.speed) {
+        model.playersMaxSpeed = model.speed;
+    }
 };

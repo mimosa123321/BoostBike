@@ -36,6 +36,7 @@ CameraManager.prototype.countDownInterval = function() {
 
 CameraManager.prototype.photoFlash = function() {
     this.photoFlashContainer.addClass("show");
+    cameraSound.play();
 };
 
 CameraManager.prototype.finishPhotoFlashListener = function() {
