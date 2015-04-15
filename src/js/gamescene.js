@@ -135,13 +135,13 @@ GameScene.prototype.render = function() {
         }
 
         //for 3d Engine Spinning
-        if (model.isSpinEngine) {
+        /*if (model.isSpinEngine) {
             engine.engineTimer += 1;
             if (engine.engineTimer >= 2) {
                 engine.loop();
                 engine.engineTimer = 0;
             }
-        }
+        }*/
 
         //level 5 - Win
         if (model.gameTimer != 0 && model.currentLevel === 5 && !model.isShowEnding) {

@@ -157,7 +157,7 @@ var TransitionLevel3 = function() {
     this.engine = $('#engine');
     this.engine3dPhotos = $('#photos');
     this.engineDomElement = document.getElementById('engine');
-    this.engine3DDomElement = document.getElementById('photos');
+    //this.engine3DDomElement = document.getElementById('photos');
     //this.finishShowEngine = this.onFinishShowEngine.bind(this);
     this.finishHide3DEngine = this.onFinishHide3DEngine.bind(this);
 
@@ -175,21 +175,21 @@ TransitionLevel3.prototype.hide = function() {
 
 
 TransitionLevel3.prototype.show3DEngine = function() {
-    this.engine3dPhotos.addClass('show');
-    setTimeout(function() {
+    this.engine.addClass('show');
+    /*setTimeout(function() {
         model.isSpinEngine = true;
-    }, 1200);
+    }, 1200);*/
     //setTimeout(this.hide3DEngine.bind(this), 8000);
 };
 
 TransitionLevel3.prototype.hide3DEngine = function() {
-    model.isSpinEngine = false;
-    this.engine3dPhotos.attr('class', 'hide');
-    animate.addAnimationListener(this.engine3DDomElement, "AnimationEnd", this.finishHide3DEngine);
+    //model.isSpinEngine = false;
+    this.engine.attr('class', 'hide');
+    animate.addAnimationListener(this.engineDomElement, "AnimationEnd", this.finishHide3DEngine);
 };
 
 TransitionLevel3.prototype.onFinishHide3DEngine = function() {
-    animate.removeAnimationListener(this.engine3DDomElement, "AnimationEnd", this.finishHide3DEngine);
+    animate.removeAnimationListener(this.engineDomElement, "AnimationEnd", this.finishHide3DEngine);
     uielements.rpmMeter.teamRPMMeter.startUpdate();
     uielements.speedMeter.startUpdate();
 };
@@ -220,10 +220,21 @@ var Engine = function() {
     this.photoContainer = $('#photos');
     this.frameHeight = 722;
     this.engineTimer = 0;
+    this.attachSWF();
     //
 };
 
-Engine.prototype.loop = function() {
+Engine.prototype.attachSWF = function() {
+    swfobject.embedSWF("./assets/engine.swf","photos","720","720","9","./js/expressInstall.swf", {}, {
+        allowFullScreen:"true",
+        allowScriptAccess:"true",
+        wmode:"transparent"
+    });
+};
+
+
+
+/*Engine.prototype.loop = function() {
     var posY = parseInt(this.photoContainer.css("background-position-y"));
     var newPosY = posY - this.frameHeight;
 
@@ -233,4 +244,4 @@ Engine.prototype.loop = function() {
         newPosY = 0;
     }
     this.photoContainer.css("background-position-y", newPosY + 'px');
-};
+};*/

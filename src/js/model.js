@@ -15,7 +15,7 @@ var model = {
     revolutionPercentagePerLevel: [0.05, 0.25, 0.5, 0.2],
     revolutionPerLevel: [],
     currentLevel: 1,
-    isSpinEngine: false,
+    //isSpinEngine: false,
     isAccelerate: false,
     isShowTransition1: false,
     isShowTransition2: false,
@@ -52,13 +52,13 @@ var model = {
         model.calcRevPerLevel();
         initMain();
         console.log("Start Connection");
-        try {
+        /*try {
             GameScreenCore.getInstance().init('#camera-feed'); //Init the GameScreen (required as it init the connect)
         } catch (e) {
             console.log("jquery_ready_GameScreenCore_init", e, {
                 result: 'failed'
             });
-        }
+        }*/
     },
 
     calcRevPerLevel: function() {

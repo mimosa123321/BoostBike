@@ -1064,7 +1064,7 @@ img {
 #transition3 #engine {
     display:block;
     position:absolute;
-    left:0;
+    left: -500px;
     top:0;
     right:0;
     bottom:0;
@@ -1072,18 +1072,17 @@ img {
     width:720px;
     height:722px;
     opacity:1;
+    -webkit-transform:scale(1);
+    transform:scale(1);
 }
 
 #transition3 #engine #photos {
     position:absolute;
-    left: -299px;
+    left: 0px;
     top:0;
     width:720px;
     height:722px;
-    background-position: 0 0;
-    background: url('../images/engine3.png') no-repeat;
-    opacity: 0;
-    -webkit-transform:scale(0);
+    opacity: 1;
 }
 
 #endGamePanel {
