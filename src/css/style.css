@@ -913,6 +913,49 @@ img {
 }
 
 
+#transitionsContainer #greenLeft {
+    position:absolute;
+    top:0px;
+    left:0;
+    width:1920px;
+    height:1080px;
+    background: url(../images/backplateleft.png) no-repeat;
+    background-size: cover;
+    -webkit-transform:translateX(-1920px);
+    /*z-index:2;*/
+}
+
+#transitionsContainer #greenRight {
+    position:absolute;
+    top:0;
+    left:0;
+    width:1920px;
+    height:1080px;
+    background: url(../images/backplateright.png) no-repeat;
+    -webkit-transform:translateX(1920px);
+    background-size: cover;
+    /*z-index:1;*/
+}
+
+
+#transitionsContainer.show #greenLeft{
+    -webkit-transform:translateX(-1920px);
+}
+
+#transitionsContainer.show #greenRight{
+    -webkit-transform:translateX(1920px);
+}
+
+#transitionsContainer.hide #greenLeft{
+    -webkit-transform:translateX(0px);
+}
+
+#transitionsContainer.hide #greenRight{
+    -webkit-transform:translateX(0px);
+}
+
+
+
 /**/
 
 #transition1 {

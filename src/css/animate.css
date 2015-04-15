@@ -187,36 +187,35 @@
 
 /*---------------------transition---------------------------*/
 #transitionsContainer.show #greenTop {
-    -webkit-animation: show-greenTop-ani 0.7s ease-out;
-    animation: show-engine-ani 0.7s ease-out;
+    -webkit-animation: show-greenTop-ani 1s ease-out 1s;
+    animation: show-engine-ani 1s ease-out 1s;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
 
 #transitionsContainer.show #greenBottom {
-    -webkit-animation: show-greenBottom-ani 0.7s ease-out 0.3s;
-    animation: show-greenBottom-ani 0.7s ease-out 0.3s;
+    -webkit-animation: show-greenBottom-ani 1s ease-out 1s;
+    animation: show-greenBottom-ani 1s ease-out 1s;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
 
 #transitionsContainer.hide #greenTop {
-    -webkit-animation: hide-greenTop-ani 0.7s ease-out;
-    animation: hide-greenTop-ani 0.7s ease-out;
+    -webkit-animation: hide-greenTop-ani 1s ease-out;
+    animation: hide-greenTop-ani 1s ease-out;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
 
 #transitionsContainer.hide #greenBottom {
-    -webkit-animation: hide-greenBottom-ani 0.7s ease-out;
-    animation: hide-greenBottom-ani 0.7s ease-out;
+    -webkit-animation: hide-greenBottom-ani 1s ease-out;
+    animation: hide-greenBottom-ani 1s ease-out;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
 
-
 @-webkit-keyframes show-greenTop-ani {
-    0%   { -webkit-transform: translateY(-1080px) }
+    0%   { -webkit-transform: translateY(-1080px)}
     100%   { -webkit-transform: translateY(0px)}
 }
 
@@ -233,6 +232,57 @@
 @-webkit-keyframes hide-greenBottom-ani {
     0%   { -webkit-transform: translateY(0px) }
     100%   { -webkit-transform: translateY(1080px)}
+}
+
+
+/*---------------------transition vertical---------------------------*/
+#transitionsContainer.show #greenLeft {
+    -webkit-animation: show-greenLeft-ani 1s ease-out;
+    animation: show-engine-ani 1s ease-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+#transitionsContainer.show #greenRight {
+    -webkit-animation: show-greenRight-ani 1s ease-out;
+    animation: show-greenBottom-ani 1s ease-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+#transitionsContainer.hide #greenLeft {
+    -webkit-animation: hide-greenLeft-ani 1s ease-out 1s;
+    animation: hide-greenTop-ani 1s ease-out 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+#transitionsContainer.hide #greenRight {
+    -webkit-animation: hide-greenRight-ani 1s ease-out 1s;
+    animation: hide-greenRight-ani 1s ease-out 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+
+@-webkit-keyframes show-greenLeft-ani {
+    0%   { -webkit-transform: translateX(-1920px) }
+    100%   { -webkit-transform: translateX(0px)}
+}
+
+@-webkit-keyframes hide-greenLeft-ani {
+    0%   { -webkit-transform: translateX(0px) }
+    100%   { -webkit-transform: translateX(-1920px)}
+}
+
+@-webkit-keyframes show-greenRight-ani {
+    0%   { -webkit-transform: translateX(1920px) }
+    100%   { -webkit-transform: translateX(0px)}
+}
+
+@-webkit-keyframes hide-greenRight-ani {
+    0%   { -webkit-transform: translateX(0px) }
+    100%   { -webkit-transform: translateX(1920px)}
 }
 
 #transition2.show {
