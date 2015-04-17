@@ -2,10 +2,13 @@ var main, cameraManager, video, gamescene, uielements, tutorial, engine, transit
     myTimer = 0;
 var screen_width, screen_height;
 var stats;
+var domBody;
+
 
 function initMain() {
     screen_width = window.innerWidth;
     screen_height = window.innerHeight;
+    domBody = document.body; // Make the body go full screen.
     main = new Main();
 }
 
@@ -27,7 +30,7 @@ Main.prototype.initStats = function() {
     stats = new Stats();
     stats.domElement.style.position = 'absolute';
     stats.domElement.style.bottom = '0px';
-    //stats.domElement.style.opacity = 0;
+    stats.domElement.style.opacity = 0;
     document.body.appendChild(stats.domElement);
 };
 
@@ -178,6 +181,10 @@ var keyEvent = function(event) {
         main.restartGame();
     }
 
+    if (keychar.toUpperCase() === "F") {
+        requestFullScreen(domBody);
+    }
+
 
     if (key === 38) {
         if (uielements.rpmMeter.teamRPMMeter.isStartUpdate) {
@@ -233,4 +240,19 @@ var prefixedRemoveEventListener = function(element, type, callback) {
 window.addEventListener('load', model.onPreload);
 
 
-/*get*/
+//Make full screen
+function requestFullScreen(element) {
+
+    console.log(element);
+    // Supports most browsers and their versions.
+    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullscreen;
+
+    if (requestMethod) { // Native full screen.
+        requestMethod.call(element);
+    } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+        var wscript = new ActiveXObject("WScript.Shell");
+        if (wscript !== null) {
+            wscript.SendKeys("{F11}");
+        }
+    }
+}

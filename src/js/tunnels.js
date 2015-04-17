@@ -200,22 +200,22 @@ Tunnel2.prototype.update = function() {
 Tunnel2.prototype.checkRayLength = function() {
     var changeValue = 0.005;
     var lengthPerSpeed = Tunnel2.MAX_LIGHTRAYLENGTH / (SpeedMeter.totalSpeed);
-    var targetLength = (lengthPerSpeed * Math.ceil(model.speed * model.boostSpeed))  + Tunnel2.MIN_LIGHTRAYLENGTH;
+    var targetLength = (lengthPerSpeed * Math.ceil(model.speed * model.boostSpeed)) + Tunnel2.MIN_LIGHTRAYLENGTH;
     var afterLength;
-    if(this.lightRayLength < targetLength) {
+    if (this.lightRayLength < targetLength) {
         afterLength = this.lightRayLength + changeValue;
-        if(afterLength >= targetLength) {
+        if (afterLength >= targetLength) {
             this.lightRayLength = targetLength;
             return;
-        }else {
+        } else {
             this.lightRayLength += changeValue;
         }
-    }else if(this.lightRayLength > targetLength) {
+    } else if (this.lightRayLength > targetLength) {
         afterLength = this.lightRayLength - changeValue;
-        if(afterLength <= targetLength) {
+        if (afterLength <= targetLength) {
             this.lightRayLength = targetLength;
             return;
-        }else {
+        } else {
             this.lightRayLength -= changeValue;
         }
     }

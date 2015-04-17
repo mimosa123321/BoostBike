@@ -75,7 +75,7 @@ GameScene.prototype.render = function() {
                 //for Update Team Meter
                 uielements.rpmMeter.updateTeamMeterValue();
 
-                if(uielements.speedMeter.isStartUpdate) {
+                if (uielements.speedMeter.isStartUpdate) {
                     //for Update Speed Meter
                     uielements.speedMeter.updateValue(Math.ceil(model.speed * model.boostSpeed));
                     uielements.speedMeter.checkAcceleration();

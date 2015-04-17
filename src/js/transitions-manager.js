@@ -206,11 +206,56 @@ EndPage.prototype.hide = function() {
     this.endPage.attr('class', "hide");
 };
 
+
+
 EndPage.prototype.getData = function() {
-    $('.resultSpeed').html(model.playersMaxSpeed * model.boostSpeed);
-    $('.resultLevel').html(model.currentLevel);
-    $('.resultRank').html(model.ranking);
-    console.log("show result panel after get");
+    var resultSpeed = model.playersMaxSpeed * model.boostSpeed;
+    var resultLevel = model.currentLevel;
+    var resultRank = model.ranking;
+
+    if (model.isWin) {
+        $('#endGamePanel').find('.title').html('<span>恭喜您做到了！</span><br>CONGRATULATIONS YOU DID IT');
+        $('#endGameResult').html('<span> 您以 ' + resultSpeed + ' KM/H的速度完成等级' + resultLevel + '</span><br>',
+            'YOU COMPLETED LEVEL ' + resultLevel + ' WITH A SPEED OF ' + resultSpeed + 'KM/H <br>',
+            '<span>您的团队排名是 ' + resultRank + '</span><br>',
+            'YOUR TEAM RANKING IS ' + resultRank + '<br>',
+            '<span>点击平板查看您的排行榜与纪念品</span><br>',
+            'CHECK YOUR TABLET FOR THE LEADERBOARD AND YOUR SOUVENIR'
+        );
+        /*$('#en-result').html('YOU COMPLETED LEVEL ' + resultLevel + ' WITH A SPEED OF ' + resultSpeed + 'KM/H <br>',
+            'YOUR TEAM RANKING IS ' + resultRank + '<br>',
+            'CHECK YOUR TABLET FOR THE LEADERBOARD AND YOUR SOUVENIR'
+        );
+
+        $('#chi-result').html('您以 ' + resultSpeed + ' KM/H的速度完成等级' + resultLevel +'<br>',
+            '您的团队排名是 ' + resultRank + '<br>',
+            '点击平板查看您的排行榜与纪念品'
+        );*/
+
+    } else {
+        $('#endGamePanel').find('.title').html('干得好!!!<br>WELL DONE!!!');
+        /*$('#en-result').html('ALL THE WAY TO LEVEL ' + resultLevel + ' WITH A SPEED OF ' + resultSpeed + 'KM/H <br>',
+            'YOUR TEAM RANKING IS ' + resultRank + '<br>',
+            'CHECK YOUR TABLET FOR THE LEADERBOARD AND YOUR SOUVENIR'
+        );
+
+        $('#chi-result').html('一路上保持 ' + resultSpeed + ' KM/H的速度完成等级' + resultLevel +'<br>',
+            '您的团队排名是 ' + resultRank + '<br>',
+            '点击平板查看您的排行榜与纪念品'
+        );*/
+        $('#endGameResult').html('<span> 一路上保持 ' + resultSpeed + ' KM/H的速度完成等级' + resultLevel + '</span><br>',
+            'YOU COMPLETED LEVEL ' + resultLevel + ' WITH A SPEED OF ' + resultSpeed + 'KM/H <br>',
+            '<span>您的团队排名是 ' + resultRank + '</span><br>',
+            'YOUR TEAM RANKING IS ' + resultRank + '<br>',
+            '<span>点击平板查看您的排行榜与纪念品</span><br>',
+            'CHECK YOUR TABLET FOR THE LEADERBOARD AND YOUR SOUVENIR'
+        );
+    }
+
+    //$('.resultSpeed').html(model.playersMaxSpeed * model.boostSpeed);
+    //$('.resultLevel').html(model.currentLevel);
+    //$('.resultRank').html(model.ranking);
+    //console.log("show result panel after get");
     setTimeout(this.show(), 1000);
 };
 
@@ -225,10 +270,10 @@ var Engine = function() {
 };
 
 Engine.prototype.attachSWF = function() {
-    swfobject.embedSWF("./assets/engine.swf","photos","720","720","9","./js/expressInstall.swf", {}, {
-        allowFullScreen:"true",
-        allowScriptAccess:"true",
-        wmode:"transparent"
+    swfobject.embedSWF("./assets/engine.swf", "photos", "720", "720", "9", "./expressInstall.swf", {}, {
+        allowFullScreen: "true",
+        allowScriptAccess: "true",
+        wmode: "transparent"
     });
 };
 

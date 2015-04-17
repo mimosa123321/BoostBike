@@ -220,7 +220,7 @@ var GameScreenFactory = function() {
     this.gameScreenState = GameScreenState.ScreenSaver; //State of the gamescreen
 
     //WebSocket Variables
-    this.serverURL = "doudou.localhost.com";
+    this.serverURL = "remote.localhost.com";
     this.serverPort = "8802";
     this.serverEndpoint = "boostbike";
     this.gameInformation = new NetworkGameInformation(

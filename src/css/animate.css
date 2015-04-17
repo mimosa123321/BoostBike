@@ -185,6 +185,64 @@
     100%   { transform: translate3d(0,-50px,0); opacity: 0}
 }
 
+/*----------------------transiton arrow -------------------*/
+
+#gameUIElements #instructionsArrow #rpmArrow.show {
+    -webkit-animation: show-ani 1.2s;
+    animation: show-ani 1.2s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+#gameUIElements #instructionsArrow #teamArrow.show,
+#gameUIElements #instructionsArrow #speedArrow.show{
+    -webkit-animation: show-ani 1.2s 0.5s;
+    animation: show-ani 1.2s 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+#gameUIElements #instructionsArrow #rpmArrow.hide,
+#gameUIElements #instructionsArrow #teamArrow.hide,
+#gameUIElements #instructionsArrow #speedArrow.hide{
+    -webkit-animation: hide-ani 1s;
+    animation: hide-ani 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+#gameUIElements #instructionsArrow #rpmArrow  #leftArrow,
+#gameUIElements #instructionsArrow #rpmArrow  #rightArrow,
+#gameUIElements #instructionsArrow #speedArrow  #downArrow {
+    -webkit-animation: move-rpm-arrow-ani 1s;
+    animation: move-rpm-arrow-ani 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    animation-iteration-count:infinite;
+    -webkit-animation-iteration-count:infinite;
+}
+
+@-webkit-keyframes move-rpm-arrow-ani {
+    0%   { transform: translateY(-5px) rotate(180deg);  }
+    50%   { transform: translateY(10px) rotate(180deg);}
+    100%   { transform: translateY(-5px) rotate(180deg);}
+}
+
+#gameUIElements #instructionsArrow #teamArrow  #topArrow {
+    -webkit-animation: move-teamRPM-arrow-ani 1s;
+    animation: move-teamRPM-arrow-ani 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    animation-iteration-count:infinite;
+    -webkit-animation-iteration-count:infinite;
+}
+
+@-webkit-keyframes move-teamRPM-arrow-ani {
+    0%   { transform: translateY(-5px) rotate(0deg);  }
+    50%   { transform: translateY(10px) rotate(0deg);}
+    100%   { transform: translateY(-5px) rotate(0deg);}
+}
+
 /*---------------------transition---------------------------*/
 #transitionsContainer.show #greenTop {
     -webkit-animation: show-greenTop-ani 1s ease-out;

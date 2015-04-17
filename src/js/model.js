@@ -7,7 +7,7 @@ var model = {
     player1_name: null,
     player2_name: null,
     speed: 0,
-    boostSpeed : 1,
+    boostSpeed: 1,
     accelerateSpeed: 0,
     isAllowAccel: false,
     players_maxSpeed: 100,
@@ -23,7 +23,7 @@ var model = {
     isShowEnding: false,
     isEndGame: false,
     currentTunnel: 1,
-    gameTimer: 45,  //default 45
+    gameTimer: 45, //default 45
     takePhotoMoment: 30 - 10,
     ranking: null,
     isNeedReload: false,
@@ -52,13 +52,13 @@ var model = {
         model.calcRevPerLevel();
         initMain();
         console.log("Start Connection");
-        /*try {
+        try {
             GameScreenCore.getInstance().init('#camera-feed'); //Init the GameScreen (required as it init the connect)
         } catch (e) {
             console.log("jquery_ready_GameScreenCore_init", e, {
                 result: 'failed'
             });
-        }*/
+        }
     },
 
     calcRevPerLevel: function() {

@@ -5,6 +5,7 @@ html, body {
     height: 100%;
     background-color: black;
     overflow: hidden;
+    cursor: none;
 }
 
 h1, h2 {
@@ -32,6 +33,7 @@ img {
     height:100%;
     opacity:0;
     -webkit-transition: opacity 1s linear;
+    cursor: none;
 }
 
 #wrapper {
@@ -87,6 +89,8 @@ img {
     right:0;
     width:749px;
     height:482px;
+    background: url('../images/tablet.png') no-repeat;
+    background-size: cover;
 }
 
 #getReadyContainer #tablets img, #getReadyContainer #tabletsArrow img {
@@ -390,6 +394,11 @@ img {
     /*top:45%;*/
 }
 
+#gameUIElements #tutorial #instruction3 {
+    transform: translate3d(-50%,-63%,0);
+}
+
+
 #gameUIElements #tutorial .instructions h1 {
     position:relative;
     -webkit-transform: translate3d(0px, 50px, 0px);
@@ -410,13 +419,75 @@ img {
     opacity: 1;
 }
 
+#gameUIElements #instructionsArrow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#gameUIElements #instructionsArrow #rpmArrow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity:0;
+}
+
+#gameUIElements #instructionsArrow #rpmArrow #leftArrow{
+    position: absolute;
+    bottom: 430px;
+    left: 86px;
+    -webkit-transform: translateY(-5px) rotate(180deg)
+}
+
+#gameUIElements #instructionsArrow #rpmArrow #rightArrow{
+    position: absolute;
+    bottom: 430px;
+    right: 86px;
+    -webkit-transform: translateY(-5px) rotate(180deg);
+}
+
+#gameUIElements #instructionsArrow img{
+    width: 78px;
+    height: 109px;
+}
+
+#gameUIElements #instructionsArrow #teamArrow {
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0;
+}
+
+#gameUIElements #instructionsArrow #teamArrow #topArrow{
+    position: absolute;
+    top: 133px;
+    left: 380px;
+    -webkit-transform: translateY(-5px) rotate(0deg);
+}
+
+#gameUIElements #instructionsArrow #speedArrow {
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0;
+}
+
+#gameUIElements #instructionsArrow #speedArrow #downArrow{
+    position: absolute;
+    top: 672px;
+    left: 911px;
+    -webkit-transform: translateY(-5px) rotate(180deg);
+}
+
 #gameUIElements #rpms {
     display: inline-block;
     position: absolute;
     width: 100%;
     left: 0px;
     bottom: -4px;
-    opacity:1;
+    opacity:0;
     z-index: 6;
     -webkit-transition:opacity 1.2s ease-out;
     transition:opacity 1.2s ease-out;
@@ -986,13 +1057,17 @@ img {
 }
 
 #transition1 #congratsContainer h1 {
-    line-height: 91px;
-    font-size: 80px;
+    /*line-height: 91px;
+    font-size: 80px;*/
+    font-size: 30px;
+    line-height: 40px;
+    margin-bottom: 29px;
 }
 
-#transition1 #congratsContainer h2 {
-    font-size: 60px;
+#transition1 #congratsContainer h1 span {
+    font-size: 44px;
 }
+
 
 /*transition2*/
 #transition2 {
@@ -1003,7 +1078,7 @@ img {
     bottom:0;
     margin:auto;
     width:1092px;
-    height:243px;
+    height: 212px;
     opacity:0;
     z-index:100;
     -webkit-transition: opacity 0.6s ease-out;
@@ -1017,9 +1092,13 @@ img {
 }
 
 #transition2 #congratsContainer2 h1 {
-    line-height: 56px;
+    font-size: 30px;
+    line-height: 40px;
+    margin-bottom: 29px;
+}
+
+#transition2 #congratsContainer2 h1 span {
     font-size: 44px;
-    margin-bottom: 23px;
 }
 
 #transition2 #congratsContainer2 h2 {
@@ -1036,7 +1115,7 @@ img {
     bottom:0;
     margin:auto;
     width:1092px;
-    height:243px;
+    height:312px;
     opacity:0;
     z-index:100;
     -webkit-transition: opacity 0.6s ease-out;
@@ -1051,9 +1130,13 @@ img {
 }
 
 #transition3 #congratsContainer3 h1 {
-    line-height: 56px;
+    font-size: 30px;
+    line-height: 40px;
+    margin-bottom: 29px;
+}
+
+#transition3 #congratsContainer3 h1 span {
     font-size: 44px;
-    margin-bottom: 23px;
 }
 
 #transition3 #congratsContainer3 h2 {
@@ -1100,12 +1183,16 @@ img {
 }
 
 #endGamePanel .title {
-    font-size: 71px;
+    font-size: 40px;
+}
+
+#endGamePanel .title span {
+    font-size: 60px;
 }
 
 #endGamePanel #chi-result {
     font-size: 40px;
-    margin: 60px 0 0 0;
+    margin: 30px 0 0 0;
 }
 
 #endGamePanel #en-result {

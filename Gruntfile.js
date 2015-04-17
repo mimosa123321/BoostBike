@@ -47,7 +47,7 @@ module.exports = function(grunt) {
             },
             my_target: {
                 files: {
-                    'build/js/main.min.js': ['src/js/lib/jquery-1.11.1.min.js','src/js/lib/imagesloaded/imagesloaded.pkgd.min.js','src/js/websocket/core.js','src/js/lib/WebcamJS/webcam.min.js','src/js/lib/buzz/buzz.min.js','src/js/lib/Stats.js','src/js/model.js','src/js/sound-manager.js','src/js/main.js','src/js/video.js','src/js/camera-manage.js','src/js/tutorial.js','src/js/time-manager.js','src/js/gamescene.js','src/js/tunnels.js','src/js/transitions-manager.js','src/js/ui-elements/speedmeter.js','src/js/ui-elements/game-uielements.js']
+                    'build/js/main.min.js': ['src/js/lib/jquery-1.11.1.min.js','src/js/lib/imagesloaded/imagesloaded.pkgd.min.js','src/js/lib/swfobject.js','src/js/websocket/core.js','src/js/lib/WebcamJS/webcam.min.js','src/js/lib/buzz/buzz.min.js','src/js/lib/Stats.js','src/js/model.js','src/js/sound-manager.js','src/js/main.js','src/js/video.js','src/js/camera-manage.js','src/js/tutorial.js','src/js/time-manager.js','src/js/gamescene.js','src/js/tunnels.js','src/js/transitions-manager.js','src/js/ui-elements/speedmeter.js','src/js/ui-elements/game-uielements.js']
                 }
             }
         },
