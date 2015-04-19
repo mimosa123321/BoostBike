@@ -140,6 +140,32 @@
     100%   { transform: scale(1.2); opacity: 0}
 }
 
+
+#gameUIElements #tutorial #tutorialTitle.show h1 {
+    -webkit-animation: show-instructionsTitle-ani .5s;
+    animation: show-instructionsTitle-ani .5s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+#gameUIElements #tutorial #tutorialTitle.hide h1 {
+    -webkit-animation: hide-instructionsTitle-ani .5s;
+    animation: hide-instructionsTitle-ani .5s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+
+@-webkit-keyframes show-instructionsTitle-ani {
+    0%   { transform: translate3d(0,50px,0); opacity: 0 }
+    100%   { transform: translate3d(0,0px,0); opacity: 1}
+}
+
+@-webkit-keyframes hide-instructionsTitle-ani {
+    0%   { transform: translate3d(0,0px,0); opacity: 1 }
+    100%   { transform: translate3d(0,-50px,0); opacity: 0}
+}
+
 #gameUIElements #tutorial .instructions.show h1 {
     -webkit-animation: show-instructions-ani .5s;
     animation: show-instructions-ani .5s;
@@ -185,6 +211,10 @@
     100%   { transform: translate3d(0,-50px,0); opacity: 0}
 }
 
+#gameUIElements #tutorial #instruction1.show h1 {
+    -webkit-animation-delay: 0.2s;
+}
+
 /*----------------------transiton arrow -------------------*/
 
 #gameUIElements #instructionsArrow #rpmArrow.show {
@@ -194,10 +224,16 @@
     animation-fill-mode: forwards;
 }
 
-#gameUIElements #instructionsArrow #teamArrow.show,
-#gameUIElements #instructionsArrow #speedArrow.show{
+#gameUIElements #instructionsArrow #teamArrow.show {
     -webkit-animation: show-ani 1.2s 0.5s;
     animation: show-ani 1.2s 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+#gameUIElements #instructionsArrow #speedArrow.show {
+    -webkit-animation: show-ani 1.2s 1.1s;
+    animation: show-ani 1.2s 1.1s;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }

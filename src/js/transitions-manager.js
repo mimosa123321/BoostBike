@@ -90,8 +90,9 @@ TransitionsManager.prototype.hide = function(transitionId) {
 
     //pause sound
     if (this.currentTransitionId != 4) {
-        //transitionSound.pause();
-        //setTimeout(gateClose.play(),3000);
+        setTimeout(function() {
+            gateClose.play()
+        }, 3000);
     }
 
     setTimeout(function() {
@@ -123,7 +124,6 @@ TransitionsManager.prototype.onEndHideTransitions = function() {
 
     //pause sound
     if (this.currentTransitionId != 4) {
-        //transitionSound.pause();
         //gateClose.play();
     }
 

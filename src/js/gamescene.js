@@ -105,7 +105,7 @@ GameScene.prototype.render = function() {
         //level 3
         if (model.gameTimer != 0 && model.currentLevel === 3 && !model.isShowTransition2) {
             model.isShowTransition2 = true;
-            model.boostSpeed = 1.3;
+            model.boostSpeed = 1.8;
             this.manageTransitions(2, 1000, 5500); //6500
 
             //stop team rpm
@@ -121,7 +121,7 @@ GameScene.prototype.render = function() {
         //level 4 - show Engine Layer
         if (model.gameTimer != 0 && model.currentLevel === 4 && !model.isShowTransition3) {
             model.isShowTransition3 = true;
-            model.boostSpeed = 2;
+            model.boostSpeed = 2.8;
             //show engine
             this.manageTransitions(3, 1000, 8500);
             //stop team rpm

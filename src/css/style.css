@@ -366,6 +366,33 @@ img {
     height:100%;
 }
 
+#gameUIElements #tutorial #tutorialTitle {
+    position: absolute;
+    width: 80%;
+    top: 29%;
+    left: 50%;
+    color: white;
+    text-align: center;
+    line-height: 53px;
+    -webkit-transform: translate3d(-50%,-50%,0);
+    transform: translate3d(-50%,-50%,0);
+    opacity:1;
+}
+
+
+#gameUIElements #tutorial #tutorialTitle h1 {
+    -webkit-transform: translate3d(0px, 50px, 0px);
+    transform: translate3d(0px, 50px, 0px);
+    opacity: 0;
+    font-size: 45px;
+}
+
+#gameUIElements #tutorial #tutorialTitle h1 span {
+    font-size: 60px;
+    line-height: 0px;
+    font-family: "FordSimplifiedChinese";
+}
+
 #instruction2 h1 {
     /*text-align: center;*/
 }
@@ -392,11 +419,16 @@ img {
     transform: translate3d(-50%,-50%,0);
 }
 
+#gameUIElements #tutorial #instruction1 {
+    top: 50%;
+}
+
 #gameUIElements #tutorial #instruction2 {
-    /*top:45%;*/
+    top: 55%;
 }
 
 #gameUIElements #tutorial #instruction3 {
+    top: 56%;
     transform: translate3d(-50%,-63%,0);
 }
 
@@ -477,11 +509,12 @@ img {
     width:100%;
     height:100%;
     opacity:0;
+    -webkit-transform: scale(0.8);
 }
 
 #gameUIElements #instructionsArrow #speedArrow #downArrow{
     position: absolute;
-    top: 672px;
+    top: 757px;
     left: 911px;
     -webkit-transform: translateY(-5px) rotate(180deg);
 }
@@ -1202,6 +1235,7 @@ img {
 
 #endGamePanel .title span {
     font-size: 90px;
+    font-family: "FordSimplifiedChinese";
 }
 
 #endGameResult {

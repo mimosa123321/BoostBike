@@ -6,15 +6,18 @@ var Tutorial = function() {
     this.rpmArrow = $('#rpmArrow');
     this.teamArrow = $('#teamArrow');
     this.speedArrow = $('#speedArrow');
+
+    this.tutorialTitle = $('#tutorialTitle');
 };
 
 Tutorial.prototype.showInstructions = function(pageId) {
-    console.log("show page=" + pageId);
     this.instructions = $('#instruction' + pageId);
     this.instructions.addClass('show');
     var transitionTime;
 
     if (pageId === 1) {
+        //show Tutorial title
+        this.showTutorialTitle();
         //add Animation End Listener //text sentence 3
         this.showRMPText = document.getElementById('showRPMText');
         animate.addAnimationListener(this.showRMPText, "AnimationStart", this.startShowRPMSText);
@@ -29,6 +32,7 @@ Tutorial.prototype.showInstructions = function(pageId) {
         this.showTutorialTimeout = setTimeout(this.addRevolution.bind(this, this.addRevolutionValue), 800);
         transitionTime = 8000;
     } else if (pageId === 4) {
+        uielements.rpmMeter.teamRPMMeter.startUpdate();
         transitionTime = 3000;
     }
 
@@ -53,11 +57,23 @@ Tutorial.prototype.hideInstructions = function(pageId) {
     } else if (pageId === 3) {
         this.addRevolution(this.addRevolutionValue);
         this.speedArrow.attr("class", "hide");
+        this.hideTutorialTitle();
+
     } else if (pageId === 4) {
-        this.showTutorialTimeout = setTimeout(function() {
+        /*this.showTutorialTimeout = setTimeout(function() {
             uielements.rpmMeter.teamRPMMeter.startUpdate();
-        }, 1000);
+        }, 1000);*/
     }
+};
+
+Tutorial.prototype.showTutorialTitle = function() {
+    console.log("show");
+    console.log(this.tutorialTitle);
+    this.tutorialTitle.addClass("show");
+};
+
+Tutorial.prototype.hideTutorialTitle = function() {
+    this.tutorialTitle.attr('class', "hide");
 };
 
 Tutorial.prototype.onStartShowRPMS = function() {
