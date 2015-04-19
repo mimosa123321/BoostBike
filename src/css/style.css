@@ -123,12 +123,14 @@ img {
     color: #003478;
     font-size: 48px;
     line-height: 48px;
+    font-family: "FordSimplifiedChinese";
 }
 
 #getReadyContainer .text h2{
     color: #003478;
     font-size: 36px;
     line-height: 10px;
+    font-family: "FordAntenna", sans-serif;
 }
 
 /*---------camera------*/
@@ -411,12 +413,15 @@ img {
 
 #gameUIElements #tutorial .instructions h1 span {
     font-size: 44px;
+    font-family: "FordSimplifiedChinese";
 }
+
 
 #gameUIElements #tutorial .instructions.hide h1 {
     -webkit-transform: translate3d(0px, 0px, 0px);
     transform: translate3d(0px, 0px, 0px);
     opacity: 1;
+    font-family: "FordAntenna", sans-serif;
 }
 
 #gameUIElements #instructionsArrow {
@@ -1062,10 +1067,12 @@ img {
     font-size: 30px;
     line-height: 40px;
     margin-bottom: 29px;
+    font-family: "FordAntenna", sans-serif;
 }
 
 #transition1 #congratsContainer h1 span {
     font-size: 44px;
+    font-family: "FordSimplifiedChinese";
 }
 
 
@@ -1095,14 +1102,17 @@ img {
     font-size: 30px;
     line-height: 40px;
     margin-bottom: 29px;
+    font-family: "FordAntenna", sans-serif;
 }
 
 #transition2 #congratsContainer2 h1 span {
     font-size: 44px;
+    font-family: "FordSimplifiedChinese";
 }
 
 #transition2 #congratsContainer2 h2 {
     font-size: 30px;
+    font-family: "FordAntenna", sans-serif;
 }
 
 
@@ -1133,10 +1143,12 @@ img {
     font-size: 30px;
     line-height: 40px;
     margin-bottom: 29px;
+    font-family: "FordAntenna", sans-serif;
 }
 
 #transition3 #congratsContainer3 h1 span {
     font-size: 44px;
+    font-family: "FordSimplifiedChinese";
 }
 
 #transition3 #congratsContainer3 h2 {
@@ -1183,14 +1195,33 @@ img {
 }
 
 #endGamePanel .title {
-    font-size: 40px;
+    line-height: 77px;
+    font-size: 61px;
+    margin-bottom: 60px;
 }
 
 #endGamePanel .title span {
-    font-size: 60px;
+    font-size: 90px;
 }
 
-#endGamePanel #chi-result {
+#endGameResult {
+    line-height: 52px;
+}
+
+#endGamePanel #endGameResult h1{
+    font-size: 34px;
+    font-family: "FordAntenna", sans-serif;
+    margin: 0 0 30px 0;
+}
+
+#endGamePanel #endGameResult h1 span{
+    font-size: 48px;
+    line-height: 0px;
+    font-family: "FordSimplifiedChinese";
+}
+
+
+/*#endGamePanel #chi-result {
     font-size: 40px;
     margin: 30px 0 0 0;
 }
@@ -1198,7 +1229,7 @@ img {
 #endGamePanel #en-result {
     margin: 30px 0 0 0;
     font-size: 32px;
-}
+}*/
 
 #endGameCountDown {
     position:absolute;

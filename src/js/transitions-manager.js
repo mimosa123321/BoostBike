@@ -36,7 +36,8 @@ TransitionsManager.prototype.show = function(transitionId) {
 
     //play Sound
     if (this.currentTransitionId != 4) {
-        transitionSound.play();
+        //transitionSound.play();
+        gateOpen.play();
     } else {
         if (!soundManager.isGamePlaySoundPause) {
             gamePlaySound.pause();
@@ -87,6 +88,12 @@ TransitionsManager.prototype.hide = function(transitionId) {
         this.transition3.hide3DEngine();
     }
 
+    //pause sound
+    if (this.currentTransitionId != 4) {
+        //transitionSound.pause();
+        //setTimeout(gateClose.play(),3000);
+    }
+
     setTimeout(function() {
         $('#transitionsContainer').attr("class", "hide");
     }, 800);
@@ -116,7 +123,8 @@ TransitionsManager.prototype.onEndHideTransitions = function() {
 
     //pause sound
     if (this.currentTransitionId != 4) {
-        transitionSound.pause();
+        //transitionSound.pause();
+        //gateClose.play();
     }
 
 };
@@ -209,53 +217,30 @@ EndPage.prototype.hide = function() {
 
 
 EndPage.prototype.getData = function() {
-    var resultSpeed = model.playersMaxSpeed * model.boostSpeed;
+    var resultSpeed = Math.ceil(model.playersMaxSpeed * model.boostSpeed);
     var resultLevel = model.currentLevel;
     var resultRank = model.ranking;
 
     if (model.isWin) {
         $('#endGamePanel').find('.title').html('<span>恭喜您做到了！</span><br>CONGRATULATIONS YOU DID IT');
-        $('#endGameResult').html('<span> 您以 ' + resultSpeed + ' KM/H的速度完成等级' + resultLevel + '</span><br>',
-            'YOU COMPLETED LEVEL ' + resultLevel + ' WITH A SPEED OF ' + resultSpeed + 'KM/H <br>',
-            '<span>您的团队排名是 ' + resultRank + '</span><br>',
-            'YOUR TEAM RANKING IS ' + resultRank + '<br>',
-            '<span>点击平板查看您的排行榜与纪念品</span><br>',
-            'CHECK YOUR TABLET FOR THE LEADERBOARD AND YOUR SOUVENIR'
+        $('#endGameResult').html('<h1><span> 您以 ' + resultSpeed + ' KM/H的速度完成等级 ' + resultLevel + '</span><br>' +
+            'YOU COMPLETED LEVEL ' + resultLevel + ' WITH A SPEED OF ' + resultSpeed + 'KM/H <br></h1>' +
+            '<h1><span>您的团队排名是 ' + resultRank + '</span><br>' +
+            'YOUR TEAM RANKING IS ' + resultRank + '<br></h1>' +
+            '<h1><span>点击平板获取您的排行榜成绩与照片</span><br>' +
+            'CHECK YOUR TABLET FOR THE LEADERBOARD AND YOUR SOUVENIR</h1>'
         );
-        /*$('#en-result').html('YOU COMPLETED LEVEL ' + resultLevel + ' WITH A SPEED OF ' + resultSpeed + 'KM/H <br>',
-            'YOUR TEAM RANKING IS ' + resultRank + '<br>',
-            'CHECK YOUR TABLET FOR THE LEADERBOARD AND YOUR SOUVENIR'
-        );
-
-        $('#chi-result').html('您以 ' + resultSpeed + ' KM/H的速度完成等级' + resultLevel +'<br>',
-            '您的团队排名是 ' + resultRank + '<br>',
-            '点击平板查看您的排行榜与纪念品'
-        );*/
 
     } else {
-        $('#endGamePanel').find('.title').html('干得好!!!<br>WELL DONE!!!');
-        /*$('#en-result').html('ALL THE WAY TO LEVEL ' + resultLevel + ' WITH A SPEED OF ' + resultSpeed + 'KM/H <br>',
-            'YOUR TEAM RANKING IS ' + resultRank + '<br>',
-            'CHECK YOUR TABLET FOR THE LEADERBOARD AND YOUR SOUVENIR'
-        );
-
-        $('#chi-result').html('一路上保持 ' + resultSpeed + ' KM/H的速度完成等级' + resultLevel +'<br>',
-            '您的团队排名是 ' + resultRank + '<br>',
-            '点击平板查看您的排行榜与纪念品'
-        );*/
-        $('#endGameResult').html('<span> 一路上保持 ' + resultSpeed + ' KM/H的速度完成等级' + resultLevel + '</span><br>',
-            'YOU COMPLETED LEVEL ' + resultLevel + ' WITH A SPEED OF ' + resultSpeed + 'KM/H <br>',
-            '<span>您的团队排名是 ' + resultRank + '</span><br>',
-            'YOUR TEAM RANKING IS ' + resultRank + '<br>',
-            '<span>点击平板查看您的排行榜与纪念品</span><br>',
-            'CHECK YOUR TABLET FOR THE LEADERBOARD AND YOUR SOUVENIR'
+        $('#endGamePanel').find('.title').html('<span>干得好!!!</span><br>WELL DONE!!!');
+        $('#endGameResult').html('<h1><span> 一路上保持 ' + resultSpeed + ' KM/H的速度到等级 ' + resultLevel + '</span><br>' +
+            'YOU COMPLETED LEVEL ' + resultLevel + ' WITH A SPEED OF ' + resultSpeed + 'KM/H <br></h1>' +
+            '<h1><span>您的团队排名是 ' + resultRank + '</span><br>' +
+            'YOUR TEAM RANKING IS ' + resultRank + '<br></h1>' +
+            '<h1><span>点击平板获取您的排行榜成绩与照片</span><br>' +
+            'CHECK YOUR TABLET FOR THE LEADERBOARD AND YOUR SOUVENIR</h1>'
         );
     }
-
-    //$('.resultSpeed').html(model.playersMaxSpeed * model.boostSpeed);
-    //$('.resultLevel').html(model.currentLevel);
-    //$('.resultRank').html(model.ranking);
-    //console.log("show result panel after get");
     setTimeout(this.show(), 1000);
 };
 

@@ -39,7 +39,7 @@ var TimeManager = {
         var totalRevolutionsExceptTutorial = model.totalRevolutions - model.revolutionPerLevel[0];
         //send call back
         GameScreenCore.getInstance().gameInformationGameEnded(
-            model.currentLevel, model.playersMaxSpeed * model.boostSpeed, model.players_souvenir_2, totalRevolutionsExceptTutorial
+            model.currentLevel, Math.ceil(model.playersMaxSpeed * model.boostSpeed), model.players_souvenir_2, totalRevolutionsExceptTutorial
         ); //TODO: add totalRPM (instead of the 0)
     }
 };

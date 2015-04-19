@@ -35,6 +35,10 @@ SpeedMeter.prototype.stopUpdate = function() {
 SpeedMeter.prototype.updateValue = function(value) {
 
     //console.log("sped="+value);
+    if (value >= (model.players_maxSpeed * 2)) {
+        value = model.players_maxSpeed * 2;
+    }
+
     this.speedMeter_value.html(value);
 
     this.indictorTargetDegree = this.convertRPMToDegree(value);

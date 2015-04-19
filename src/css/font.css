@@ -70,3 +70,28 @@
     src: url("../fonts/FordAntenna-ThinItalic.otf") format("opentype");
     font-weight: 100;
     font-style: italic; }
+
+/*@font-face {
+    font-family: 'ford_simplified_chineseRg';
+    src: url("../fonts/Antenna_Simplified_Chinese_for_Ford-Regular.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+
+}*/
+
+/*@font-face {
+    font-family: 'ford_simplified_chineseRg';
+    src: url('../fonts/Antenna_Simplified_Chinese_for_Ford-Regular-webfont.eot');
+    src: url('../fonts/Antenna_Simplified_Chinese_for_Ford-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Antenna_Simplified_Chinese_for_Ford-Regular-webfont.woff2') format('woff2'),
+    url('../fonts/Antenna_Simplified_Chinese_for_Ford-Regular-webfont.woff') format('woff'),
+    url('../fonts/Antenna_Simplified_Chinese_for_Ford-Regular.ttf') format('truetype');
+
+    font-weight: normal;
+    font-style: normal;
+}*/
+
+@font-face {
+    font-family: 'FordSimplifiedChinese';
+    src: local('FontName-Regular'), url('../fonts/FordCNRegular.woff') format('woff');
+}

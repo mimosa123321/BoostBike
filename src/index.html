@@ -110,7 +110,6 @@
             gl_FragColor = vec4(ToGamma(col),1);
             gl_FragColor = vec4(col,1);
 
-
         }
 </script>
 <div id="preload"><img src="images/engine3.png"></div>
@@ -118,7 +117,7 @@
     <div id="wrapper">
         <div id="preparation">
             <div id="cameraFeedContainer">
-                <div class="text"><h1>微笑</h1><br><h2>Smile</h2></div>
+                <div class="text"><h1>微笑！</h1><br><h2>Smile!</h2></div>
                 <div id="myCamera">
                     <div id="camera-feed"></div>
                     <div id="takenPhoto"><img src=""></div>
@@ -156,24 +155,24 @@
     <div id="gameUIElements">
         <div id="tutorial" class="sections">
             <div class="instructions" id="instruction1">
-                <h1 class="text1"><span>一起工作并挑战局限</span><br>WORK TOGETHER AND PUSH THE LIMITS</h1>
-                <h1 class="text2" id="showRPMText"><span>您的个人转数显示您的动力</span><br>YOUR POWER IS SHOWN IN YOUR INDIVIDUAL RPM</h1>
+                <h1 class="text1"><span>团队协作 挑战极限！</span><br>WORK TOGETHER AND PUSH THE LIMITS</h1>
+                <h1 class="text2" id="showRPMText"><span>速度动力将以个人转速方式显示</span><br>YOUR POWER IS SHOWN IN YOUR INDIVIDUAL RPM</h1>
             </div>
 
             <div class="instructions" id="instruction2">
-                <h1 class="text1"><span>您的团队转数 - 一起踩踏板来强化</span><br>YOUR TEAM RPM - PEDAL TOGETHER TO INCREASE IT</h1>
+                <h1 class="text1"><span>您的团队转数——共同踩踏板来加速</span><br>YOUR TEAM RPM - PEDAL TOGETHER TO INCREASE IT</h1>
                 <h1 class="text2"><span>提升您的团队转数来启动ECOBOOST®</span><br>INCREASE YOUR TEAM RPM TO UNLOCK AN ECOBOOST®</h1>
-                <h1 class="text3"><span>每一次增益会提升您的速度</span><br>EVERY BOOST WILL INCREASE YOUR SPEED</h1>
+                <h1 class="text3"><span>获取助力后能提升您的速度</span><br>EVERY BOOST WILL INCREASE YOUR SPEED</h1>
             </div>
 
             <div class="instructions" id="instruction3">
-                <h1 class="text1"><span>您的团队速度测量器</span><br>YOUR TEAM SPEED GAUGE</h1>
+                <h1 class="text1"><span>您的团队速度表</span><br>YOUR TEAM SPEED GAUGE</h1>
                 <h1 class="text2"><span>释放ECOBOOST®的动力</span><br>UNLOCK THE POWER OF ECOBOOST®</h1>
-                <h1 class="text3"><span>并且增益您的速度至最后</span><br>AND BOOST YOUR SPEED TO THE FINISH!</h1>
+                <h1 class="text3"><span>为您加速直至到达终点</span><br>AND BOOST YOUR SPEED TO THE FINISH!</h1>
             </div>
 
             <div class="instructions" id="instruction4">
-                <h1 class="text1"><span>寻找IT团队</span><br>GO FOR IT TEAM</h1>
+                <h1 class="text1"><span>开始用力！</span><br>GO FOR IT TEAM</h1>
             </div>
         </div>
 
@@ -304,25 +303,19 @@
             <div id="congratsContainer">
                 <h1><span>准备就绪</span><br>GET READY</h1>
                 <h1><span>开始踩踏板</span><br>START PEDALLING NOW</h1>
-                <!--<h1>准备就绪<br>开始踩踏板</h1>-->
-                <!--<h2>GET READY<br>START PEDALLING NOW</h2>-->
             </div>
         </div>
         <div id="transition2">
             <div id="congratsContainer2">
                 <h1><span>等级 3</span><br>LEVEL 3</h1>
                 <h1><span>不要停!</span><br>DON'T STOP NOW!</h1>
-                <!--<h1>等级 3<br>不要停!</h1>-->
-                <!--<h2>LEVEL 3<br>DON'T STOP NOW!</h2>-->
             </div>
         </div>
         <div id="transition3">
             <div id="congratsContainer3">
                 <h1><span>等级 4</span><br>LEVEL 4</h1>
                 <h1><span>ECOBOOST® 提升动力</span><br>ECOBOOST® POWER UP</h1>
-                <h1><span>几乎到达了</span><br>ALMOST THERE</h1>
-                <!--<h1>等级 4<br>ECOBOOST® 提升动力<br>几乎到达了</h1>-->
-                <!--<h2>LEVEL 4<br>ECOBOOST® POWER UP <br>ALMOST THERE</h2>-->
+                <h1><span>就快到了</span><br>ALMOST THERE</h1>
             </div>
             <div id="engine">
                 <div id="photos"></div>
@@ -330,8 +323,7 @@
         </div>
         <div id="endGamePanel">
             <h1 class="title"></h1>
-            <h1 class="result" id="chi-result"></h1>
-            <h2 class="result" id="en-result"></h2>
+            <div id="endGameResult"></div>
             <!--你们以 <span class="resultSpeed"></span> km/h 成功地达到第 <span class="resultLevel"></span> 关。<br>
                 你们目前的排名是 <span class="resultRank"></span> ，阅览您的平板电脑，看看排行榜和纪念品。-->
             <!--Your team successfully reached the level <span class="resultLevel"></span> with a speed of <span class="resultSpeed"></span> km/h. <br>

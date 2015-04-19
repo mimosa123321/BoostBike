@@ -18,11 +18,11 @@ var gamePlaySound = new buzz.sound("./music/gameplay", {
 //gamePlaySound.setVolume(80);
 //gamePlaySound.mute();
 
-var transitionSound = new buzz.sound("./music/transition", {
+/*var transitionSound = new buzz.sound("./music/transition", {
     formats: ["mp3"]
 });
 
-transitionSound.setVolume(100);
+transitionSound.setVolume(100);*/
 
 var winSound = new buzz.sound("./music/success", {
     formats: ["mp3"]
@@ -43,5 +43,13 @@ var loseSound = new buzz.sound("./music/lose", {
 loseSound.setVolume(100);
 
 var cameraSound = new buzz.sound("./music/camera", {
+    formats: ["mp3"]
+});
+
+var gateOpen = new buzz.sound("./music/gate_move", {
+    formats: ["mp3"]
+});
+
+var gateClose = new buzz.sound("./music/gate_close", {
     formats: ["mp3"]
 });

@@ -221,6 +221,7 @@ var GameScreenFactory = function() {
 
     //WebSocket Variables
     this.serverURL = "remote.localhost.com";
+    //this.serverURL = "172.31.10.52";
     this.serverPort = "8802";
     this.serverEndpoint = "boostbike";
     this.gameInformation = new NetworkGameInformation(

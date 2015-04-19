@@ -87,7 +87,9 @@ Main.prototype.initUIElements = function() {
 };
 
 Main.prototype.enterGame = function() {
-    attractorSound.pause();
+    attractorSound.fadeOut(500,function() {
+        attractorSound.pause();
+    });
     gamePlaySound.play().fadeIn().loop();
     model.isAllowAccel = true;
     main.startGameScene();
