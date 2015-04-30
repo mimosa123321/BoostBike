@@ -123,7 +123,7 @@ GameScene.prototype.render = function() {
             model.isShowTransition3 = true;
             model.boostSpeed = 2.8;
             //show engine
-            this.manageTransitions(3, 1000, 8500);
+            this.manageTransitions(3, 1000, 7000);
             //stop team rpm
             uielements.rpmMeter.teamRPMMeter.stopUpdate();
 

@@ -160,13 +160,8 @@ TransitionLevel2.prototype.hide = function() {
 /*-----------------*/
 var TransitionLevel3 = function() {
     this.transition = $('#transition3');
-    this.frameHeight = 722;
-    this.engineTimer = 0;
     this.engine = $('#engine');
-    this.engine3dPhotos = $('#photos');
     this.engineDomElement = document.getElementById('engine');
-    //this.engine3DDomElement = document.getElementById('photos');
-    //this.finishShowEngine = this.onFinishShowEngine.bind(this);
     this.finishHide3DEngine = this.onFinishHide3DEngine.bind(this);
 
 };
@@ -174,7 +169,6 @@ var TransitionLevel3 = function() {
 TransitionLevel3.prototype.show = function() {
     console.log("transition 3 show");
     this.transition.addClass("show");
-    //this.show3DEngine();
 };
 
 TransitionLevel3.prototype.hide = function() {
@@ -191,7 +185,6 @@ TransitionLevel3.prototype.show3DEngine = function() {
 };
 
 TransitionLevel3.prototype.hide3DEngine = function() {
-    //model.isSpinEngine = false;
     this.engine.attr('class', 'hide');
     animate.addAnimationListener(this.engineDomElement, "AnimationEnd", this.finishHide3DEngine);
 };

@@ -1,5 +1,5 @@
 var model = {
-    maxRPM: 330, //change the difficulitie//default 450
+    maxRPM: 290, //change the difficulitie//default 450
     players_souvenir_1: null,
     players_souvenir_2: null,
     player1_RPM: 0,
